@@ -1,0 +1,37 @@
+{
+  "name": "newkb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "slack-bot": "node app_slack.js",
+    "test:default": "npx playwright test --project=Default-YesSetUp --project=Default-NoSetUp ",
+    "test:kb-bet1": "npx playwright test --project=KB-Bet1-YesSetUp --project=KB-Bet1-NoSetUp ",
+    "test:kb-win26": "npx playwright test --project=KB-win26-YesSetUp --project=KB-win26-NoSetUp",
+    "test:kb-17": "npx playwright test --project=KB-16-YesSetUp --project=KB-16-NoSetUp --headed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rustem-gif/NewKB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rustem-gif/NewKB/issues"
+  },
+  "homepage": "https://github.com/Rustem-gif/NewKB#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^22.10.10",
+    "playwright-qase-reporter": "^2.0.16",
+    "typescript": "^5.9.2",
+    "playwright-slack-report": "^1.1.99"
+  },
+  "dependencies": {
+    "@slack/bolt": "^4.4.0",
+    "chalk": "^5.4.1",
+    "dotenv": "^17.2.1",
+    "moment": "^2.30.1",
+    "speakeasy": "^2.0.0"
+  }
+}
