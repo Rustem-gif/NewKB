@@ -1,9 +1,7 @@
 import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
-import {MAIN_USER} from "../../Data/Users/mainUser";
-import { axeScan } from "axe-playwright-report";
 
-export class PasswordRecovery extends BasePage {
+export default class PasswordRecovery extends BasePage {
     public notificationText: string
     public confirmationNotificationText: string
 

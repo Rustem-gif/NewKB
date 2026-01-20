@@ -1,38 +1,28 @@
 import test, {expect} from '@playwright/test'
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import {LIST_OF_CURRENCIES} from "../../../src/Data/Constants/Currencies";
-import SignUpModal from "../../../src/PO/MainPage/Component/SignUpModal";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
-import {PASSWORD_STATES} from "../../../src/Data/ParametrizedData/passwords/passwords";
-import {COUNTRIES} from "../../../src/Data/Constants/countries";
-import playwrightConfig from "../../../playwright.config";
-import TermsAndConditions from "../../../src/PO/TermsAndConditions/TermsAndConditions";
-import {NEGATIVE_EMAILS} from "../../../src/Data/ParametrizedData/negativeEmails/negativeEmails";
-import Methods from "../../../src/Methods/Methods";
-import { DepModal } from '../../../src/Components/DepModal';
+import KingBilly from "../../../../src/PageManager/KingBilly";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import {LIST_OF_CURRENCIES} from "../../../../src/Data/Constants/Currencies";
+import SignUpModal from "../../../../src/PO/MainPage/Component/SignUpModal";
+import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
+import {PASSWORD_STATES} from "../../../../src/Data/ParametrizedData/passwords/passwords";
+import {NEGATIVE_EMAILS} from "../../../../src/Data/ParametrizedData/negativeEmails/negativeEmails";
+import {COUNTRIES} from "../../../../src/Data/Constants/countries";
 
 
 
 
 test.describe('Registration Modal', () => {
-    let mainPage: MainPage;
-    let methods: Methods;
+    let kingBilly: KingBilly;
     let signUpModal: SignUpModal;
-    let termsAndConditions: TermsAndConditions;
-    let depModal: DepModal
 
     test.beforeEach(async ({ page }) => {
-        mainPage = new MainPage(page);
-        methods = new Methods();
-        termsAndConditions = new TermsAndConditions(page);
-        depModal = new DepModal(page)
+        kingBilly = new KingBilly(page);
 
-        await mainPage.navTo(LINKS.Main);
-        await mainPage.clickAcceptCookies();
+        await kingBilly.mainPage.navTo(LINKS.Main);
+        await kingBilly.mainPage.clickAcceptCookies();
 
-        signUpModal = await mainPage.header.clickCreateAccount();
-        await mainPage.waitForSelector(signUpModal.getEmailInput);
+        signUpModal = await kingBilly.mainPage.header.clickCreateAccount();
+        await kingBilly.mainPage.waitForSelector(signUpModal.getEmailInput);
     });
 
     test('Check "Currency" dropdown', async () => {
@@ -74,7 +64,7 @@ test.describe('Registration Modal', () => {
         test(`Check password field states: ${state}`, async () => {
             await test.step(`Enter ${state} password`, async () => {
                 await signUpModal.fillPassword(values.password);
-                await mainPage.sleep(1000);
+                await kingBilly.mainPage.sleep(1000);
             });
 
             await test.step(`Check color of the state bar of ${state} password`, async () => {
@@ -118,8 +108,8 @@ test.describe('Registration Modal', () => {
     test('Check "Terms and conditions" link', async ({baseURL}) => {
         await test.step('Click on the "Terms and conditions" link', async () => {
             await signUpModal.clickOnTermsAndConditionsLink();
-            expect.soft(await termsAndConditions.getPageUrl()).toEqual(`${baseURL}${LINKS.TermsAndConditions}`);
-            await expect.soft(termsAndConditions.getDownloadPdfButton).toBeVisible();
+            expect.soft(await kingBilly.termsAndConditions.getPageUrl()).toEqual(`${baseURL}${LINKS.TermsAndConditions}`);
+            await expect.soft(kingBilly.termsAndConditions.getDownloadPdfButton).toBeVisible();
         });
     });
 
@@ -138,15 +128,15 @@ test.describe('Registration Modal', () => {
     }
 
     test('Check Registration and Post reg pop-up modal', async ({baseURL}) => {
-        const email = await methods.generateRandomEmail(3);
+        const email = await kingBilly.methods.generateRandomEmail(3);
 
         await test.step('Create an account', async () => {
             await signUpModal.createAccount({ email: email, password: MAIN_USER.password });
         });
 
         await test.step('Check dep modal to be visible', async () => {
-            await expect.soft(depModal.getDepModal).toBeVisible();
-            await expect.soft(await mainPage.getPageUrl()).toEqual(`${baseURL}${LINKS.MainPageDepModal}`);
+            await expect.soft(kingBilly.depModal.getDepModal).toBeVisible();
+            await expect.soft(await kingBilly.mainPage.getPageUrl()).toEqual(`${baseURL}${LINKS.MainPageDepModal}`);
         })
     });
 });

@@ -4,7 +4,7 @@ import MainPage from '../../../src/PO/MainPage/MainPage';
 
 setup.describe('Setup Session Storage', () => {
   let mainPage: MainPage;
-  setup('Set up session storage for main account via API', async ({baseURL}) => {
+  setup.skip('Set up session storage for main account via API', async ({baseURL}) => {
     console.log('Setting up session state for the main account via API...');
     
     // Create a new request context
@@ -39,8 +39,21 @@ setup.describe('Setup Session Storage', () => {
     console.log('API login successful, status:', response.status());
     
     // Save storage state from the API context
-    await apiRequest.storageState({ path: './tests/setup/storageState.json' });
+    await apiRequest.storageState({ path: './tests/Regression/setup/storageState.json' });
     
     console.log('Storage state saved successfully!');
+  });
+
+
+  setup('UI SetUp', async ({ page }) => {
+    console.log('Setting up session storage for the main account via UI...');
+    mainPage = new MainPage(page);
+    await mainPage.navTo('/');
+    console.log('Navigated to main page for session storage setup.');
+
+    await mainPage.header.signIn(MAIN_USER.email, MAIN_USER.password);
+    await mainPage.header.getDepositButton.waitFor({ state: 'visible' });
+    console.log('Signed in via UI for session storage setup.');
+    await page.context().storageState({ path: './tests/Regression/setup/storageState.json' });
   });
 });

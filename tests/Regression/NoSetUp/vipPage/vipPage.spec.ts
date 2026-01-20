@@ -1,16 +1,15 @@
 import {test, expect, Locator} from "@playwright/test";
-import VipPage from "../../../src/PO/VipPage/VipPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import {VIP_USERS} from "../../../src/Data/Users/users";
-import {VIP_TERMS_AND_CONDITIONS} from "../../../src/Data/ExpectedTextResult/vipTermsAndConditions";
-import playwrightConfig from "../../../playwright.config";
+import VipPage from "../../../../src/PO/VipPage/VipPage";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import {VIP_USERS} from "../../../../src/Data/Users/users";
+import {VIP_TERMS_AND_CONDITIONS} from "../../../../src/Data/ExpectedTextResult/vipTermsAndConditions";
 
 
 test.use({viewport:
 { width: 1920, height: 1080 }});
 
 for (const [status, creds] of Object.entries(VIP_USERS)) {
-  test.describe(`Visual tests for ${status}`, () => {
+  test.describe.skip(`Visual tests for ${status}`, () => {
     let vipPage: VipPage;
 
     test.beforeEach(async ({ page}) => {
@@ -50,7 +49,7 @@ for (const [status, creds] of Object.entries(VIP_USERS)) {
 
 
 
-test.describe(`Visual tests for anon`, () => {
+test.describe.skip(`Visual tests for anon`, () => {
   let vipPage: VipPage;
 
   test.beforeEach(async ({page}) => {

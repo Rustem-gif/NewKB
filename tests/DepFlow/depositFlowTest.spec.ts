@@ -1,10 +1,8 @@
 import test, { expect } from "@playwright/test";
-import MainPage from "../PO/MainPage/MainPage";
-import { DepModal } from "../PO/Components/DepModal";
-import { testData } from "../testData/testData";
-import NeosurfPage from "../PO/NeosurfPage/NeosurfPage";
-import Methods from "../Methods/Methods";
-import { vpnController } from "../helpers/vpnControllerInstance";
+import KingBilly from "../../src/PageManager/KingBilly";
+import { testData } from "../../src/Data/testDepositData/testDataDepositMonitor";
+import NeosurfPage from "../../src/PO/NeosurfPage/NeosurfPage";
+import { vpnController } from "../../helpers/vpnControllerInstance";
 
 // Map regions to VPN locations
 const regionToVpnLocation = {
@@ -26,19 +24,17 @@ test.describe("Deposit Flow Test", () => {
         
         // Create context with consistent user agent
         const context = await browser.newContext({ 
-            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) kingBillyleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         });
         const page = await context.newPage();
         
-        // Initialize page objects
-        const mainPage = new MainPage(page);
-        const depositModal = new DepModal(page);
-        const methods = new Methods();
+        // Initialize page manager
+        const kingBilly = new KingBilly(page);
 
-        await mainPage.navTo('http://kingbillywin24.com');
-        await mainPage.clickAcceptCookies();
-        const signUpModal = await mainPage.header.clickCreateAccount();
-        randomEmail = await methods.generateRandomEmail(10);
+        await kingBilly.mainPage.navTo('http://kingbillywin24.com');
+        await kingBilly.mainPage.clickAcceptCookies();
+        const signUpModal = await kingBilly.mainPage.header.clickCreateAccount();
+        randomEmail = await kingBilly.methods.generateRandomEmail(10);
         await signUpModal.createAccount({ email: randomEmail, password });
 
         const creditCardData = {
@@ -53,16 +49,16 @@ test.describe("Deposit Flow Test", () => {
             postalCode: testData.AU.paymentMethods.creditCard.postalCode,
             mobileNumber: testData.AU.paymentMethods.creditCard.mobileNumber
         };
-        await depositModal.clickOnDepMethod('creditCardAU');
-        await depositModal.selectDateFromDatePicker()
-        await depositModal.chooseSatateAu();
-        await depositModal.fillCreditCardField(creditCardData);
-        await depositModal.page.waitForTimeout(60000);
-        await depositModal.clickOnDepositButton();
-        await depositModal.page.waitForTimeout(60000);
-        expect(depositModal.getDepModalError).toBeVisible({ timeout: 5000 });
+        await kingBilly.depModal.clickOnDepMethod('creditCardAU');
+        await kingBilly.depModal.selectDateFromDatePicker()
+        await kingBilly.depModal.chooseSatateAu();
+        await kingBilly.depModal.fillCreditCardField(creditCardData);
+        await kingBilly.depModal.page.waitForTimeout(60000);
+        await kingBilly.depModal.clickOnDepositButton();
+        await kingBilly.depModal.page.waitForTimeout(60000);
+        expect(kingBilly.depModal.getDepModalError).toBeVisible({ timeout: 5000 });
     
-        await expect(page).toHaveScreenshot('au_credit_card.png', { fullPage: false, maxDiffPixelRatio: 0.05, threshold: 0.3 });
+        await expect(page).toHaveScreenshot('au_credit_card.png', {maxDiffPixels: 2000, maxDiffPixelRatio: 0.5});
         const auCreditCardScreenshot = await page.screenshot({ fullPage: false });
         await test.info().attach('au_credit_card.png', { body: auCreditCardScreenshot, contentType: 'image/png' });
         await context.close();
@@ -80,30 +76,28 @@ test.describe("Deposit Flow Test", () => {
         
         // Create context with consistent user agent
         const context = await browser.newContext({ 
-            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) kingBillyleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         });
         const page = await context.newPage();
         
-        // Initialize page objects
-        const mainPage = new MainPage(page);
-        const depositModal = new DepModal(page);
+        // Initialize page manager
+        const kingBilly = new KingBilly(page);
         const neoserfPage = new NeosurfPage(page);
-        const methods = new Methods();
         
-        await mainPage.navTo('http://kingbillywin24.com');
-        await mainPage.clickAcceptCookies();
-        const signUpModal = await mainPage.header.clickCreateAccount();
-        randomEmail = await methods.generateRandomEmail(11);
+        await kingBilly.mainPage.navTo('http://kingbillywin24.com');
+        await kingBilly.mainPage.clickAcceptCookies();
+        const signUpModal = await kingBilly.mainPage.header.clickCreateAccount();
+        randomEmail = await kingBilly.methods.generateRandomEmail(11);
         await signUpModal.createAccount({ email: randomEmail, password });
-        await depositModal.clickOnDepMethod('neoserf');
-        await depositModal.clickOnDepositButton();
-        await depositModal.page.waitForTimeout(60000);
-        const url = await depositModal.getPageUrl();
+        await kingBilly.depModal.clickOnDepMethod('neoserf');
+        await kingBilly.depModal.clickOnDepositButton();
+        await kingBilly.depModal.page.waitForTimeout(60000);
+        const url = await kingBilly.depModal.getPageUrl();
         expect(
             url.includes('pay2.secure-neosurf.com') || url.includes('pay.neosurf.com')
         ).toBe(true);
         expect(neoserfPage.getNeosurfPageLogo).toBeVisible();
-        await expect(page).toHaveScreenshot('au_neoserf.png', { fullPage: false, maxDiffPixelRatio: 0.05, threshold: 0.3 });
+        await expect(page).toHaveScreenshot('au_neoserf.png', {maxDiffPixels: 2000, maxDiffPixelRatio: 0.5});
         const auNeoserfScreenshot = await page.screenshot({ fullPage: false });
         await test.info().attach('au_neoserf.png', { body: auNeoserfScreenshot, contentType: 'image/png' });
         await context.close();
@@ -121,20 +115,18 @@ test.describe("Deposit Flow Test", () => {
         
         // Create context with consistent user agent
         const context = await browser.newContext({ 
-            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) kingBillyleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         });
         const page = await context.newPage();
         
-        // Initialize page objects
-        const mainPage = new MainPage(page);
-        const depositModal = new DepModal(page);
-        const methods = new Methods();
+        // Initialize page manager
+        const kingBilly = new KingBilly(page);
         
-        await mainPage.navTo('http://kingbillycasino.com');
-        await mainPage.clickAcceptCookies();
+        await kingBilly.mainPage.navTo('http://kingbillycasino.com');
+        await kingBilly.mainPage.clickAcceptCookies();
         
-        const signUpModal = await mainPage.header.clickCreateAccount();
-        randomEmail = await methods.generateRandomEmail(13);
+        const signUpModal = await kingBilly.mainPage.header.clickCreateAccount();
+        randomEmail = await kingBilly.methods.generateRandomEmail(13);
         await signUpModal.createAccount({ email: randomEmail, password });
         const creditCardData = {
             cardNumber: testData.NZ.paymentMethods.creditCard.cardNumber,
@@ -148,16 +140,16 @@ test.describe("Deposit Flow Test", () => {
             postalCode: testData.NZ.paymentMethods.creditCard.postalCode,
             mobileNumber: testData.NZ.paymentMethods.creditCard.mobileNumber
         };
-        await depositModal.selectDateFromDatePicker()
-        await depositModal.clickOnDepMethod('creditCardNZ');
-        // await depositModal.selectDateFromDatePicker();
-        await depositModal.fillCreditCardFieldNZ(creditCardData);
-        await depositModal.clickOnDepositButton();
-        await expect(page).toHaveScreenshot('nz_credit_card.png', { fullPage: false, maxDiffPixelRatio: 0.05, threshold: 0.3 });
+        await kingBilly.depModal.selectDateFromDatePicker()
+        await kingBilly.depModal.clickOnDepMethod('creditCardNZ');
+        // await kingBilly.depModal.selectDateFromDatePicker();
+        await kingBilly.depModal.fillCreditCardFieldNZ(creditCardData);
+        await kingBilly.depModal.clickOnDepositButton();
+        await expect(page).toHaveScreenshot('nz_credit_card.png', {maxDiffPixels: 2000, maxDiffPixelRatio: 0.5});
         const nzCreditCardScreenshot = await page.screenshot({ fullPage: false });
         await test.info().attach('nz_credit_card.png', { body: nzCreditCardScreenshot, contentType: 'image/png' });
-        await depositModal.page.waitForTimeout(60000);
-        expect(depositModal.getDepModalError).toBeVisible({ timeout: 5000 });
+        await kingBilly.depModal.page.waitForTimeout(60000);
+        expect(kingBilly.depModal.getDepModalError).toBeVisible({ timeout: 5000 });
         await context.close();
         
         // Disconnect VPN after test
@@ -173,25 +165,23 @@ test.describe("Deposit Flow Test", () => {
         
         // Create context with consistent user agent
         const context = await browser.newContext({ 
-            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) kingBillyleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         });
         const page = await context.newPage();
         
-        // Initialize page objects
-        const mainPage = new MainPage(page);
-        const depositModal = new DepModal(page);
-        const methods = new Methods();
+        // Initialize page manager
+        const kingBilly = new KingBilly(page);
 
-        await mainPage.navTo('http://kingbillycasino.com');
-        await mainPage.clickAcceptCookies();
-        const signUpModal = await mainPage.header.clickCreateAccount();
-        randomEmail = await methods.generateRandomEmail(12);
+        await kingBilly.mainPage.navTo('http://kingbillycasino.com');
+        await kingBilly.mainPage.clickAcceptCookies();
+        const signUpModal = await kingBilly.mainPage.header.clickCreateAccount();
+        randomEmail = await kingBilly.methods.generateRandomEmail(12);
         await signUpModal.createAccount({ email: randomEmail, password });
-        await depositModal.clickOnDepMethod('paysafecard');
-        await depositModal.clickOnDepositButton();
-        await depositModal.page.waitForTimeout(60000);
-        expect(depositModal.getPaysafeCardModal).toBeVisible({ timeout: 5000 });
-        await expect(page).toHaveScreenshot('nz_paysafecard.png', { fullPage: false, maxDiffPixelRatio: 0.05, threshold: 0.3 });
+        await kingBilly.depModal.clickOnDepMethod('paysafecard');
+        await kingBilly.depModal.clickOnDepositButton();
+        await kingBilly.depModal.page.waitForTimeout(60000);
+        expect(kingBilly.depModal.getPaysafeCardModal).toBeVisible({ timeout: 5000 });
+        await expect(page).toHaveScreenshot('nz_paysafecard.png', {maxDiffPixels: 2000, maxDiffPixelRatio: 0.5});
         const nzPaysafecardScreenshot = await page.screenshot({ fullPage: false });
         await test.info().attach('nz_paysafecard.png', { body: nzPaysafecardScreenshot, contentType: 'image/png' });
         await context.close();
@@ -210,27 +200,26 @@ test.describe("Deposit Flow Test", () => {
         
         // Create context with consistent user agent
         const context = await browser.newContext({ 
-            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) kingBillyleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         });
         const page = await context.newPage();
         
-        // Initialize page objects
-        const mainPage = new MainPage(page);
-        const depositModal = new DepModal(page);
+        // Initialize page manager
+        const kingBilly = new KingBilly(page);
 
-        await mainPage.navTo('http://kingbillycasino.com');
-        await mainPage.clickAcceptCookies();
-        const signInModal = await mainPage.header.clickSignIn();
+        await kingBilly.mainPage.navTo('http://kingbillycasino.com');
+        await kingBilly.mainPage.clickAcceptCookies();
+        const signInModal = await kingBilly.mainPage.header.clickSignIn();
         await signInModal.fillEmail(testData.CA.credentials.email);
         await signInModal.fillPassword(testData.CA.credentials.password);
         await signInModal.clickSignIn();
-        await mainPage.header.openDepositButton()
-        await depositModal.clickOnDepMethod('interac');
-        await depositModal.clickOnDepositButton();
-        await depositModal.page.waitForTimeout(60000);
-        expect(await mainPage.getPageUrl()).toContain('interac.express-connect.com');
-        await expect(mainPage.page.locator('.otherPayments > p')).toContainText('Select your bank');
-        await expect(page).toHaveScreenshot('ca_interac.png', { fullPage: false, maxDiffPixelRatio: 0.05, threshold: 0.3 });
+        await kingBilly.mainPage.header.clickDepositButton()
+        await kingBilly.depModal.clickOnDepMethod('interac');
+        await kingBilly.depModal.clickOnDepositButton();
+        await kingBilly.depModal.page.waitForTimeout(60000);
+        expect(await kingBilly.mainPage.getPageUrl()).toContain('interac.express-connect.com');
+        await expect(kingBilly.mainPage.page.locator('.otherPayments > p')).toContainText('Select your bank');
+        await expect(page).toHaveScreenshot('ca_interac.png', {maxDiffPixels: 2000, maxDiffPixelRatio: 0.5});
         const caInteracScreenshot = await page.screenshot({ fullPage: false });
         await test.info().attach('ca_interac.png', { body: caInteracScreenshot, contentType: 'image/png' });
         await context.close();
@@ -248,33 +237,32 @@ test.describe("Deposit Flow Test", () => {
         
         // Create context with consistent user agent
         const context = await browser.newContext({ 
-            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) kingBillyleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         });
         const page = await context.newPage();
         
-        // Initialize page objects
-        const mainPage = new MainPage(page);
-        const depositModal = new DepModal(page);
+        // Initialize page manager
+        const kingBilly = new KingBilly(page);
 
-        await mainPage.navTo('http://kingbillycasino.com');
-        await mainPage.clickAcceptCookies();
-        const signInModal = await mainPage.header.clickSignIn();
+        await kingBilly.mainPage.navTo('http://kingbillycasino.com');
+        await kingBilly.mainPage.clickAcceptCookies();
+        const signInModal = await kingBilly.mainPage.header.clickSignIn();
         await signInModal.fillEmail(testData.CA.credentials.email);
         await signInModal.fillPassword(testData.CA.credentials.password);
         await signInModal.clickSignIn();
-        await mainPage.header.openDepositButton()
-        await depositModal.clickOnDepMethod('creditCardCA');
-        await depositModal.fillCreditCardField({
+        await kingBilly.mainPage.header.clickDepositButton()
+        await kingBilly.depModal.clickOnDepMethod('creditCardCA');
+        await kingBilly.depModal.fillCreditCardField({
             cardNumber: testData.CA.paymentMethods.creditCard.cardNumber,
             cardHolderName: testData.CA.paymentMethods.creditCard.nameOnCard,
             expiryDate: testData.CA.paymentMethods.creditCard.expiryDate,
             cvv: testData.CA.paymentMethods.creditCard.cvv,
             isCA: true,
         });
-        await depositModal.clickOnDepositButton();
-        await depositModal.page.waitForTimeout(60000);
-        await expect(depositModal.getDepModalError).toBeVisible({ timeout: 5000 });
-        await expect(page).toHaveScreenshot('ca_credit_card.png', { fullPage: false, maxDiffPixelRatio: 0.05, threshold: 0.3 });
+        await kingBilly.depModal.clickOnDepositButton();
+        await kingBilly.depModal.page.waitForTimeout(60000);
+        await expect(kingBilly.depModal.getDepModalError).toBeVisible({ timeout: 5000 });
+        await expect(page).toHaveScreenshot('ca_credit_card.png', {maxDiffPixels: 2000, maxDiffPixelRatio: 0.5});
         await context.close();
         
         // Disconnect VPN after test

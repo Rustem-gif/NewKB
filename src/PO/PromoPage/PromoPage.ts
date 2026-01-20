@@ -1,4 +1,3 @@
-import { axeScan } from "axe-playwright-report";
 import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
 
@@ -19,6 +18,7 @@ export default class PromoPage extends BasePage{
     private infoButton: Locator
     private promoCardDepositButton: Locator
     private depositModal: Locator
+    readonly vipButton: Locator
 
     private tournamentShowMoreButton: (index: number) => Locator
 
@@ -42,6 +42,8 @@ export default class PromoPage extends BasePage{
         this.depositModal = page.locator('#fast-deposit')
 
         this.tournamentShowMoreButton = (index) => page.locator(`.a.tourn-item__button.link-btn:nth-of-type(${index})`)
+
+        this.vipButton = page.locator('#promo_promo_vip_tab')
 
     }
 
@@ -97,6 +99,7 @@ export default class PromoPage extends BasePage{
         await this.promoCardDepositButton.click()
     }
 
+
     async getaAndSortPromos(): Promise<{ activePromos: Array<Locator>; inactivePromos: Array<Locator> }> {
         let activePromos: Array<Locator> = []
         let inactivePromos: Array<Locator> = []
@@ -115,6 +118,30 @@ export default class PromoPage extends BasePage{
 
         return {activePromos, inactivePromos}
     }
+
+    async checkPromoTourn({promoType, lang, expectedValue, section}:
+            {promoType: 'promo' | 'tournament', lang: string, expectedValue: string, section: 'promo' | 'tournament'}): Promise<boolean> {
+        let receivedArray
+        let titleIsNotFound
+
+        switch(section) {
+            case "promo":
+                receivedArray = await this.getPromoCardText();
+                titleIsNotFound = await this.checkTitle({receivedArray, expectedValue});
+                // console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`));
+                break;
+            case "tournament":
+                receivedArray = await this.getTournamentPromoText();
+                titleIsNotFound = await this.checkTitle({receivedArray, expectedValue});
+                // console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`));
+                break;
+            default:
+                // console.log(chalk.red(`Invalid section ${section}`));
+                return false;
+        }
+        return titleIsNotFound
+    }
+
 
     get getPromoCard(): Locator {
         return this.promoCard

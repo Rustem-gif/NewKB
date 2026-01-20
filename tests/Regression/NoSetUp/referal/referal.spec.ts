@@ -1,11 +1,10 @@
 import test, {expect} from "@playwright/test";
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import SignInModal from "../../../src/PO/MainPage/Component/SignInModal";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
-import {USERS} from "../../../src/Data/Users/users";
-import ReferalProgram from "../../../src/PO/ReferalProgram/ReferalProgram";
-import playwrightConfig from "../../../playwright.config";
+import MainPage from "../../../../src/PO/MainPage/MainPage";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import SignInModal from "../../../../src/PO/MainPage/Component/SignInModal";
+import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
+import {USERS} from "../../../../src/Data/Users/users";
+import ReferalProgram from "../../../../src/PO/ReferalProgram/ReferalProgram";
 
 
 

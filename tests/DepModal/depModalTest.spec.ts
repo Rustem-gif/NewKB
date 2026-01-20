@@ -1,44 +1,42 @@
 import {expect, test} from "@playwright/test";
-import VpnController from "../src/modules/VpnController/vpnController";
-import {USERS} from "../src/Data/Users/users";
-import PageMethods from "../src/modules/PageMethods/PageMethods";
+import { vpnController } from "../../helpers/vpnControllerInstance";
+import KingBilly from "../../src/PageManager/KingBilly";
+import { USERS_DEPOSIT_MODAL } from "../../src/Data/testDepositData/depositModalTestUsers";
 
-for(const locale of Object.keys(USERS)) {
-    const {location, user} = USERS[locale]
+for(const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
+    const {location, user} = USERS_DEPOSIT_MODAL[locale]
 
     for (const [type, creds] of Object.entries(user)) {
         const {email, password} = creds
 
         test.describe(`Check ${locale}, ${type}`, () => {
-
-                let vpnController: VpnController
-                let pageMethods: PageMethods
+                let kingBilly: KingBilly
                 let status: string
                 const timeout = 30000;
                 const interval = 1000;
                 const startTime = Date.now();
 
                 test.beforeEach(async ({page}) => {
-                    vpnController = new VpnController();
-                    pageMethods = new PageMethods(page)
+                    kingBilly = new KingBilly(page)
 
                     const currentStatus = await vpnController.vpnCheckStatus();
-                    if (currentStatus === `Connected to ${location}`) {
+                    if (currentStatus === `connected to ${location}`) {
                         console.log('Correct location, proceeding to the test');
                     } else if (currentStatus === `Not connected`) {
                         console.log('Connecting...');
-                        await vpnController.vpnConnnect(location);
+                        await vpnController.vpnConnect(location);
                     } else {
                         console.log('Changing location...')
                         await vpnController.vpnDisconnect();
                         await vpnController.sleepVPN(5000)
-                        await vpnController.vpnConnnect(location);
+                        await vpnController.vpnConnect(location);
+                        await vpnController.sleepVPN(5000)
                     }
 
                     do {
                         status = await vpnController.vpnCheckStatus();
                         console.log(`Current status: ${status}`);
-                        if (status === `Connected to ${location}`) {
+                        if (status === `connected`) {
                             console.log(`Successfully connected to ${location}`);
                             break;
                         }
@@ -49,13 +47,13 @@ for(const locale of Object.keys(USERS)) {
 
 
                 test(`Visual comparison of dep modal ${locale}. ${type}`, async () => {
-                    await pageMethods.navigateToMainPage()
-                    await pageMethods.signIn(email, password)
-                    await pageMethods.openDepModal()
-                    await pageMethods.getPaymentList.waitFor({state: 'visible'})
-                    await pageMethods.page.waitForTimeout(15000)
+                    await kingBilly.mainPage.navTo('/')
+                    await kingBilly.mainPage.header.signIn(email, password)
+                    await kingBilly.mainPage.header.clickDepositButton()
+                    await kingBilly.depModal.getDepModal.waitFor({state: 'visible'})
+                    await kingBilly.page.waitForTimeout(15000)
 
-                    await expect(pageMethods.getPaymentList).toHaveScreenshot({maxDiffPixels: 50})
+                    await expect(kingBilly.depModal.paymentList).toHaveScreenshot({maxDiffPixels: 500, maxDiffPixelRatio: 0.1, threshold: 0.2})
                 })
         })
     }

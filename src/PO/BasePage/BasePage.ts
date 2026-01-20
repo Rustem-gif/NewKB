@@ -3,6 +3,8 @@ import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import SidebarMenu from "../../Components/SidebarMenu";
 import CategoryDropdown from "../MainPage/Component/CategoryDropdown";
+import { DepModal } from "../../Components/DepModal";
+import chalk from "chalk";
 
 export default class BasePage {
   readonly page: Page
@@ -34,6 +36,7 @@ export default class BasePage {
   
   async navTo(url: string): Promise<void> {
     await this.page.goto(url);
+    await this.changeLanguage('EN');
   }
 
   async sleep(miliseconds: number): Promise<void> {
@@ -51,6 +54,7 @@ export default class BasePage {
   async clickAcceptCookies(): Promise<void>{
     await this.acceptCookiesButton.click()
   }
+
 
   async waitForSelector(locator: Locator): Promise<void>{
     await locator.waitFor({state: "visible"})
@@ -104,8 +108,95 @@ export default class BasePage {
     }
   }
 
-      async changeLanguage(langValue: string = 'EN', domain?: string): Promise<void> {
+     async checkTitle({
+    receivedArray,
+    expectedValue
+}: {
+    receivedArray: Array<string>,
+    expectedValue: string
+}): Promise<boolean> {
+        console.log(receivedArray)
+        console.log(expectedValue.trim().toUpperCase())
+
+    if (receivedArray.includes(expectedValue.trim().toUpperCase())) {
+        console.error(chalk.red(`${expectedValue} IS PRESENT ERROR!!!`))
+        return false
+    }
+    if (receivedArray.length === 0) {
+        console.error(chalk.red(`ARRAY IS EMPTY ERROR!!!!!!!`))
+        return false
+    } else {
+        const message = `No ${expectedValue} found`;
+        console.log(message);
+        return true
+    }
+  }
+
+        async getPromoCardText(): Promise<Array<string>> {
+        await this.page.waitForSelector('.promo-item__subtitle')
+        return await this.page.evaluate(async () => {
+            let nodeList = document.querySelectorAll('.promo-item__subtitle')
+            if (nodeList !== null) {
+                let array = Array.from(nodeList).map(title => title.textContent?.trim().toUpperCase() || '')
+                 if (array.length > 0) {
+                    return array
+                }  else {
+                    console.error("Array is empty")
+                }
+            }
+            return []
+        })
+    }
+
+        async getTournamentMainText(): Promise<Array<string>> {
+        return await this.page.evaluate(async () => {
+            let nodeList = document.querySelectorAll('.tourn-banner .tourn-banner__subtitle')
+            if (nodeList !== null) {
+                let array:Array<string> = Array.from(nodeList).map(title => title.textContent?.trim().toUpperCase() || '')
+                 if (array.length > 0) {
+                    return array
+                }  else {
+                    // throw new Error("Array is empty")
+                }
+            }
+            return []
+        })
+    }
+
+        async getFooterPromoTitles(): Promise<Array<string>> {
+        return await this.page.evaluate(async () => {
+            let nodeList = document.querySelectorAll('.promo-item__subtitle')
+            if (nodeList !== null) {
+                let array:Array<string> = Array.from(nodeList).map(title => title.textContent?.trim().toUpperCase() || '')
+                 if (array.length > 0) {
+                    return array
+                }  else {
+                    throw new Error("Array is empty")
+                }
+            }
+            return []
+        })
+    }
+
+    async getTournamentPromoText(): Promise<Array<string>> {
+        return await this.page.evaluate(async () => {
+            let nodeList = document.querySelectorAll('.tourn-item__subtitle')
+            if (nodeList !== null) {
+                let array:Array<string> = Array.from(nodeList).map(title => title.textContent?.trim().toUpperCase() || '')
+                if (array.length > 0) {
+                    return array
+                }  else {
+                    console.error("Array is empty")
+                }
+            }
+            return []
+        })
+    }
+
+
+    async changeLanguage(langValue: string = 'EN', domain?: string): Promise<void> {
         await this.page.waitForLoadState('load')
+        await this.page.waitForTimeout(2000)
 
         const depositModal = this.page.locator('.fast-deposit-modal')
         const closeDepositModalButton = this.page.locator('.modal__close-button').first()
@@ -118,34 +209,45 @@ export default class BasePage {
         const currentUrl = await this.page.url();
         const currentDomain = new URL(currentUrl).hostname;
 
-        const skipLanguageChangeDomains = ['www.kingbillywin26.com', 'kingbillywin26.com'];
+        console.log(`[changeLanguage] Current URL: ${currentUrl}`);
+        console.log(`[changeLanguage] Current domain: ${currentDomain}`);
 
-        if (domain && skipLanguageChangeDomains.includes(domain) ||
+        const skipLanguageChangeDomains = ['www.kingbillywin29.com', 'kingbillywin29.com'];
+
+        if ((domain && skipLanguageChangeDomains.includes(domain)) ||
             skipLanguageChangeDomains.includes(currentDomain)) {
             console.log(`Domain ${domain || currentDomain} doesn't require language change`);
             return;
-        } else {
-            // Proceed with language change if needed
-            try {
-                const currentLocale = await this.langDropdown.innerText();
-                
-                if (currentLocale.trim().toUpperCase() === langValue.trim().toUpperCase()) {
-                    console.log(`Language is already set to ${langValue}`);
-                    return;
-                } else {
-                    await this.langDropdown.click();
-                    await this.langItem(langValue).waitFor({ state: 'visible', timeout: 5000 });
-                    await this.langItem(langValue).click();
-                    console.log(`Language changed to ${langValue}`);
-                    // Wait for page to load after language change
-                    await this.page.waitForLoadState('load', { timeout: 10000 });
-                }
-            } catch (error) {
-                console.error(`Error changing language: ${error}`);
-                throw error;
+        }
+
+        // Check if language dropdown exists on this page
+        const langDropdownVisible = await this.langDropdown.isVisible({ timeout: 2000 }).catch(() => false);
+        if (!langDropdownVisible) {
+            console.log(`Language dropdown not found on ${currentDomain}, skipping language change`);
+            return;
+        }
+
+        // Proceed with language change if needed
+        try {
+            const currentLocale = await this.langDropdown.innerText();
+            
+            if (currentLocale.trim().toUpperCase() === langValue.trim().toUpperCase()) {
+                console.log(`Language is already set to ${langValue}`);
+                return;
+            } else {
+                await this.langDropdown.click();
+                await this.langItem(langValue).waitFor({ state: 'visible', timeout: 5000 });
+                await this.langItem(langValue).click();
+                console.log(`Language changed to ${langValue}`);
+                // Wait for page to load after language change
+                await this.page.waitForLoadState('load', { timeout: 10000 });
             }
+        } catch (error) {
+            console.error(`Error changing language: ${error}`);
+            throw error;
         }
     }
+
 
     async clickOn(button: Locator) {
       await button.click();

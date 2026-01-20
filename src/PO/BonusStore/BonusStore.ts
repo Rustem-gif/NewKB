@@ -8,26 +8,6 @@ export default class BonusStore extends BasePage {
         super(page);
     }
 
-   
-    get signInButton() {
-    return this.page.getByRole('main').getByRole('link', { name: 'sign in' });
-    }
-
-
-    get createAccountButton() {
-    return this.page.getByRole('main').getByRole('link', { name: 'Create account' });
-    }
-
-
-    get emailAddressTextbox() {
-    return this.page.getByRole('textbox', { name: 'your e-mail address' });
-    }
-
-
-    get createAccountEmailTextbox() {
-    return this.page.getByRole('textbox', { name: 'Email' });
-    }
-
     get realMoneyButton() {
     return this.page.getByRole('button', { name: 'Real Money' });
     }

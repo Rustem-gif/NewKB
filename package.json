@@ -4,10 +4,16 @@
   "main": "index.js",
   "scripts": {
     "slack-bot": "node app_slack.js",
-    "test:default": "npx playwright test --project=Default-YesSetUp --project=Default-NoSetUp ",
-    "test:kb-bet1": "npx playwright test --project=KB-Bet1-YesSetUp --project=KB-Bet1-NoSetUp ",
-    "test:kb-win26": "npx playwright test --project=KB-win26-YesSetUp --project=KB-win26-NoSetUp",
-    "test:kb-17": "npx playwright test --project=KB-16-YesSetUp --project=KB-16-NoSetUp --headed"
+    "test:au-healthcheck": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck\" npx playwright test --config=playwright.config.au-healthcheck.ts",
+    "test:au-healthcheck-fast": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck Fast\" npx playwright test --config=playwright.config.au-healthcheck.ts",
+    "test:dep-flow": "npx playwright test --config=playwright.config.dep-flow.ts --update-snapshots",
+    "test:dep-modal": "npx playwright test --config=playwright.config.dep-modal.ts --debug",
+    "test:unpublish:prod": "npx playwright test --project=prod --config=playwright.config.unpublish.ts",
+    "test:unpublish:staging": "npx playwright test --project=stage --config=playwright.config.unpublish.ts",
+    "test:regression:default": "npx playwright test --project=Default-YesSetUp --project=Default-NoSetUp --config=playwright.config.regression.ts",
+    "test:regression:kb-bet1": "npx playwright test --project=KB-Bet1-YesSetUp --project=KB-Bet1-NoSetUp --config=playwright.config.regression.ts",
+    "test:regression:kb-win": "npx playwright test --project=KB-win26-YesSetUp --project=KB-win26-NoSetUp --config=playwright.config.regression.ts",
+    "test:regression:kb-17": "npx playwright test --project=KB-16-YesSetUp --project=KB-16-NoSetUp --config=playwright.config.regression.ts"
   },
   "repository": {
     "type": "git",
@@ -23,15 +29,17 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@types/node": "^22.10.10",
+    "cross-env": "^7.0.3",
     "playwright-qase-reporter": "^2.0.16",
-    "typescript": "^5.9.2",
-    "playwright-slack-report": "^1.1.99"
+    "playwright-slack-report": "^1.1.99",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "@slack/bolt": "^4.4.0",
-    "chalk": "^5.4.1",
+    "chalk": "^5.6.2",
     "dotenv": "^17.2.1",
     "moment": "^2.30.1",
+    "p-limit": "^7.2.0",
     "speakeasy": "^2.0.0"
   }
 }

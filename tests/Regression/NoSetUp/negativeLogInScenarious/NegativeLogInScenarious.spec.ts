@@ -1,31 +1,28 @@
 import test, {expect} from '@playwright/test'
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import SignInModal from "../../../src/PO/MainPage/Component/SignInModal";
-import {PasswordRecovery} from "../../../src/PO/PasswordRecovery/PasswordRecovery";
-import {ERRORS} from "../../../src/Data/Errors/errors";
-import {INVALID_USER} from "../../../src/Data/Users/invalidUser";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
+import KingBilly from "../../../../src/PageManager/KingBilly";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import SignInModal from "../../../../src/PO/MainPage/Component/SignInModal";
+import {ERRORS} from "../../../../src/Data/Errors/errors";
+import {INVALID_USER} from "../../../../src/Data/Users/invalidUser";
+import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
 
 
 
 test.describe('Log In', () => {
-    let mainPage: MainPage;
+    let kingBilly: KingBilly;
     let signInModal: SignInModal
-    let passwordRecovery: PasswordRecovery
 
     test.beforeEach(async ({page}) => {
-        mainPage = new MainPage(page);
-        passwordRecovery = new PasswordRecovery(page)
+        kingBilly = new KingBilly(page);
 
         await test.step('Navigate to main page', async () => {
-            await mainPage.navTo(LINKS.Main);
+            await kingBilly.mainPage.navTo(LINKS.Main);
 
-            await mainPage.clickAcceptCookies();
+            await kingBilly.mainPage.clickAcceptCookies();
         })
 
         await test.step('Open Sign in form', async () => {
-            signInModal = await mainPage.header.clickSignIn()
+            signInModal = await kingBilly.mainPage.header.clickSignIn()
             
         })
     })

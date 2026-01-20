@@ -1,28 +1,24 @@
 import test, {expect} from '@playwright/test'
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import SignInModal from "../../../src/PO/MainPage/Component/SignInModal";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
-import {PasswordRecovery} from "../../../src/PO/PasswordRecovery/PasswordRecovery";
-import playwrightConfig from "../../../playwright.config";
+import KingBilly from "../../../../src/PageManager/KingBilly";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import SignInModal from "../../../../src/PO/MainPage/Component/SignInModal";
+import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
 
 
 test.describe('Log In', () => {
-    let mainPage: MainPage;
+    let kingBilly: KingBilly;
     let signInModal: SignInModal
-    let passwordRecovery: PasswordRecovery
 
     test.beforeEach(async ({ page }) => {
-        mainPage = new MainPage(page);
-        passwordRecovery = new PasswordRecovery(page)
+        kingBilly = new KingBilly(page);
 
         await test.step('Navigate to main page', async () => {
-            await mainPage.navTo(LINKS.Main);
-            await mainPage.clickAcceptCookies();
+            await kingBilly.mainPage.navTo(LINKS.Main);
+            await kingBilly.mainPage.clickAcceptCookies();
         })
 
         await test.step('Open Sign In modal', async () => {
-            signInModal = await mainPage.header.clickSignIn()
+            signInModal = await kingBilly.mainPage.header.clickSignIn()
         })
     })
 
@@ -100,11 +96,11 @@ test.describe('Log In', () => {
         })
 
         await test.step('Check page URL', async () => {
-            expect(await passwordRecovery.getPageUrl()).toEqual(`${test.info().project.use.baseURL}${LINKS.PasswordRecovery}`)
+            expect(await kingBilly.passwordRecovery.getPageUrl()).toEqual(`${test.info().project.use.baseURL}${LINKS.PasswordRecovery}`)
         })
 
         await test.step('Check if at least one UI element is visible', async () => {
-            await expect(passwordRecovery.getDidntRecieveInstructionsLink).toBeVisible()
+            await expect(kingBilly.passwordRecovery.getDidntRecieveInstructionsLink).toBeVisible()
         })
     })
 
@@ -113,7 +109,7 @@ test.describe('Log In', () => {
             await signInModal.fillEmail(MAIN_USER.email)
             await signInModal.fillPassword(MAIN_USER.password)
             await signInModal.clickSignIn()
-            await expect(mainPage.header.getDepositButton).toBeVisible()
+            await expect(kingBilly.mainPage.header.getDepositButton).toBeVisible()
         })
     })
 })

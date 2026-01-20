@@ -5,7 +5,7 @@ import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: './tests/DepFlow',
   /* Run tests in files in parallel */
   fullyParallel: true,
   timeout: 100 * 10000, 
@@ -18,24 +18,24 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['list'],
-    [
-       "./node_modules/playwright-slack-report/dist/src/SlackReporter.js",
-      {
-        SLACK_BOT_USER_OAUTH_TOKEN: process.env.SLACK_BOT_USER_OAUTH_TOKEN,
-        channels: ['test-reporter'],
-        successChannel: ['test-reporter'],
-        layoutAsync: generateCustomLayoutAsync,
-        attachFiles: true,
-        attachHtmlReport: true,
-        showInThread: true,
-      },
-    ],
+    // [
+    //    "./node_modules/playwright-slack-report/dist/src/SlackReporter.js",
+    //   {
+    //     SLACK_BOT_USER_OAUTH_TOKEN: process.env.SLACK_BOT_USER_OAUTH_TOKEN,
+    //     channels: ['test-reporter'],
+    //     successChannel: ['test-reporter'],
+    //     layoutAsync: generateCustomLayoutAsync,
+    //     attachFiles: true,
+    //     attachHtmlReport: true,
+    //     showInThread: true,
+    //   },
+    // ],
     ['html'],
   ],
 
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://kingbillycasino.com',
+    baseURL: 'http://kingbillycasino.com',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
     screenshot: 'on',

@@ -1,4 +1,3 @@
-import { axeScan } from "axe-playwright-report";
 import BasePage from "../BasePage/BasePage";
 import {Page, Locator} from "@playwright/test";
 

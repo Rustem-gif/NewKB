@@ -1,11 +1,11 @@
 import { Page, test, expect, Browser } from "@playwright/test";
 import MainPage from "../../../src/PO/MainPage/MainPage.js";
 import PromoPage from "../../../src/PO/PromoPage/PromoPage.js";
-import { Ilocale } from "../../src/Interfaces.js";
-import { IpromoTournTitle } from "../../src/Interfaces.js";
-import { USER_ACCOUTNS } from "../../src/Data/UserAccounts.js";
+import { Ilocale } from "../../../src/Interfaces.js";
+import { IpromoTournTitle } from "../../../src/Interfaces.js";
 import chalk from "chalk";
-import pLimit from 'p-limit'; // Import p-limit
+import pLimit from 'p-limit'; 
+import { UNPUBLISH_USER_ACCOUNTS } from "../../../src/Data/Users/unpublishUsers.js";
 
 const locales: Ilocale = {
     'EN-AU': 'EN-AU',
@@ -17,7 +17,7 @@ const locales: Ilocale = {
 };
 
 const commonPromoTournTitle = {
-    promo: 'ROYAL PREMIERE SPINS',
+    promo: 'Raboba',
     tourn: 'nonTourn',
     vip: `nonVip`
 };
@@ -28,15 +28,11 @@ const promoTournTitle: IpromoTournTitle = {
     'EN-NZ': commonPromoTournTitle,
     'CA': commonPromoTournTitle,
     DE: {
-        promo: 'KÖNIGLICHE PREMIERENSPIELE',
+        promo: 'ababo',
         tourn: 'nonTourn',
         vip: `nonVip`
     },
-    NO: {
-        promo: 'KONGELIGE PREMIERESPINN',
-        tourn: 'nonTourn',
-        vip: `nonVip`
-    }
+    NO: commonPromoTournTitle
 };
 
 const mainPageLinkMaster = 'https://www.kingbillycasino.com/';
@@ -111,19 +107,19 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
             tournamentPages = result.tournamentPages;
 
             // Navigate to the main and promo pages
-            await mainPages[0].goTo(mainPageLink);
-            await mainPages[0].waitForTimeout(2000);
+            await mainPages[0].navTo(mainPageLink);
+            await mainPages[0].page.waitForTimeout(2000);
         });
 
-        for (const [status, creds] of Object.entries(USER_ACCOUTNS)) {
+        for (const [status, creds] of Object.entries(UNPUBLISH_USER_ACCOUNTS)) {
             test(`Unpublish ${status}`, async () => {
                 // skip log in if user is anon
                 if (creds.type === 'anon') {
                     console.log(chalk.yellow(`Skipping login for ${status} user`));
-                    await mainPages[0].closePage();
+                    await mainPages[0].page.close();
                 } else {
-                    await mainPages[0].logIn({ email: creds.email, password: creds.password });
-                    await mainPages[0].closePage();
+                    await mainPages[0].header.signIn(creds.email, creds.password);
+                    await mainPages[0].page.close();
                 }
 
                 const localesToTestMain = [
@@ -258,9 +254,9 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
                     ...localesToTestMain.map(({ lang, page, promoTitle, tournamentTitle }) => {
                         limit(async () => {
                             await test.step(`Checking ${lang} Main Page`, async () => {
-                                await page.goTo(mainPageLink);
-                                await page.waitForTimeout(2000);
-                                await page.changeLanguge(lang, domain);
+                                await page.navTo(mainPageLink);
+                                await page.page.waitForTimeout(2000);
+                                await page.changeLanguage(lang, domain);
                                 if (creds.type !== 'anon') {
                                 await page.clickThroughAllBanners();
 
@@ -344,7 +340,7 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
                                 await Promise.all(steps);
 
                                 // Close the page
-                                await page.closePage();
+                                await page.page.close();
                             });
                         })
                     }),
@@ -352,9 +348,9 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
                     ...localesToTestPromo.map(({ lang, page, promoTitle, tournamentTitle, vipPromoTitle }) =>
                         limit(async () => {
                             await test.step(`Checking ${lang} Promo and Tournament Page`, async () => {
-                                await page.goTo(promoPageLink);
-                                await page.waitForTimeout(2000);
-                                await page.changeLanguge(lang, domain);
+                                await page.navTo(promoPageLink);
+                                await page.page.waitForTimeout(2000);
+                                await page.changeLanguage(lang, domain);
 
                                 await Promise.all([
                                     test.step('Promo Card', async () => {
@@ -404,9 +400,9 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
                                     }),
 
                                     test.step('Check VIP promos', async () => {
-                                        await page.vipButtonElement.click();
+                                        await page.vipButton.click();
 
-                                        await page.changeLanguge(lang, domain);
+                                        await page.changeLanguage(lang, domain);
                                         const receivedArray = await page.getPromoCardText();
                                         const titleIsNotFoundVip = await page.checkTitle({
                                             receivedArray: receivedArray,
@@ -426,7 +422,7 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
                                         }
                                     })
                                 ]);
-                                await page.closePage();
+                                 await page.page.close();
                             });
                         })
                     ),
@@ -434,9 +430,9 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
                     ...localesToTestTournament.map(({ lang, page, promoTitle, tournamentTitle }) =>
                         limit(async () => {
                             await test.step(`Checking ${lang} Tournament Page`, async () => {
-                                await page.goTo(tournamentPageLink);
-                                await page.waitForTimeout(2000);
-                                await page.changeLanguge(lang, domain);
+                                await page.navTo(tournamentPageLink);
+                                await page.page.waitForTimeout(2000);
+                                await page.changeLanguage(lang, domain);
 
                                 await Promise.all([
                                     test.step('Tournament Page Tournament', async () => {
@@ -483,7 +479,7 @@ testDomains.forEach(({ domain, mainPageLink, promoPageLink, tournamentPageLink }
                                         expect.soft(titleIsNotFoundPromo).toEqual(true);
                                     }),
                                 ]);
-                                await page.closePage();
+                                await page.page.close();
                             });
                         })
                     )

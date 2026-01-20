@@ -1,34 +1,29 @@
 import test, {expect} from '@playwright/test'
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
-import SignInModal from "../../../src/PO/MainPage/Component/SignInModal";
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {DepModal} from "../../../src/Components/DepModal";
-import {LINKS} from "../../../src/Data/Links/Links";
-import {SEARCH_GAME} from "../../../src/Data/ParametrizedData/games/games";
-import GamePage from "../../../src/PO/GamePage/GamePage";
-import {LOCALES} from "../../../src/Data/Locales/Locales";
+import KingBilly from "../../../../src/PageManager/KingBilly";
+import {DepModal} from "../../../../src/Components/DepModal";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import {SEARCH_GAME} from "../../../../src/Data/ParametrizedData/games/games";
+import {LOCALES} from "../../../../src/Data/Locales/Locales";
 
 
 
 test.describe('Header', () => {
-    let mainPage: MainPage
+    let kingBilly: KingBilly
     let depModal: DepModal
-    let gamePage: GamePage
 
     test.beforeEach(async ({page}) => {
-        mainPage = new MainPage(page)
-        gamePage = new GamePage(page)
+        kingBilly = new KingBilly(page)
 
         await test.step('Navigate to main page', async () => {
-            await mainPage.navTo(LINKS.Main)
-            await mainPage.clickAcceptCookies()
-            await mainPage.closeModal()
+            await kingBilly.mainPage.navTo(LINKS.Main)
+            await kingBilly.mainPage.clickAcceptCookies()
+            await kingBilly.mainPage.closeModal()
         })
 
         // Storage state should already have us logged in, just verify
         await test.step('Verify user is logged in (using storage state)', async () => {
-            await mainPage.header.waitForSelector(mainPage.header.getDepositButton)
-            await expect(mainPage.header.getDepositButton).toBeVisible()
+            await kingBilly.mainPage.header.waitForSelector(kingBilly.mainPage.header.getDepositButton)
+            await expect(kingBilly.mainPage.header.getDepositButton).toBeVisible()
         })
     })
 
@@ -36,10 +31,10 @@ test.describe('Header', () => {
     test('Check the "deposit" button', async () => {
 
         await test.step('', async () => {
-            depModal = await mainPage.header.clickDepositButton()
+            depModal = await kingBilly.mainPage.header.clickDepositButton()
         })
 
-        await mainPage.page.reload()
+        await kingBilly.mainPage.page.reload()
 
         await test.step('Check if deposit modal is opened', async () => {
             await expect(depModal.getDepModal).toBeVisible()
@@ -49,15 +44,15 @@ test.describe('Header', () => {
     test('Check "Search your game" input', async () => {
 
         await test.step('Enter the game name in the search input', async () => {
-            await mainPage.header.searchFor(SEARCH_GAME)
+            await kingBilly.mainPage.header.searchFor(SEARCH_GAME)
         })
 
         await test.step('Click on the game', async () => {
-            await mainPage.header.clickOnGameItem()
+            await kingBilly.mainPage.header.clickOnGameItem()
         })
 
         await test.step('Check if game is opened', async () => {
-            await expect(gamePage.getGameFrame).toBeVisible()
+            await expect(kingBilly.gamePage.getGameFrame).toBeVisible()
         })
     })
 
@@ -67,11 +62,11 @@ test.describe('Header', () => {
          test.skip((test.info().project.use.baseURL || '').includes('kingbillywin26'), 'These tests are skipped on kingbillywin26 domain');
          
         await test.step('Open lang dropdown', async () => {
-            await mainPage.header.openLangDropdown()
+            await kingBilly.mainPage.header.openLangDropdown()
         })
 
         await test.step('Get text of the lang button and dropdown', async () => {
-            listOfLocales = await mainPage.header.getLangDropdownLocales()
+            listOfLocales = await kingBilly.mainPage.header.getLangDropdownLocales()
         })
 
         await test.step('Compare received list to the expected result', async () => {

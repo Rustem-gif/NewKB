@@ -1,9 +1,9 @@
 import test, {expect} from '@playwright/test'
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
-import SignInModal from "../../../src/PO/MainPage/Component/SignInModal";
-import SidebarMenu from "../../../src/Components/SidebarMenu";
+import MainPage from "../../../../src/PO/MainPage/MainPage";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
+import SignInModal from "../../../../src/PO/MainPage/Component/SignInModal";
+import SidebarMenu from "../../../../src/Components/SidebarMenu";
 
 test.describe('Burger menu - Logout functionality', () => {
     let mainPage: MainPage

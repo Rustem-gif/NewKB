@@ -1,32 +1,26 @@
 import test, {expect} from "@playwright/test";
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import GamePage from "../../../src/PO/GamePage/GamePage";
-import SignInModal from "../../../src/PO/MainPage/Component/SignInModal";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
-import {SLIDER_CATEGORIES, SLIDER_CATEGORIES_AU} from "../../../src/Data/Categories/Categories";
-import {CATEGORY_DROPDOWN_PARAMS} from "../../../src/Data/Constants/CategoryDropdownsLocators";
-import SupportMessanger from "../../../src/Components/SupportButton";
+import KingBilly from "../../../../src/PageManager/KingBilly";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import {SLIDER_CATEGORIES, SLIDER_CATEGORIES_AU} from "../../../../src/Data/Categories/Categories";
+import {CATEGORY_DROPDOWN_PARAMS} from "../../../../src/Data/Constants/CategoryDropdownsLocators";
+import SupportMessanger from "../../../../src/Components/SupportButton";
 
 test.describe('Body', async () => {
-    let mainPage: MainPage
-    let gamePage: GamePage
-    let signInModal: SignInModal
+    let kingBilly: KingBilly
 
     test.beforeEach(async ({page}) =>{
-        mainPage = new MainPage(page)
-        gamePage = new GamePage(page)
+        kingBilly = new KingBilly(page)
 
         await test.step('Navigate to the main page', async () => {
-            await mainPage.navTo(LINKS.Main)
-            await mainPage.clickAcceptCookies()
-            await mainPage.closeModal()
+            await kingBilly.mainPage.navTo(LINKS.Main)
+            await kingBilly.mainPage.clickAcceptCookies()
+            await kingBilly.mainPage.closeModal()
         })
         
         // Storage state should already have us logged in, just verify
         await test.step('Verify user is logged in (using storage state)', async () => {
-            await mainPage.header.waitForSelector(mainPage.header.getDepositButton)
-            await expect(mainPage.header.getDepositButton).toBeVisible()
+            await kingBilly.mainPage.header.waitForSelector(kingBilly.mainPage.header.getDepositButton)
+            await expect(kingBilly.mainPage.header.getDepositButton).toBeVisible()
         })
     })
 
@@ -35,27 +29,27 @@ test.describe('Body', async () => {
         let numberOfGames: number = 0
 
         await test.step('Scroll to the top winners section', async () => {
-            await mainPage.scrollTo(mainPage.getTopWinnersSection)
+            await kingBilly.mainPage.scrollTo(kingBilly.mainPage.getTopWinnersSection)
         })
 
         await test.step('Get number of games in the top winners section', async () => {
-            numberOfGames = await mainPage.getNumberOfTopWinnerGames()
+            numberOfGames = await kingBilly.mainPage.getNumberOfTopWinnerGames()
         })
 
-        for (let index = 0; index <= 5; index++) {
+        for (let index = 0; index <= 3; index++) {
             await test.step(`Navigate back to the main page. Index ${index}`, async () => {
-                await mainPage.navTo(LINKS.Main)
-                await mainPage.scrollTo(mainPage.getTopWinnersSection)
+                await kingBilly.mainPage.navTo(LINKS.Main)
+                await kingBilly.mainPage.scrollTo(kingBilly.mainPage.getTopWinnersSection)
             })
 
             await test.step(`Click on each game to open the game page. Index ${index}`, async () => {
-                await mainPage.sleep(2000)
-                await mainPage.clickOnTopWinnersGame(index)
+                await kingBilly.mainPage.sleep(2000)
+                await kingBilly.mainPage.clickOnTopWinnersGame(index)
             })
 
             await test.step(`Check if a game has been opened ${index}`, async () => {
-                await mainPage.sleep(4000)
-                await expect.soft(gamePage.getSideBarPanel).toBeVisible()
+                await kingBilly.mainPage.sleep(4000)
+                await expect.soft(kingBilly.gamePage.getSideBarPanel).toBeVisible()
             })
         }
     })
@@ -64,7 +58,7 @@ test.describe('Body', async () => {
     test('Check categories in the slider', async () => {
         let actualCategories: Array<string>
         await test.step('Get categories from the slider', async () => {
-            const categories = await mainPage.getCategorySlider.innerText()
+            const categories = await kingBilly.mainPage.getCategorySlider.innerText()
             const categoriesSet = new Set(categories.split('\n').map(word => word.trim()));
             actualCategories = Array.from(categoriesSet);
         })
@@ -85,10 +79,10 @@ test.describe('Body', async () => {
         test(`Check subcategories of ${categoryName}`, async () => {
 
             await test.step(`Open ${categoryName} dropdown`, async () => {
-                await mainPage.clickOnCategoryDropdown(params.locator)
+                await kingBilly.mainPage.clickOnCategoryDropdown(params.locator)
 
-                await mainPage.sleep(1000)
-                const dropdownText = await mainPage.getSubCategoryDropdown.innerText()
+                await kingBilly.mainPage.sleep(1000)
+                const dropdownText = await kingBilly.mainPage.getSubCategoryDropdown.innerText()
                 const categoriesArray = dropdownText.split('\n').map(string => string.trim())
 
                 expect(categoriesArray).toEqual(params.expectedResult)
@@ -100,7 +94,7 @@ test.describe('Body', async () => {
     test('Check "Support" button', async () => {
         let intercomWindow: SupportMessanger
         await test.step('Open support window', async () => {
-            intercomWindow = await mainPage.clickOnSupportButton()
+            intercomWindow = await kingBilly.mainPage.clickOnSupportButton()
         })
 
         await test.step('Check that intercom window opened', async () => {

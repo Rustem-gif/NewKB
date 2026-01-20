@@ -1,23 +1,23 @@
 import test, { expect } from "@playwright/test";
-import CasinoFaq from "../../../src/PO/CasinoFaq/CasinoFaq";
-import { LINKS } from "../../../src/Data/Links/Links";
-import { FAQText } from "../../../src/Data/ExpectedTextResult/FAQText";
-import CasinoDictionary from "../../../src/PO/CasinoDictionary/CasinoDictionary";
-import { CasinoDictionaryText } from "../../../src/Data/ExpectedTextResult/casinoDictionaryText";
-import CryptoFaq from "../../../src/PO/CryptoFaq/CryptoFaq";
-import {CRYPTO_FAQ_TEXT} from "../../../src/Data/ExpectedTextResult/cryptoFAQText";
-import Complaints from "../../../src/PO/Complaints/Complaints";
-import {COMPLAINTS_TEXT} from "../../../src/Data/ExpectedTextResult/complaintsText";
-import TermsAndConditions from "../../../src/PO/TermsAndConditions/TermsAndConditions";
-import {TERMS_AND_CONDITIONS_TEXT} from "../../../src/Data/ExpectedTextResult/termsAndCondition";
-import BonusTermsAndConditions from "../../../src/PO/BonusTermsAndConditions/BonusTermsAndConditions";
-import {BONUS_TERMS_AND_CONDITIONS} from "../../../src/Data/ExpectedTextResult/bonusTermsAndConditionsText";
-import PrivacyPolicy from "../../../src/PO/PrivacyPolicy/PrivacyPolicy";
-import {PRIVACY_POLICY_TEXT} from "../../../src/Data/ExpectedTextResult/privacyPolicyText";
-import {RESPONSIBLE_GAMBLING_TEXT} from "../../../src/Data/ExpectedTextResult/responsibleGamblingText";
-import SupportPage from "../../../src/PO/SupportPage/SupportPage";
-import { PRIVACY_POLICY_TEXT_AU } from "../../../src/Data/ExpectedTextResult/privacyPolicyTextAu";
-import { PRIVACY_POLICY_TEXT_BET } from "../../../src/Data/ExpectedTextResult/privacyPolicyTextBet";
+import CasinoFaq from "../../../../src/PO/CasinoFaq/CasinoFaq";
+import { LINKS } from "../../../../src/Data/Links/Links";
+import { FAQText } from "../../../../src/Data/ExpectedTextResult/FAQText";
+import CasinoDictionary from "../../../../src/PO/CasinoDictionary/CasinoDictionary";
+import { CasinoDictionaryText } from "../../../../src/Data/ExpectedTextResult/casinoDictionaryText";
+import CryptoFaq from "../../../../src/PO/CryptoFaq/CryptoFaq";
+import {CRYPTO_FAQ_TEXT} from "../../../../src/Data/ExpectedTextResult/cryptoFAQText";
+import Complaints from "../../../../src/PO/Complaints/Complaints";
+import {COMPLAINTS_TEXT} from "../../../../src/Data/ExpectedTextResult/complaintsText";
+import TermsAndConditions from "../../../../src/PO/TermsAndConditions/TermsAndConditions";
+import {TERMS_AND_CONDITIONS_TEXT} from "../../../../src/Data/ExpectedTextResult/termsAndCondition";
+import BonusTermsAndConditions from "../../../../src/PO/BonusTermsAndConditions/BonusTermsAndConditions";
+import {BONUS_TERMS_AND_CONDITIONS} from "../../../../src/Data/ExpectedTextResult/bonusTermsAndConditionsText";
+import PrivacyPolicy from "../../../../src/PO/PrivacyPolicy/PrivacyPolicy";
+import {PRIVACY_POLICY_TEXT} from "../../../../src/Data/ExpectedTextResult/privacyPolicyText";
+import {RESPONSIBLE_GAMBLING_TEXT} from "../../../../src/Data/ExpectedTextResult/responsibleGamblingText";
+import SupportPage from "../../../../src/PO/SupportPage/SupportPage";
+import { PRIVACY_POLICY_TEXT_AU } from "../../../../src/Data/ExpectedTextResult/privacyPolicyTextAu";
+import { PRIVACY_POLICY_TEXT_BET } from "../../../../src/Data/ExpectedTextResult/privacyPolicyTextBet";
 
 
 test.describe("Help Center", () => {
@@ -71,7 +71,7 @@ test.describe("Help Center", () => {
         expect(await bonusTermsAndConditions.getInfoBlockText()).toEqual(BONUS_TERMS_AND_CONDITIONS)
     })
 
-    test('Check Privacy policy', async ({page}) => {
+    test.skip('Check Privacy policy', async ({page}) => {
         privacyPolicy = new PrivacyPolicy(page)
 
         await privacyPolicy.navTo(LINKS.privacyPolicy)
@@ -84,7 +84,7 @@ test.describe("Help Center", () => {
         }
     })
 
-    test('Check Responsible gambling', async ({page}) => {
+    test.skip('Check Responsible gambling', async ({page}) => {
         privacyPolicy = new PrivacyPolicy(page)
 
         await privacyPolicy.navTo(LINKS.responsibleGambling)

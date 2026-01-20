@@ -6,22 +6,22 @@ import {DepModal} from "./DepModal";
 
 
 export default class Header extends BaseComponent {
-    private burgerMenuOpenButton: Locator
-    private headerLogo: Locator
-    private search: Locator
-    private searchField: Locator
-    private createAccountButton: Locator
-    private signInButton: Locator
+    readonly burgerMenuOpenButton: Locator
+    readonly headerLogo: Locator
+    readonly search: Locator
+    readonly searchField: Locator
+    readonly createAccountButton: Locator
+    readonly signInButton: Locator
     public langDropdown: Locator
-    private filterButton: Locator
-    private depositButton: Locator
-    private gameItem: Locator
-    private currenciesDropdown: Locator
+    readonly filterButton: Locator
+    readonly depositButton: Locator
+    readonly gameItem: Locator
+    readonly currenciesDropdown: Locator
 
-    private filterProviderButton: Locator
-    private filterCategoriesButton: Locator
+    readonly filterProviderButton: Locator
+    readonly filterCategoriesButton: Locator
 
-    private langDropdownItem: (language: string) => Locator
+    readonly langDropdownItem: (language: string) => Locator
 
 
 
@@ -74,7 +74,7 @@ export default class Header extends BaseComponent {
         await signInModal.fillEmail(email)
         await signInModal.fillPassword(password)
         await signInModal.clickSignIn()
-        await signInModal.page.waitForTimeout(8000)
+        await this.changeLanguage('EN')
     }
 
     async openLangDropdown(): Promise<void> {

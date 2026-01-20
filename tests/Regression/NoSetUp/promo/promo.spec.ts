@@ -1,11 +1,10 @@
 import test, {expect, Locator} from "@playwright/test";
-import {LINKS} from "../../../src/Data/Links/Links";
-import playwrightConfig from "../../../playwright.config";
-import TournamentPage from "../../../src/PO/TournamentPage/TournamentPage";
-import {DEP_USERS, USERS,} from "../../../src/Data/Users/users";
-import SignInModal from "../../../src/PO/MainPage/Component/SignInModal";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import TournamentPage from "../../../../src/PO/TournamentPage/TournamentPage";
+import {DEP_USERS, USERS} from "../../../../src/Data/Users/users";
+import SignInModal from "../../../../src/PO/MainPage/Component/SignInModal";
 import PromoPage from "../../../../src/PO/PromoPage/PromoPage";
+import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
 
 
 

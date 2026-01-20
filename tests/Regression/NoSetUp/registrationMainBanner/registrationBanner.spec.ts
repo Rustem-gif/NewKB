@@ -1,18 +1,15 @@
 import test, {expect} from '@playwright/test'
-import MainPage from "../../../src/PO/MainPage/MainPage";
-import {LINKS} from "../../../src/Data/Links/Links";
-import {LIST_OF_CURRENCIES} from "../../../src/Data/Constants/Currencies";
-import {MAIN_USER} from "../../../src/Data/Users/mainUser";
-import {PASSWORD_STATES} from "../../../src/Data/ParametrizedData/passwords/passwords";
-import {COUNTRIES} from "../../../src/Data/Constants/countries";
-import playwrightConfig from "../../../playwright.config";
-import TermsAndConditions from "../../../src/PO/TermsAndConditions/TermsAndConditions";
-import SignUpFormSlider from "../../../src/PO/MainPage/Component/SignUpFormSlider";
-import { NEGATIVE_EMAILS} from "../../../src/Data/ParametrizedData/negativeEmails/negativeEmails";
-import PromoPage from "../../../src/PO/PromoPage/PromoPage";
-import Methods from "../../../src/Methods/Methods";
-import {as} from "@faker-js/faker/dist/airline-D6ksJFwG";
-import { DepModal } from '../../../src/Components/DepModal';
+import MainPage from "../../../../src/PO/MainPage/MainPage";
+import {LINKS} from "../../../../src/Data/Links/Links";
+import {LIST_OF_CURRENCIES} from "../../../../src/Data/Constants/Currencies";
+import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
+import {PASSWORD_STATES} from "../../../../src/Data/ParametrizedData/passwords/passwords";
+import {COUNTRIES} from "../../../../src/Data/Constants/countries";
+import TermsAndConditions from "../../../../src/PO/TermsAndConditions/TermsAndConditions";
+import SignUpFormSlider from "../../../../src/PO/MainPage/Component/SignUpFormSlider";
+import {NEGATIVE_EMAILS} from "../../../../src/Data/ParametrizedData/negativeEmails/negativeEmails";
+import Methods from "../../../../src/Methods/Methods";
+import { DepModal } from '../../../../src/Components/DepModal';
 
 
 test.describe('Registration Modal', () => {
