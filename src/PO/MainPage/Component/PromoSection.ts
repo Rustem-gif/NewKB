@@ -3,31 +3,16 @@ import BaseComponent from "../../../Components/BaseComponent";
 import {Locator, Page} from "@playwright/test";
 
 export default class PromoSection extends BaseComponent {
-    private promoCards: Locator
-    private closeButton: Locator
-    private infoModal: Locator
-    private promoSection: Locator
-    private sliderButtonOne: Locator
-    private sliderButtonTwo: Locator
+    private promoCards: Locator = this.page.locator('.promo-item')
+    private closeButton: Locator = this.page.locator('button.modal__close-button')
+    private infoModal: Locator = this.page.locator('.promo-modal__container')
+    private promoSection: Locator = this.page.locator('.promos-slider')
+    private sliderButtonOne: Locator = this.page.locator('.promos-slider .slick-arrow:nth-of-type(1)')
+    private sliderButtonTwo: Locator = this.page.locator('.promos-slider .slick-arrow:nth-of-type(2)')
 
-    private promoCard: (index: number) => Locator;
-    private promoInfoButton: (index: number) => Locator;
-    private promoGetItButton: (index: number) => Locator;
-
-    constructor(page: Page){
-        super(page);
-
-        this.promoCards = this.page.locator('.promo-item');
-        this.infoModal = this.page.locator('.promo-modal__container')
-        this.closeButton = this.page.locator('button.modal__close-button')
-        this.promoSection = this.page.locator('.promos-slider')
-        this.sliderButtonOne = this.page.locator('.promos-slider .slick-arrow:nth-of-type(1)')
-        this.sliderButtonTwo = this.page.locator('.promos-slider .slick-arrow:nth-of-type(2)')
-
-        this.promoCard = (index) => this.page.locator(`.promo-item:nth-of-type(${index})`)
-        this.promoInfoButton = (index) => this.page.locator(`div[data-index='${index}'] .promo-item__info`)
-        this.promoGetItButton = (index) => this.page.locator(`div[data-index='${index}'] .promo-item__button`)
-    }
+    private promoCard = (index: number) => this.page.locator(`.promo-item:nth-of-type(${index})`)
+    private promoInfoButton = (index: number) => this.page.locator(`div[data-index='${index}'] .promo-item__info`)
+    private promoGetItButton = (index: number) => this.page.locator(`div[data-index='${index}'] .promo-item__button`)
 
     async getNumberOfCards(): Promise<number> {
         return await this.promoCards.count()

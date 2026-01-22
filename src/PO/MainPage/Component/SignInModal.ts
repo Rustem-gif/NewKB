@@ -5,37 +5,18 @@ import { test } from "@playwright/test";
 import Header from "../../../Components/Header";
 
 export default class SignInModal extends BaseComponent {
-    private header: Header
-    private emailInput: Locator
-    private passwordInput: Locator
-    private signInButton: Locator
-    private forgetPasswordLink: Locator
-    private loginWithGoogleButton: Locator
-    private createAccountButton: Locator
-    private signInModalForm: Locator
-    private hideShowPasswordButton: Locator
-    private emailInputError: Locator
-    private passwordInputError: Locator
-    private invalidCredsError: Locator
-
-
-    constructor(page: Page) {
-        super(page);
-
-        this.header = new Header(this.page)
-
-        this.emailInput = page.locator('#login_modal_email_input')
-        this.passwordInput = page.locator('#login_password_input')
-        this.signInButton = page.locator('#submit_login')
-        this.forgetPasswordLink = page.locator('#forgot_pass_btn')
-        this.loginWithGoogleButton = page.locator('.login-form__social .auth-providers__icon').filter({hasText: 'Continue with Google'})
-        this.createAccountButton = page.locator('#login_modal_reg_btn')
-        this.signInModalForm = page.locator('.sign-in-page')
-        this.hideShowPasswordButton = page.locator('.login-form__form-element .password-input__visibility-icon')
-        this.emailInputError = page.locator('.sign-in-page__body .login-form__input.input + .collapse .form-element__error')
-        this.passwordInputError = page.locator('.sign-in-page__body .password-input + .collapse .form-element__error')
-        this.invalidCredsError = page.locator('.errors__error')
-    }
+    private header: Header = new Header(this.page)
+    private emailInput: Locator = this.page.locator('#login_modal_email_input')
+    private passwordInput: Locator = this.page.locator('#login_password_input')
+    private signInButton: Locator = this.page.locator('#submit_login')
+    private forgetPasswordLink: Locator = this.page.locator('#forgot_pass_btn')
+    private loginWithGoogleButton: Locator = this.page.locator('.login-form__social .auth-providers__icon').filter({hasText: 'Continue with Google'})
+    private createAccountButton: Locator = this.page.locator('#login_modal_reg_btn')
+    private signInModalForm: Locator = this.page.locator('.sign-in-page')
+    private hideShowPasswordButton: Locator = this.page.locator('.login-form__form-element .password-input__visibility-icon')
+    private emailInputError: Locator = this.page.locator('.sign-in-page__body .login-form__input.input + .collapse .form-element__error')
+    private passwordInputError: Locator = this.page.locator('.sign-in-page__body .password-input + .collapse .form-element__error')
+    private invalidCredsError: Locator = this.page.locator('.errors__error')
 
     async fillEmail(email: string): Promise<void> {
         await this.emailInput.fill(email)

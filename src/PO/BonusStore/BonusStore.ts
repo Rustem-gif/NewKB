@@ -4,9 +4,6 @@ import BasePage from "../BasePage/BasePage";
 type BonusType = 'realMoney' | 'kingsCoins';
 
 export default class BonusStore extends BasePage {
-    constructor(page: Page) { 
-        super(page);
-    }
 
     get realMoneyButton() {
     return this.page.getByRole('button', { name: 'Real Money' });

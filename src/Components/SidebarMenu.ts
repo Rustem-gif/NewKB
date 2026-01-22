@@ -3,56 +3,28 @@ import {Locator, Page} from "@playwright/test";
 import PromoPage from "../PO/PromoPage/PromoPage";
 
 export default class SidebarMenu extends BaseComponent {
-    private sidebarMenu: Locator
-    private promotionsTab: Locator
-    private tournamentsTab: Locator
-    private vipTab: Locator
-    private bankingTab: Locator
-    private legendTab: Locator
-    private appBtn: Locator
-    private userInfoBlock: Locator
-    private compointsBlock: Locator
-    private playerPannerWrapper: Locator
-    private username: Locator
-    private currentStatus: Locator
-    private nextStatus: Locator
-    private statusPoints: Locator
-    private statusBar: Locator
-    private userMenu: Locator
-    private logoutButton: Locator
-    private referalButton: Locator
+    private sidebarMenu: Locator = this.page.locator('.bar-modal__container')
+    private promotionsTab: Locator = this.page.locator('#bar #burger_promotions_btn')
+    private tournamentsTab: Locator = this.page.locator('#bar #burger_tournaments_btn ')
+    private vipTab: Locator = this.page.locator('#bar #burger_vip_btn')
+    private bankingTab: Locator = this.page.locator('#bar #burger_banking_btn')
+    private legendTab: Locator = this.page.locator('#bar #burger_legend_btn')
+    private appBtn: Locator = this.page.locator('#bar .btn--app')
+    private userInfoBlock: Locator = this.page.locator('#bar').locator('.select-user-menu__section')
+    private compointsBlock: Locator = this.page.locator('#bar').locator('.side-bar')
+    private playerPannerWrapper: Locator = this.page.locator('#bar #downshift-select')
+    private username: Locator = this.page.locator('#bar .user-info-player__nickname')
+    private currentStatus: Locator = this.page.locator('#bar .user-info-player__level')
+    private nextStatus: Locator = this.page.locator('#bar .user-status-player__name')
+    private statusPoints: Locator = this.page.locator('#bar .user-status-player__next-level')
+    private statusBar: Locator = this.page.locator('#bar .progress-bar__track')
+    private userMenu: Locator = this.page.locator('#bar .select-user-menu__dropdown')
+    private logoutButton: Locator = this.page.locator('#bar .logout ')
+    private referalButton: Locator = this.page.locator('#bar .left-header-menu__item--referral_program')
 
-    private openMenuStatusClass: string
+    private openMenuStatusClass: string = 'select-user-menu__dropdown select-user-menu__dropdown--open'
 
-    private profileButton: (text: string) => Locator
-
-
-    constructor(page: Page) {
-        super(page);
-
-        this.sidebarMenu = page.locator('.bar-modal__container')
-        this.promotionsTab = page.locator('#bar #burger_promotions_btn')
-        this.tournamentsTab = page.locator('#bar #burger_tournaments_btn ')
-        this.vipTab = page.locator('#bar #burger_vip_btn')
-        this.bankingTab = page.locator('#bar #burger_banking_btn')
-        this.legendTab = page.locator('#bar #burger_legend_btn')
-        this.appBtn = page.locator('#bar .btn--app')
-        this.userInfoBlock = page.locator('#bar').locator('.select-user-menu__section')
-        this.compointsBlock = page.locator('#bar').locator('.side-bar')
-        this.playerPannerWrapper = page.locator('#bar #downshift-select')
-        this.username = page.locator('#bar .user-info-player__nickname')
-        this.currentStatus = page.locator('#bar .user-info-player__level')
-        this.nextStatus = page.locator('#bar .user-status-player__name')
-        this.statusPoints = page.locator('#bar .user-status-player__next-level')
-        this.statusBar = page.locator('#bar .progress-bar__track')
-        this.userMenu = page.locator('#bar .select-user-menu__dropdown')
-        this.logoutButton = page.locator('#bar .logout ')
-        this.referalButton = page.locator('#bar .left-header-menu__item--referral_program')
-
-        this.profileButton = (text: string) => page.locator('#bar .user-menu__link ').filter({hasText: text})
-
-        this.openMenuStatusClass = 'select-user-menu__dropdown select-user-menu__dropdown--open'
-    }
+    private profileButton = (text: string) => this.page.locator('#bar .user-menu__link ').filter({hasText: text})
 
     async openPromotionsTab(): Promise<void> {
         await this.promotionsTab.click()

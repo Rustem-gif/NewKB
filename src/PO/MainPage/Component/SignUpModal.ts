@@ -4,49 +4,25 @@ import SignInModal from "./SignInModal";
 
 
 export default class SignUpModal extends BaseComponent{
-    private emailInput: Locator
-    private passwordInput: Locator
-    private countryDropdown: Locator
-    private countryDropdownItem: (country: string) => Locator
-    private currencyDropdown: Locator
-    private currencyDropdownItem: (currency: string) => Locator
-    private promoCheckbox: Locator
-    private ageCheckbox: Locator
-    private crossSaleCheckbox: Locator
-    private creacteAccountButton: Locator
-    private signInLink: Locator
-    private googleRegBtn: Locator
-    private closeButton: Locator
-    private signUpModal: Locator
-    private passwordStateBar: Locator
-    private stateText: Locator
-    private passwordTip: Locator
-    private termsAndConditionsLink: Locator
-    private emailInputError: Locator
-
-    constructor(page: Page) {
-        super(page);
-
-        this.emailInput = page.locator('#reg_modal_email_input')
-        this.passwordInput = page.locator('#reg_modal_password_input')
-        this.countryDropdown = page.locator('#reg_modal_country_dropdown')
-        this.countryDropdownItem = (country: string) => page.locator('#reg_modal_country_dropdown-menu .select__option').filter({hasText: country})
-        this.currencyDropdown = page.locator('#reg_modal_currency_dropdown')
-        this.currencyDropdownItem = (currency: string) => page.locator('#reg_modal_currency_dropdown .select__option').filter({hasText: currency})
-        this.promoCheckbox = page.locator('[for=\'reg_modal_promo_checkbox\'] .checkbox__point')
-        this.ageCheckbox = page.locator('[for=\'reg_modal_age_checkbox\'] .checkbox__point')
-        this.crossSaleCheckbox = page.locator('[for=\'reg_modal_cross_sale_checkbox\'] .checkbox__point')
-        this.creacteAccountButton = page.locator('#reg_modal_submit_btn')
-        this.signInLink = page.locator('#reg_modal_sign_in_btn')
-        this.googleRegBtn = page.locator('.auth-providers__icon').filter({hasText: 'Continue with Google'})
-        this.closeButton = page.locator('#sign-up .modal__close-button')
-        this.signUpModal = page.locator('.modal__content > .registration-form')
-        this.passwordStateBar = page.locator('#modal-root .password-input__strength-progress')
-        this.stateText = page.locator('#modal-root .password-input__strength-description')
-        this.passwordTip = page.locator('.registration-dynamic-form__element--password_single .form-element__error')
-        this.termsAndConditionsLink = page.locator('#modal-root a.terms-acceptance__terms-link')
-        this.emailInputError = page.locator('#modal-root .form-element__error')
-    }
+    private emailInput: Locator = this.page.locator('#reg_modal_email_input')
+    private passwordInput: Locator = this.page.locator('#reg_modal_password_input')
+    private countryDropdown: Locator = this.page.locator('#reg_modal_country_dropdown')
+    private countryDropdownItem = (country: string) => this.page.locator('#reg_modal_country_dropdown-menu .select__option').filter({hasText: country})
+    private currencyDropdown: Locator = this.page.locator('#reg_modal_currency_dropdown')
+    private currencyDropdownItem = (currency: string) => this.page.locator('#reg_modal_currency_dropdown .select__option').filter({hasText: currency})
+    private promoCheckbox: Locator = this.page.locator('[for=\'reg_modal_promo_checkbox\'] .checkbox__point')
+    private ageCheckbox: Locator = this.page.locator('[for=\'reg_modal_age_checkbox\'] .checkbox__point')
+    private crossSaleCheckbox: Locator = this.page.locator('[for=\'reg_modal_cross_sale_checkbox\'] .checkbox__point')
+    private creacteAccountButton: Locator = this.page.locator('#reg_modal_submit_btn')
+    private signInLink: Locator = this.page.locator('#reg_modal_sign_in_btn')
+    private googleRegBtn: Locator = this.page.locator('.auth-providers__icon').filter({hasText: 'Continue with Google'})
+    private closeButton: Locator = this.page.locator('#sign-up .modal__close-button')
+    private signUpModal: Locator = this.page.locator('.modal__content > .registration-form')
+    private passwordStateBar: Locator = this.page.locator('#modal-root .password-input__strength-progress')
+    private stateText: Locator = this.page.locator('#modal-root .password-input__strength-description')
+    private passwordTip: Locator = this.page.locator('.registration-dynamic-form__element--password_single .form-element__error')
+    private termsAndConditionsLink: Locator = this.page.locator('#modal-root a.terms-acceptance__terms-link')
+    private emailInputError: Locator = this.page.locator('#modal-root .form-element__error')
 
     async fillEmail(email: string): Promise<void> {
         await this.emailInput.fill(email)

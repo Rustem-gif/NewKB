@@ -3,101 +3,62 @@ import BaseComponent from "./BaseComponent";
 import {Locator, Page} from "@playwright/test";
 
 export default class Footer extends BaseComponent {
-    private facebookButton: Locator
-    private instagramButton: Locator
-    private youtubeButton: Locator
-    private telegramButton: Locator
-    private bankingLink: Locator
-    private casinoFaq: Locator
-    private casinoDictionary: Locator
-    private cryptoFaq: Locator
-    private complaints: Locator
-    private cookiePolicy: Locator
-    private termsAndConditions: Locator
-    private privacyPolicy: Locator
-    private responsibleGaming: Locator
-    private legend: Locator
-    private blog: Locator
-    private top: Locator
-    private new: Locator
-    private slots: Locator
-    private tableGames: Locator
-    private liveCasino: Locator
-    private kingsChoice: Locator
-    private promotions: Locator
-    private tournaments: Locator
-    private footerLangDropdown: Locator
-    private vip: Locator
-    private BonusTermsAndConditions: Locator
-    private affiliate: Locator
-    private affiliateTermsAndConditions: Locator
-    private askgamblersAwards: Locator
-    private paymentLogos: Locator
-    private nextArrow: Locator
+    private facebookButton: Locator = this.page.locator('.social-links__link--facebook')
+    private instagramButton: Locator = this.page.locator('.social-links__link--instagram')
+    private youtubeButton: Locator = this.page.locator('.social-links__link--youtube')
+    private telegramButton: Locator = this.page.locator('.social-links__link--telegram')
+    private bankingLink: Locator = this.page.locator('.footer-menu__link--online-casino-payments')
+    private casinoFaq: Locator = this.page.locator('.footer-menu__link--casino-faq')
+    private casinoDictionary: Locator = this.page.locator('.footer-menu__link--dictionary')
+    private cryptoFaq: Locator = this.page.locator('.footer-menu__link--btc-faq')
+    private complaints: Locator = this.page.locator('.footer-menu__link--complaints')
+    private cookiePolicy: Locator = this.page.locator('.footer-menu__link--cookie-policy-tb')
+    private termsAndConditions: Locator = this.page.locator('.footer-menu__link--terms-and-conditions')
+    private privacyPolicy: Locator = this.page.locator('.footer-menu__link--privacy-policy')
+    private responsibleGaming: Locator = this.page.locator('.footer-menu__link--responsible-gaming-tb')
+    private legend: Locator = this.page.locator('.footer-menu__link--the-legend')
+    private blog: Locator = this.page.locator('.footer-menu__link--blog')
+    private top: Locator = this.page.locator('.footer-menu__link--top_casino_games')
+    private new: Locator = this.page.locator('.footer-menu__link--new_online_games')
+    private slots: Locator = this.page.locator('.footer-menu__link--slots')
+    private tableGames: Locator = this.page.locator('.footer-menu__link--casino_table_games')
+    private liveCasino: Locator = this.page.locator('.footer-menu__link--live_casino')
+    private kingsChoice: Locator = this.page.locator('.footer-menu__link--hot_games')
+    private promotions: Locator = this.page.locator('.footer-menu__link--promotions')
+    private tournaments: Locator = this.page.locator('.footer-menu__link--tournaments')
+    private footerLangDropdown: Locator = this.page.locator('#footer_lang_dropdown')
+    private vip: Locator = this.page.locator('.footer-menu__link--vip-club')
+    private BonusTermsAndConditions: Locator = this.page.locator('.footer-menu__link--bonus-terms-conditions')
+    private affiliate: Locator = this.page.locator('.footer-menu__link--affiliate')
+    private affiliateTermsAndConditions: Locator = this.page.locator('.footer-menu__link--affiliate-terms-conditions')
+    private askgamblersAwards: Locator = this.page.locator('.ask-footer')
+    private paymentLogos: Locator = this.page.locator('footer .slick-track > div[data-index][style]')
+    private nextArrow: Locator = this.page.locator('footer .slick-next')
 
-    public gameCategories: IGameCategories
-
-    constructor(page: Page){
-        super(page);
-        this.facebookButton = page.locator('.social-links__link--facebook')
-        this.instagramButton = page.locator('.social-links__link--instagram')
-        this.youtubeButton = page.locator('.social-links__link--youtube')
-        this.telegramButton = page.locator('.social-links__link--telegram')
-        this.bankingLink = page.locator('.footer-menu__link--online-casino-payments');
-        this.casinoFaq = page.locator('.footer-menu__link--casino-faq')
-        this.casinoDictionary = page.locator('.footer-menu__link--dictionary')
-        this.cryptoFaq = page.locator('.footer-menu__link--btc-faq')
-        this.complaints = page.locator('.footer-menu__link--complaints')
-        this.cookiePolicy = page.locator('.footer-menu__link--cookie-policy-tb')
-        this.termsAndConditions = page.locator('.footer-menu__link--terms-and-conditions')
-        this.privacyPolicy = page.locator('.footer-menu__link--privacy-policy')
-        this.responsibleGaming = page.locator('.footer-menu__link--responsible-gaming-tb')
-        this.legend = page.locator('.footer-menu__link--the-legend')
-        this.blog = page.locator('.footer-menu__link--blog')
-        this.top = page.locator('.footer-menu__link--top_casino_games')
-        this.new = page.locator('.footer-menu__link--new_online_games')
-        this.slots = page.locator('.footer-menu__link--slots')
-        this.tableGames = page.locator('.footer-menu__link--casino_table_games')
-        this.liveCasino = page.locator('.footer-menu__link--live_casino')
-        this.promotions = page.locator('.footer-menu__link--promotions')
-        this.tournaments = page.locator('.footer-menu__link--tournaments')
-        this.kingsChoice = page.locator('.footer-menu__link--hot_games')
-        this.vip = page.locator('.footer-menu__link--vip-club')
-        this.BonusTermsAndConditions = page.locator('.footer-menu__link--bonus-terms-conditions')
-        this.affiliate = page.locator('.footer-menu__link--affiliate')
-        this.affiliateTermsAndConditions = page.locator('.footer-menu__link--affiliate-terms-conditions')
-        this.footerLangDropdown = page.locator('#footer_lang_dropdown')
-        this.askgamblersAwards = page.locator('.ask-footer')
-        this.paymentLogos = page.locator('footer .slick-track > div[data-index][style]')
-        this.nextArrow = page.locator('footer .slick-next')
-
-
-        this.gameCategories = {
-            // this.lobby,
-            New:{
-                locator: this.new,
-                title: 'New online games'
-            },
-            Top: {
-                locator: this.top,
-                title: 'Top casino games'
-            },
-            Popular: {
-                locator: this.kingsChoice,
-                title: "King's Choice"
-            },
-            Slots: {
-                locator: this.slots,
-                title: 'Slots'
-            },
-            Live: {
-                locator: this.liveCasino,
-                title: 'Live casino'
-            },
-            Table: {
-                locator: this.tableGames,
-                title: 'Casino table games'
-            }
+    public gameCategories: IGameCategories = {
+        New:{
+            locator: this.new,
+            title: 'New online games'
+        },
+        Top: {
+            locator: this.top,
+            title: 'Top casino games'
+        },
+        Popular: {
+            locator: this.kingsChoice,
+            title: "King's Choice"
+        },
+        Slots: {
+            locator: this.slots,
+            title: 'Slots'
+        },
+        Live: {
+            locator: this.liveCasino,
+            title: 'Live casino'
+        },
+        Table: {
+            locator: this.tableGames,
+            title: 'Casino table games'
         }
     }
 

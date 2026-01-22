@@ -2,50 +2,24 @@ import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
 
 export default class PromoPage extends BasePage{
-
     public defaultPromoIndex: number = 2
 
-    private promoTab: Locator
-    private vipTab: Locator
-    private tournamentsTab: Locator
-    private promoCard: Locator
-    private tournamentCard: Locator
-    private showMoreButton: Locator
-    private trounShowMoreButton: Locator
-    private getItPromoButton: Locator
-    private promoModal: Locator
-    private closeButton: Locator
-    private infoButton: Locator
-    private promoCardDepositButton: Locator
-    private depositModal: Locator
-    readonly vipButton: Locator
+    private promoTab: Locator = this.page.locator('#promo_promo_tab')
+    private vipTab: Locator = this.page.locator('#promo_promo_vip_tab')
+    private tournamentsTab: Locator = this.page.locator('#promo_tournaments_tab')
+    private promoCard: Locator = this.page.locator('.promo-item')
+    private tournamentCard: Locator = this.page.locator('.tourn-item')
+    private showMoreButton: Locator = this.page.locator('.section-header__button')
+    private trounShowMoreButton: Locator = this.page.locator('.tourn-item__button')
+    private getItPromoButton: Locator = this.page.locator('.promo-item__button')
+    private promoModal: Locator = this.page.locator('.promo-modal')
+    private closeButton: Locator = this.page.locator('.modal__close-icon')
+    private infoButton: Locator = this.page.locator('.btn--info')
+    private promoCardDepositButton: Locator = this.page.locator('.promo-modal__button.deposit-button')
+    private depositModal: Locator = this.page.locator('#fast-deposit')
+    readonly vipButton: Locator = this.page.locator('#promo_promo_vip_tab')
 
-    private tournamentShowMoreButton: (index: number) => Locator
-
-
-
-    constructor(page: Page) {
-        super(page);
-
-        this.promoTab = page.locator('#promo_promo_tab')
-        this.vipTab = page.locator('#promo_promo_vip_tab')
-        this.tournamentsTab = page.locator('#promo_tournaments_tab')
-        this.promoCard = page.locator('.promo-item')
-        this.tournamentCard = page.locator('.tourn-item')
-        this.showMoreButton = page.locator('.section-header__button')
-        this.trounShowMoreButton = page.locator('.tourn-item__button')
-        this.getItPromoButton = page.locator('.promo-item__button')
-        this.promoModal = page.locator('.promo-modal')
-        this.closeButton = page.locator('.modal__close-icon')
-        this.infoButton = page.locator('.btn--info')
-        this.promoCardDepositButton = page.locator('.promo-modal__button.deposit-button')
-        this.depositModal = page.locator('#fast-deposit')
-
-        this.tournamentShowMoreButton = (index) => page.locator(`.a.tourn-item__button.link-btn:nth-of-type(${index})`)
-
-        this.vipButton = page.locator('#promo_promo_vip_tab')
-
-    }
+    private tournamentShowMoreButton = (index: number) => this.page.locator(`.a.tourn-item__button.link-btn:nth-of-type(${index})`)
 
     
     async openPromoTab(): Promise<void> {

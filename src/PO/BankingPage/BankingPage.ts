@@ -1,17 +1,9 @@
-import { axeScan } from "axe-playwright-report";
 import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
 
 export default class BankingPage extends BasePage {
-    private bankingItem: Locator
-    private bankingItems: Locator
-
-    constructor(page: Page) {
-        super(page);
-
-        this.bankingItem = page.locator('.payment-tables__content:not(.payment-tables__content--hide) .payment-list__block:nth-of-type(1)');
-        this.bankingItems = page.locator('.payment-tables__content:not(.payment-tables__content--hide) .payment-list__block')
-    }
+    private bankingItem: Locator = this.page.locator('.payment-tables__content:not(.payment-tables__content--hide) .payment-list__block:nth-of-type(1)')
+    private bankingItems: Locator = this.page.locator('.payment-tables__content:not(.payment-tables__content--hide) .payment-list__block')
 
     
     async getNumberOfBankingItems() {

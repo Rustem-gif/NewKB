@@ -1,73 +1,48 @@
 import {Locator} from "@playwright/test";
 import {Page} from "@playwright/test";
+import BaseComponent from "../../../Components/BaseComponent";
 
-export default class CategoryDropdown {
-    private page: Page
-    private accumulatingCategory: Locator
-    private bonusBuyCategory: Locator
-    private slotsMegaways: Locator
-    private slotsCrash: Locator
-    private slotsBook: Locator
-    private slotsExclusive: Locator
+export default class CategoryDropdown extends BaseComponent {
+    private accumulatingCategory: Locator = this.page.locator('#slots_accumulating')
+    private bonusBuyCategory: Locator = this.page.locator('#slots_bonus_buy')
+    private slotsMegaways: Locator = this.page.locator('#slots_megaways')
+    private slotsCrash: Locator = this.page.locator('#slots_crash')
+    private slotsBook: Locator = this.page.locator('#slots_book')
+    private slotsExclusive: Locator = this.page.locator('#slots_exclusive')
 
-    private liveBlackJack: Locator
-    private liveRoulette: Locator
-    private liveBaccarat: Locator
-    private livePoker: Locator
+    private liveBlackJack: Locator = this.page.locator('#live_blackjack')
+    private liveRoulette: Locator = this.page.locator('#live_roulette')
+    private liveBaccarat: Locator = this.page.locator('#live_baccarat')
+    private livePoker: Locator = this.page.locator('#live_poker')
 
-    private onlineRoulette: Locator
-    private onlineBlackJack: Locator
-    private onlineBaccarat: Locator
+    private onlineRoulette: Locator = this.page.locator('#table_online_roulette')
+    private onlineBlackJack: Locator = this.page.locator('#table_online_blackjack')
+    private onlineBaccarat: Locator = this.page.locator('#table_online_baccarat')
 
-    protected liveCategories: Array<Locator>
-    protected slotsCategories: Array<Locator>
-    protected tableCategories: Array<Locator>
+    private subcategory: Locator = this.page.locator('.top-games-menu__link')
 
-    private subcategory: Locator
+    protected slotsCategories: Array<Locator> = [
+        this.accumulatingCategory,
+        this.bonusBuyCategory,
+        this.slotsMegaways,
+        this.slotsCrash,
+        this.slotsBook,
+        this.slotsExclusive,
+    ]
 
-    constructor(page: Page) {
-        this.page = page;
+    protected liveCategories: Array<Locator> = [
+        this.liveBlackJack,
+        this.liveRoulette,
+        this.liveBaccarat,
+        this.livePoker,
+    ]
 
-        this.accumulatingCategory = page.locator('#slots_accumulating');
-        this.bonusBuyCategory = page.locator('#slots_bonus_buy')
-        this.slotsMegaways = page.locator('#slots_megaways')
-        this.slotsCrash = page.locator('#slots_crash')
-        this.slotsBook = page.locator('#slots_book')
-        this.slotsExclusive = page.locator('#slots_exclusive')
+    protected tableCategories: Array<Locator> = [
+        this.onlineRoulette,
+        this.onlineBlackJack,
+        this.onlineBaccarat,
+    ]
 
-        this.liveBlackJack = page.locator('#live_blackjack')
-        this.liveRoulette = page.locator('#live_roulette')
-        this.liveBaccarat = page.locator('#live_baccarat')
-        this.livePoker = page.locator('#live_poker')
-
-        this.onlineRoulette = page.locator('#table_online_roulette')
-        this.onlineBlackJack = page.locator('#table_online_blackjack')
-        this.onlineBaccarat = page.locator('#table_online_baccarat')
-
-        this.subcategory = page.locator('.top-games-menu__link')
-
-        this.slotsCategories = [
-            this.accumulatingCategory,
-            this.bonusBuyCategory,
-            this.slotsMegaways,
-            this.slotsCrash,
-            this.slotsBook,
-            this.slotsExclusive,
-        ]
-
-        this.liveCategories = [
-            this.liveBlackJack,
-            this.liveRoulette,
-            this.liveBaccarat,
-            this.livePoker,
-        ]
-
-        this.tableCategories = [
-            this.onlineRoulette,
-            this.onlineBlackJack,
-            this.onlineBaccarat,
-        ]
-    }
 
     async getSubcategories(): Promise<Array<string>>{
         return this.page.evaluate(() => {

@@ -1,4 +1,4 @@
-interface ILinks {
+export interface ILinks {
     Main: string
     MainPageDepModal: string
     Promo: string
@@ -8,7 +8,11 @@ interface ILinks {
     TermsAndConditions: string
     bonusTermsAndConditions: string
     PasswordRecovery: string
+
     Profile: string
+    ProfileDeposit: string
+    ProfileWithdraw: string
+
     Bonuses: string
     Bets: string
     Wallet: string
@@ -39,6 +43,8 @@ interface ILinks {
     bonusStore: string
 }
 
+export type NavigationKeys = keyof ILinks;
+
 export const LINKS: ILinks = {
     Main: "/",
     MainPageDepModal: "/?fast-deposit=modal",
@@ -49,7 +55,11 @@ export const LINKS: ILinks = {
     TermsAndConditions: "/terms-and-conditions",
     bonusTermsAndConditions: '/bonus-terms-conditions',
     PasswordRecovery: "/users/forgot-password",
+
     Profile: "/profile/general/info?target=_self",
+    ProfileDeposit: "https://www.kingbillycasino.com/profile/wallet/deposit",
+    ProfileWithdraw: "https://www.kingbillycasino.com/profile/wallet/withdrawal",
+
     Bonuses: "/profile/promo/casino?target=_self",
     Bets: "/profile/game_history/casino?target=_self",
     Wallet: "/profile/wallet/balance?target=_self",

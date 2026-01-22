@@ -5,28 +5,25 @@ import SidebarMenu from "../../Components/SidebarMenu";
 import CategoryDropdown from "../MainPage/Component/CategoryDropdown";
 import { DepModal } from "../../Components/DepModal";
 import chalk from "chalk";
+import { LINKS, NavigationKeys } from "../../Data/Links/Links";
 
 export default class BasePage {
-  readonly page: Page
+  readonly scrollUpButton: Locator
+  private acceptCookiesButton: Locator
+  public langItem: (langValue: string) => Locator
+  public langDropdown: Locator
+  
   public header: Header
   public footer: Footer
   public sideBarMenu: SidebarMenu
-  private acceptCookiesButton: Locator
-  readonly scrollUpButton: Locator
   public categoryDropdown: CategoryDropdown
-  public langItem: (langValue: string) => Locator
-  public langDropdown: Locator
 
-  constructor(page: Page) {
-    this.page = page;
-
+  constructor(readonly page: Page) {
     this.scrollUpButton = this.page.locator('.btn-scroll-top')
     this.acceptCookiesButton = this.page.locator('#accept_initial_notification_button')
-
-    this.langItem = (langValue) => page.locator('.header .select-language-icons-with-code__item', {'hasText': `${langValue}`}).first()
-    this.langDropdown = page.locator('.header .select-language-icons-with-code__button')
+    this.langItem = (langValue: string) => this.page.locator('.header .select-language-icons-with-code__item', {'hasText': `${langValue}`}).first()
+    this.langDropdown = this.page.locator('.header .select-language-icons-with-code__button')
     
-
     this.header = new Header(this.page)
     this.footer = new Footer(this.page)
     this.sideBarMenu = new SidebarMenu(this.page)
@@ -34,8 +31,11 @@ export default class BasePage {
   }
 
   
-  async navTo(url: string): Promise<void> {
-    await this.page.goto(url);
+  async navTo(url: NavigationKeys): Promise<void>;
+  async navTo(url: string): Promise<void>;
+  async navTo(url: NavigationKeys | string): Promise<void> {
+    const targetUrl = url in LINKS ? LINKS[url as NavigationKeys] : url;
+    await this.page.goto(targetUrl);
     await this.changeLanguage('EN');
   }
 

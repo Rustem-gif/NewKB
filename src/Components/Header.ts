@@ -6,45 +6,22 @@ import {DepModal} from "./DepModal";
 
 
 export default class Header extends BaseComponent {
-    readonly burgerMenuOpenButton: Locator
-    readonly headerLogo: Locator
-    readonly search: Locator
-    readonly searchField: Locator
-    readonly createAccountButton: Locator
-    readonly signInButton: Locator
-    public langDropdown: Locator
-    readonly filterButton: Locator
-    readonly depositButton: Locator
-    readonly gameItem: Locator
-    readonly currenciesDropdown: Locator
+    readonly burgerMenuOpenButton: Locator = this.page.locator('#burger_menu_btn')
+    readonly headerLogo: Locator = this.page.locator('.header__logo--desktop')
+    readonly search: Locator = this.page.locator('.header__input-search')
+    readonly searchField: Locator = this.page.locator('#header_search_input')
+    readonly createAccountButton: Locator = this.page.locator('#header_create_acc_btn')
+    readonly signInButton: Locator = this.page.locator('#header_log_in_btn')
+    public langDropdown: Locator = this.page.locator('#lang_dropdown')
+    readonly filterButton: Locator = this.page.locator('#filter_btn')
+    readonly depositButton: Locator = this.page.locator('#header_dep_btn')
+    readonly gameItem: Locator = this.page.locator('.select-games-search-for-grid__option-link')
+    readonly currenciesDropdown: Locator = this.page.locator('#header_currency_dropdown')
 
-    readonly filterProviderButton: Locator
-    readonly filterCategoriesButton: Locator
+    readonly filterProviderButton: Locator = this.page.locator('.games-search-filter-block__header').filter({ hasText: /^Provider$/ })
+    readonly filterCategoriesButton: Locator = this.page.locator('.games-search-filter-block__header').filter({ hasText: /^Category$/ })
 
-    readonly langDropdownItem: (language: string) => Locator
-
-
-
-    constructor(page: Page) {
-        super(page);
-
-        this.burgerMenuOpenButton = page.locator('#burger_menu_btn')
-        this.headerLogo = page.locator('.header__logo--desktop')
-        this.search = page.locator('.header__input-search')
-        this.searchField = page.locator('#header_search_input')
-        this.createAccountButton = page.locator('#header_create_acc_btn')
-        this.signInButton = page.locator('#header_log_in_btn')
-        this.langDropdown = page.locator('#lang_dropdown')
-        this.filterButton = page.locator('#filter_btn')
-        this.depositButton = page.locator('#header_dep_btn')
-        this.gameItem = page.locator('.select-games-search-for-grid__option-link')
-        this.currenciesDropdown = page.locator('#header_currency_dropdown')
-
-        this.filterProviderButton = page.locator('.games-search-filter-block__header').filter({ hasText: /^Provider$/ })
-        this.filterCategoriesButton = page.locator('.games-search-filter-block__header').filter({ hasText: /^Category$/ })
-
-        this.langDropdownItem = (language: string) => page.locator('.select-language-icons-with-code__link').filter({hasText: language})
-    }
+    readonly langDropdownItem = (language: string) => this.page.locator('.select-language-icons-with-code__link').filter({hasText: language})
 
     async openBurgerMenu(): Promise<void> {
         await this.burgerMenuOpenButton.click()

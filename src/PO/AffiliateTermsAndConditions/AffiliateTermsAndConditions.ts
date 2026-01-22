@@ -3,14 +3,7 @@ import BasePage from "../BasePage/BasePage";
 
 
 export default class AffiliateTermsAndConditions extends BasePage {
-
-    private body: Locator
-
-    constructor(page: Page){
-        super(page);
-
-        this.body = page.locator('.cms-page')
-    }
+    private body: Locator = this.page.locator('.cms-page')
 
     
     async getTextOfThePage(): Promise<string> {

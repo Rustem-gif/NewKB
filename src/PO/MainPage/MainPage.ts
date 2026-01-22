@@ -8,157 +8,93 @@ import PromoSection from "./Component/PromoSection";
 
 
 export default class MainPage extends BasePage {
-    private mainPage: Page
-    private allProviders: Locator
-    private providersBlock: Locator
-    public promoSection: PromoSection
+    private mainPage: Page = this.page
+    private allProviders: Locator = this.page.locator('.games-filter__cell--providers')
+    private providersBlock: Locator = this.page.locator('.menu-providers-select__content')
+    public promoSection: PromoSection = new PromoSection(this.page)
 
-    private subcategoryDropdown: Locator
-    private categorySlider: Locator
-    private categoryTitle: Locator
-    private lobbyCategory: Locator
-    private newCategory: Locator
-    private topCategory: Locator
-    private popularCategory: Locator
-    private jackpotsCategory: Locator
-    private slotsCategory: Locator
-    private accumulatingCategory: Locator
-    private bonusBuyCategory: Locator
-    private megawaysCategory: Locator
-    private crashCategory: Locator
-    private bookCategory: Locator
-    private exclusiveCategory: Locator
-    private liveCategory: Locator
-    private blackjackCategory: Locator
-    private rouletteCategory: Locator
-    private baccaratCategory: Locator
-    private pokerCategory: Locator
-    private tableGamesCategory: Locator
-    private tableOnlineRoulette: Locator
-    private recentGamesCategory: Locator
-    protected gameItem: Locator
-    public gameCategories: IGameCategories
-    private topGamesShowMoreButton: Locator
-    private newGamesShowMoreButton: Locator
-    private promoShowMoreButton: Locator
-    private gameItemSelector: string
-    private getItButton: Locator
-    private promoModal: Locator
-    private sidebarButton: Locator
-    private seccessRegPopUp: Locator
-    private depositAndPlayPostReg: Locator
-    private topWinnersSection: Locator
-    private supportButton: Locator
-    private sliderRegForm: Locator
-    private kingsChoiceCategory: Locator
-    private pokiesCategory: Locator
-    readonly arrowMainSlider: Locator
+    private subcategoryDropdown: Locator = this.page.locator('.top-games-menu')
+    private categorySlider: Locator = this.page.locator('.games-filter__category')
+    private categoryTitle: Locator = this.page.locator('.games__title')
+    private lobbyCategory: Locator = this.page.locator('#lobby_category')
+    private newCategory: Locator = this.page.getByRole('link', { name: 'New', exact: true })
+    private topCategory: Locator = this.page.getByRole('link', { name: 'Top', exact: true })
+    private popularCategory: Locator = this.page.getByRole('link', { name: 'Popular', exact: true })
+    private jackpotsCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Jackpots"}).nth(1)
+    private slotsCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Slots"}).nth(1)
+    private accumulatingCategory: Locator = this.page.locator('#slots_accumulating')
+    private bonusBuyCategory: Locator = this.page.locator('#slots_bonus_buy')
+    private megawaysCategory: Locator = this.page.locator('#slots_megaways')
+    private crashCategory: Locator = this.page.locator('#slots_crash')
+    private bookCategory: Locator = this.page.locator('#slots_book')
+    private exclusiveCategory: Locator = this.page.locator('#slots_exclusive')
+    private liveCategory: Locator = this.page.locator('.games-filter .game-category-helper__name').filter({hasText: "Live"}).nth(1)
+    private blackjackCategory: Locator = this.page.locator('#live_blackjack')
+    private rouletteCategory: Locator = this.page.locator('#live_roulette')
+    private baccaratCategory: Locator = this.page.locator('#live_baccarat')
+    private pokerCategory: Locator = this.page.locator('#live_poker')
+    private tableGamesCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Table games"}).nth(1)
+    private tableOnlineRoulette: Locator = this.page.locator('#table_online_roulette')
+    private recentGamesCategory: Locator = this.page.locator('#recent_games_category')
+    protected gameItem: Locator = this.page.locator('.catalog__item')
+    private topGamesShowMoreButton: Locator = this.page.locator('#top_show_more_btn')
+    private newGamesShowMoreButton: Locator = this.page.locator('#new_show_more_btn')
+    private promoShowMoreButton: Locator = this.page.locator('#main_pg_promo_show_more')
+    private gameItemSelector: string = '.catalog__item'
+    private getItButton: Locator = this.page.locator('.banner-slide__button ')
+    private promoModal: Locator = this.page.locator('.promo-modal__container')
+    private sidebarButton: Locator = this.page.locator('#burger_menu_btn')
+    private seccessRegPopUp: Locator = this.page.locator('.modal__content')
+    private depositAndPlayPostReg: Locator = this.page.locator('#deposit_play_btn')
+    private topWinnersSection: Locator = this.page.locator('.jackpot-winners-section-home')
+    private supportButton: Locator = this.page.locator(`body .intercom-lightweight-app-launcher-icon-open`)
+    private sliderRegForm: Locator = this.page.locator('.main-slide-anon__register-form')
+    private kingsChoiceCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "King's Choice"}).nth(1)
+    private pokiesCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Pokies"}).nth(1)
+    readonly arrowMainSlider: Locator = this.page.locator('#arrow_main_slider_left')
 
+    private subCategoriesDropdown = (category: Locator) => category.locator(`.game-category-helper__btn`)
+    private provider = (index: number) => this.page.locator(`#games-page-providers-filter-item-${index}`)
+    private showMoreButton = (index: number) => this.page.locator(`.home-slider__top .home-slider__see-more-btn:nth-of-type(${index})`)
+    private topWinnerGame = (index: number) => this.page.locator(`.winners-game__wrap div[data-index='${index}']`)
 
-
-    private subCategoriesDropdown: (category: Locator) => Locator
-    private provider: (index: number) => Locator
-    private showMoreButton: (index: number) => Locator
-    private topWinnerGame: (index: number) => Locator
-
-
-    constructor(page: Page) {
-        super(page);
-
-        this.mainPage = page;
-
-        this.allProviders = page.locator('.games-filter__cell--providers')
-        this.providersBlock = page.locator('.menu-providers-select__content')
-
-
-        this.categorySlider = page.locator('.games-filter__category')
-        this.subcategoryDropdown = page.locator('.top-games-menu')
-        this.categoryTitle = page.locator('.games__title')
-        this.lobbyCategory = page.locator('#lobby_category')
-        this.newCategory = page.getByRole('link', { name: 'New', exact: true })
-        this.topCategory = page.getByRole('link', { name: 'Top', exact: true })
-        this.popularCategory = page.getByRole('link', { name: 'Popular', exact: true })
-        this.jackpotsCategory = page.locator('.home__filter .game-category-helper__name').filter({hasText: "Jackpots"}).nth(1)
-        this.kingsChoiceCategory = page.locator('.home__filter .game-category-helper__name').filter({hasText: "King's Choice"}).nth(1)
-        this.slotsCategory = page.locator('.home__filter .game-category-helper__name').filter({hasText: "Slots"}).nth(1)
-        this.pokiesCategory = page.locator('.home__filter .game-category-helper__name').filter({hasText: "Pokies"}).nth(1)
-        this.accumulatingCategory = page.locator('#slots_accumulating')
-        this.bonusBuyCategory = page.locator('#slots_bonus_buy')
-        this.megawaysCategory = page.locator('#slots_megaways')
-        this.crashCategory = page.locator('#slots_crash')
-        this.bookCategory = page.locator('#slots_book')
-        this.exclusiveCategory = page.locator('#slots_exclusive')
-        this.liveCategory = page.locator('.games-filter .game-category-helper__name').filter({hasText: "Live"}).nth(1)
-        this.blackjackCategory = page.locator('#live_blackjack')
-        this.rouletteCategory = page.locator('#live_roulette')
-        this.baccaratCategory = page.locator('#live_baccarat')
-        this.pokerCategory = page.locator('#live_poker')
-        this.tableGamesCategory = page.locator('.home__filter .game-category-helper__name').filter({hasText: "Table games"}).nth(1)
-        this.tableOnlineRoulette = page.locator('#table_online_roulette')
-        this.recentGamesCategory = page.locator('#recent_games_category')
-        this.gameItem = page.locator('.catalog__item')
-        this.topGamesShowMoreButton = page.locator('#top_show_more_btn')
-        this.newGamesShowMoreButton = page.locator('#new_show_more_btn')
-        this.promoShowMoreButton = page.locator('#main_pg_promo_show_more')
-        this.getItButton = page.locator('.banner-slide__button ')
-        this.promoModal = page.locator('.promo-modal__container')
-        this.sidebarButton = page.locator('#burger_menu_btn')
-        this.seccessRegPopUp = page.locator('.modal__content')
-        this.depositAndPlayPostReg = page.locator('#deposit_play_btn')
-        this.topWinnersSection = page.locator('.jackpot-winners-section-home')
-        this.supportButton = page.locator(`body .intercom-lightweight-app-launcher-icon-open`)
-        this.sliderRegForm = page.locator('.main-slide-anon__register-form')
-        this.arrowMainSlider = page.locator('#arrow_main_slider_left')
-
-        this.promoSection = new PromoSection(this.page)
-
-        this.gameCategories = {
-            // this.lobby,
-            New:{
-                locator: this.new,
-                title: 'New online games'
-            },
-            Top: {
-                locator: this.top,
-                title: 'Top casino games'
-            },
-            Popular: {
-                locator: this.popular,
-                title: 'Popular'
-            },
-            KingsChoice: {
-                locator: this.kingsChoiceCategory,
-                title: "King's Choice"
-            },
-            Jackpots: {
-                locator: this.jackpots,
-                title: 'Casino jackpots'
-            },
-            Slots: {
-                locator: this.slots,
-                title: 'Slots'
-            },
-
-            Pokies: {
-                locator: this.pokiesCategory,
-                title: 'Pokies'
-            },
-            Live: {
-                locator: this.live,
-                title: 'Live casino'
-            },
-            Table: {
-                locator: this.tableGames,
-                title: 'Casino table games'
-            }
+    public gameCategories: IGameCategories = {
+        New:{
+            locator: this.newCategory,
+            title: 'New online games'
+        },
+        Top: {
+            locator: this.topCategory,
+            title: 'Top casino games'
+        },
+        Popular: {
+            locator: this.popularCategory,
+            title: 'Popular'
+        },
+        KingsChoice: {
+            locator: this.kingsChoiceCategory,
+            title: "King's Choice"
+        },
+        Jackpots: {
+            locator: this.jackpotsCategory,
+            title: 'Casino jackpots'
+        },
+        Slots: {
+            locator: this.slotsCategory,
+            title: 'Slots'
+        },
+        Pokies: {
+            locator: this.pokiesCategory,
+            title: 'Pokies'
+        },
+        Live: {
+            locator: this.liveCategory,
+            title: 'Live casino'
+        },
+        Table: {
+            locator: this.tableGamesCategory,
+            title: 'Casino table games'
         }
-
-        this.gameItemSelector = '.catalog__item'
-
-        this.subCategoriesDropdown = (category: Locator) => category.locator(`.game-category-helper__btn`)
-        this.provider = (index) => page.locator(`#games-page-providers-filter-item-${index}`)
-        this.showMoreButton = (index) => page.locator(`.home-slider__top .home-slider__see-more-btn:nth-of-type(${index})`)
-        this.topWinnerGame = (index: number) => page.locator(`.winners-game__wrap div[data-index='${index}']`)
     }
 
 

@@ -2,32 +2,16 @@ import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
 
 export default class PasswordRecovery extends BasePage {
-    public notificationText: string
-    public confirmationNotificationText: string
+    public notificationText: string = 'If your email is within our database, an email with instructions on how to recover your password will be sent in a few minutes'
+    public confirmationNotificationText: string = 'confirmation instructions were sent to your email'
 
-    private didntRecieveInstructionsLink: Locator
-    private resendReset: Locator
-    private passwordRecoveryNotification: Locator
-    private resendConfirmationInstructionsButton: Locator
-    private resendConfirmationNotification: Locator
-    private emailInput: Locator
-    private inputError: Locator
-
-
-    constructor(page: Page){
-        super(page)
-
-        this.notificationText = 'If your email is within our database, an email with instructions on how to recover your password will be sent in a few minutes'
-        this.confirmationNotificationText = 'confirmation instructions were sent to your email'
-
-        this.emailInput = page.locator('.input__native')
-        this.didntRecieveInstructionsLink = page.locator('.auth-form__instruction-link:nth-of-type(1)')
-        this.resendReset = page.locator('.btn--danger')
-        this.inputError = page.locator('.form-element__error')
-        this.passwordRecoveryNotification = page.locator('.notification__title')
-        this.resendConfirmationNotification = page.locator('.notification__title')
-        this.resendConfirmationInstructionsButton = page.locator('.auth-form__instruction-link:nth-of-type(2)')
-    }
+    private didntRecieveInstructionsLink: Locator = this.page.locator('.auth-form__instruction-link:nth-of-type(1)')
+    private resendReset: Locator = this.page.locator('.btn--danger')
+    private passwordRecoveryNotification: Locator = this.page.locator('.notification__title')
+    private resendConfirmationInstructionsButton: Locator = this.page.locator('.auth-form__instruction-link:nth-of-type(2)')
+    private resendConfirmationNotification: Locator = this.page.locator('.notification__title')
+    private emailInput: Locator = this.page.locator('.input__native')
+    private inputError: Locator = this.page.locator('.form-element__error')
 
     
     async clickDidntRecieveInstructions(): Promise<void> {

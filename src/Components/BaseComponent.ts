@@ -1,14 +1,13 @@
 import {Locator, Page} from "@playwright/test";
 
 export default class BaseComponent {
-    public page: Page;
     public langItem: (langValue: string) => Locator
     public langDropdown: Locator
-    constructor(page: Page) {
-        this.page = page;
 
-        this.langItem = (langValue) => page.locator('.header .select-language-icons-with-code__item', {'hasText': `${langValue}`}).first()
-        this.langDropdown = page.locator('.header .select-language-icons-with-code__button')
+    constructor(readonly page: Page) {
+        this.page = page;
+        this.langItem = (langValue: string) => this.page.locator('.header .select-language-icons-with-code__item', {'hasText': `${langValue}`}).first()
+        this.langDropdown = this.page.locator('.header .select-language-icons-with-code__button')
     }
 
     async sleep(miliseconds: number): Promise<void> {

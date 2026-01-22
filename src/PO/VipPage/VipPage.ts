@@ -2,25 +2,13 @@ import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
 
 export default class VipPage extends BasePage {
-    private currentStatusImage: Locator;
-    private vipPageLogo: Locator;
-    private vipPageStepper: Locator;
-    private cardList: Locator;
-    private pageLevelLogo: Locator;
-    private contentContainer: Locator;
-    private termsAndConditions: Locator;
-
-    constructor(page: Page) {
-        super(page);
-
-        this.vipPageLogo = page.locator('.new-vip-page__title')
-        this.currentStatusImage = page.locator('.vip-page-head__img')
-        this.vipPageStepper = page.locator('.new-vip-page__main  .vip-grid__grid')
-        this.cardList = page.locator('section .slick-list')
-        this.pageLevelLogo = page.locator('.vip-page-head__level')
-        this.contentContainer = page.locator('.container')
-        this.termsAndConditions = page.locator('.new-vip-page__section.description')
-    }
+    private currentStatusImage: Locator = this.page.locator('.vip-page-head__img')
+    private vipPageLogo: Locator = this.page.locator('.new-vip-page__title')
+    private vipPageStepper: Locator = this.page.locator('.new-vip-page__main  .vip-grid__grid')
+    private cardList: Locator = this.page.locator('section .slick-list')
+    private pageLevelLogo: Locator = this.page.locator('.vip-page-head__level')
+    private contentContainer: Locator = this.page.locator('.container')
+    private termsAndConditions: Locator = this.page.locator('.new-vip-page__section.description')
 
 
     get getCurrentStatusImage(): Locator {

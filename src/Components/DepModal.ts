@@ -5,117 +5,57 @@ import {Locator, Page} from "@playwright/test";
 type DepMethod = 'creditCard' | 'neoserf' | 'paysafecard' | 'interac' | 'creditCardAU' | 'creditCardNZ' | 'creditCardCA' | 'creditCardDE'  | 'sparkasseDE' | 'deutscheBankDE' | 'postbankDE' | 'revolut' | 'nodaPay';
 
 export class DepModal extends BaseComponent {
-    private depModal: Locator
-    private creditCardAU: Locator
-    private neoserf: Locator
-    private paysafecard: Locator
-    private creditCardNZ: Locator
-    private interac: Locator
-    private creditCardCA: Locator
-    private creditCardDE: Locator
-    private depositButton: Locator
-    private depModalError: Locator
-    private paysafeCardModal: Locator
+    private depModal: Locator = this.page.locator('.fast-deposit-modal')
+    private creditCardAU: Locator = this.page.locator("[data-method-id='devcode_devcode-creditcard-352_creditcard']")
+    private neoserf: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-neosurf~neosurf-175_neosurf~neosurf']")
+    private paysafecard: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-skrill~skrill-paysafecard-300_skrill~skrill-paysafecard']")
+    private creditCardNZ: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-card-acquirer-278_card-acquirer']")
+    private interac: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-interac~interac-316_interac~interac']")
+    private creditCardCA: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-card-acquirer-380_card-acquirer']")
+    private creditCardDE: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-card-acquirer-313_card-acquirer']")
+    private depositButton: Locator = this.page.locator('.payment-submit-default__button')
+    private depModalError: Locator = this.page.locator('#payment_common_error')
+    private paysafeCardModal: Locator = this.page.locator('.payments-lib-popup__content')
 
     //AU credit card locators
-    private auCreditCardNumberInput: Locator
-    private auCardHolderNameInput: Locator
-    private auExpiryDateInput: Locator
-    private auCvvInput: Locator
-    private firstNameInput: Locator
-    private lastNameInput: Locator
-    private dateOfBirthInput: Locator
-    private stateSelect: Locator
-    private cityInput: Locator
-    private addressInput: Locator
-    private postalCodeInput: Locator
-    private mobileNumberInput: Locator
+    private auCreditCardNumberInput: Locator = this.page.locator('#encCreditcardNumber')
+    private auCardHolderNameInput: Locator = this.page.locator('#cardHolder')
+    private auExpiryDateInput: Locator = this.page.locator('#expiry_date')
+    private auCvvInput: Locator = this.page.locator('#encCvv')
+    private firstNameInput: Locator = this.page.locator('[name="first_name"]')
+    private lastNameInput: Locator = this.page.locator('#dynamic-form__last_name')
+    private dateOfBirthInput: Locator = this.page.locator('.Date--calendar__input')
+    private stateSelect: Locator = this.page.locator('.select__input')
+    private cityInput: Locator = this.page.locator('#dynamic-form__city')
+    private addressInput: Locator = this.page.locator('#dynamic-form__address')
+    private postalCodeInput: Locator = this.page.locator('#dynamic-form__postal_code')
+    private mobileNumberInput: Locator = this.page.locator('#dynamic-form__mobile_phone-number')
 
     // NZ credit card specific locators
-    private nzCardNumberInput: Locator
-    private nzCardHolderNameInput: Locator
-    private nzExpiryDateInput: Locator
-    private nzCvvInput: Locator
-    private nzFirstNameInput: Locator
-    private nzLastNameInput: Locator
-    private nzCityInput: Locator
-    private nzAddressInput: Locator
-    private nzPostalCodeInput: Locator
-    private nzMobileFormInput: Locator
-    private creditCardNumberInpuitNZ: Locator
-    private sparkasseDE: Locator
-    private deutscheBankDE: Locator
-    private postbankDE: Locator
-    private revolut: Locator
-    private nodaPay: Locator
+    private nzCardNumberInput: Locator = this.page.locator('.payment-dynamic-form__credit-card-number > input')
+    private nzCardHolderNameInput: Locator = this.page.locator('.payment-dynamic-form__card-holder > input')
+    private nzExpiryDateInput: Locator = this.page.locator('.payment-dynamic-form__card-expiry-date > input')
+    private nzCvvInput: Locator = this.page.locator('.payment-dynamic-form__cvv > input')
+    private nzFirstNameInput: Locator = this.page.locator('#dynamic-form__first_name')
+    private nzLastNameInput: Locator = this.page.locator('#dynamic-form__last_name')
+    private nzCityInput: Locator = this.page.locator('#dynamic-form__city')
+    private nzAddressInput: Locator = this.page.locator('#dynamic-form__address')
+    private nzPostalCodeInput: Locator = this.page.locator('#dynamic-form__postal_code')
+    private nzMobileFormInput: Locator = this.page.locator('#dynamic-form__mobile_phone-number')
+    private creditCardNumberInpuitNZ: Locator = this.nzCardNumberInput
+    private sparkasseDE: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~sparkasse-germany-351_noda~sparkasse-germany']")
+    private deutscheBankDE: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~deutsche-bank-germany-348_noda~deutsche-bank-germany']")
+    private postbankDE: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~postbank-germany-349_noda~postbank-germany']")
+    private revolut: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~revolut-germany-350_noda~revolut-germany']")
+    private nodaPay: Locator = this.page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~noda-320_noda~noda']")
 
-    readonly paymentList: Locator
+    readonly paymentList: Locator = this.page.locator('.payment-methods__list')
 
-    private caCardNumberInput: Locator
-    private caCardHolderNameInput: Locator
-    private caExpiryDateInput: Locator
-    private caCvvInput: Locator
-
-    constructor(page: Page) {
-        super(page);
-
-        this.depModal = page.locator('.fast-deposit-modal')
-
-        this.creditCardAU = page.locator("[data-method-id='devcode_devcode-creditcard-352_creditcard']")
-        this.creditCardNZ = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-card-acquirer-278_card-acquirer']")
-        this.creditCardCA = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-card-acquirer-380_card-acquirer']")
-        this.creditCardDE = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-card-acquirer-313_card-acquirer']")
-        this.neoserf = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-neosurf~neosurf-175_neosurf~neosurf']")
-        this.paysafecard = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-skrill~skrill-paysafecard-300_skrill~skrill-paysafecard']")
-        this.interac = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-interac~interac-316_interac~interac']")
-
-        this.depositButton = page.locator('.payment-submit-default__button')
-        this.depModalError = page.locator('#payment_common_error')
-        this.paysafeCardModal = page.locator('.payments-lib-popup__content')
-
-        //AU credit card locators
-        this.auCreditCardNumberInput = page.locator('#encCreditcardNumber');
-        this.auCardHolderNameInput = page.locator('#cardHolder');
-        this.auExpiryDateInput = page.locator('#expiry_date');
-        this.auCvvInput = page.locator('#encCvv');
-        this.firstNameInput = page.locator('[name="first_name"]');
-        this.lastNameInput = page.locator('#dynamic-form__last_name');
-        this.dateOfBirthInput = page.locator('.Date--calendar__input');
-        this.stateSelect = page.locator('.select__input');
-        this.cityInput = page.locator('#dynamic-form__city');
-        this.addressInput = page.locator('#dynamic-form__address');
-        this.postalCodeInput = page.locator('#dynamic-form__postal_code');
-        this.mobileNumberInput = page.locator('#dynamic-form__mobile_phone-number');
-    
-
-        // NZ credit card specific locators
-        this.nzCardNumberInput = page.locator('.payment-dynamic-form__credit-card-number > input');
-        this.nzCardHolderNameInput = page.locator('.payment-dynamic-form__card-holder > input');
-        this.nzExpiryDateInput = page.locator('.payment-dynamic-form__card-expiry-date > input');
-        this.nzCvvInput = page.locator('.payment-dynamic-form__cvv > input');
-        this.nzFirstNameInput = page.locator('#dynamic-form__first_name');
-        this.nzLastNameInput = page.locator('#dynamic-form__last_name');
-        this.nzCityInput = page.locator('#dynamic-form__city');
-        this.nzAddressInput = page.locator('#dynamic-form__address');
-        this.nzPostalCodeInput = page.locator('#dynamic-form__postal_code');
-        this.nzMobileFormInput = page.locator('#dynamic-form__mobile_phone-number');
-
-        //CA credit card specific locators
-        this.caCardNumberInput = page.locator('#number');
-        this.caCardHolderNameInput = page.locator('#holder');
-        this.caExpiryDateInput = page.locator('#seamless_expiry_date');
-        this.caCvvInput = page.locator('#cvv');
-
-        this.creditCardNumberInpuitNZ = this.nzCardNumberInput;
-
-        this.paymentList = page.locator('.payment-methods__list')
-
-        this.sparkasseDE = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~sparkasse-germany-351_noda~sparkasse-germany']")
-        this.deutscheBankDE = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~deutsche-bank-germany-348_noda~deutsche-bank-germany']")
-        this.postbankDE = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~postbank-germany-349_noda~postbank-germany']")
-        this.revolut = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~revolut-germany-350_noda~revolut-germany']")
-        this.nodaPay = page.locator("[data-method-id='finteqhub_seamless_finteqhub_seamless-noda~noda-320_noda~noda']")
-    }
+    //CA credit card specific locators
+    private caCardNumberInput: Locator = this.page.locator('#number')
+    private caCardHolderNameInput: Locator = this.page.locator('#holder')
+    private caExpiryDateInput: Locator = this.page.locator('#seamless_expiry_date')
+    private caCvvInput: Locator = this.page.locator('#cvv')
 
 
     get getDepModal(): Locator {

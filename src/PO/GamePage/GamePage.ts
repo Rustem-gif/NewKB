@@ -2,53 +2,27 @@ import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
 
 export default class GamePage extends BasePage {
-    private gameFrame: Locator;
-    private sideBarPanel: Locator;
-    private sideNewGame: Locator;
-    private sideRecentGames: Locator;
-    private sideFavoriteGames: Locator;
-    private sideTopGames: Locator;
-    private sideLastGames: Locator;
-    private sideTournaments: Locator;
-    private sideSupport: Locator;
-    private searchButton: Locator;
-    private searchInput: Locator;
-    private gameButton: Locator;
-    private confirmButton: Locator;
-    private twoScreensButton: Locator;
-    private gameWindow: Locator;
-    private fourScreensButton: Locator;
-    private sidebarCurrencyDropdown: Locator;
-    private gameCurrencyList: Locator;
-    private tournamentButton: Locator;
-    private sidebarTournament: Locator;
-    private ingameCurrency: (text: string) => Locator;
-
-    constructor(page: Page) {
-        super(page);
-
-        this.gameFrame = page.locator('.game-frame__frame')
-        this.sideBarPanel = page.locator('.game-panel')
-        this.sideNewGame = page.locator('#game_side_new')
-        this.sideRecentGames = page.locator('#game_side_recently')
-        this.sideFavoriteGames = page.locator('#game_side_fav')
-        this.sideTopGames = page.locator('#game_side_fav')
-        this.sideLastGames = page.locator('#game_side_last')
-        this.sideTournaments = page.locator('#game-side-tournament')
-        this.sideSupport = page.locator('#game_side_support')
-        this.searchButton = page.locator('.game-panel__button-search')
-        this.searchInput = page.locator('#games-search')
-        this.gameButton = page.locator('#games-search-item-0')
-        this.confirmButton = page.locator('.game-session-close-modal__buttons .btn--primary')
-        this.twoScreensButton = page.locator('.game-controls__button--screen-2')
-        this.fourScreensButton = page.locator('.game-controls__button--screen-4')
-        this.gameWindow = page.locator('.page-game__grid-item')
-        this.sidebarCurrencyDropdown = page.locator('#game-currency-select')
-        this.gameCurrencyList = page.locator('.game-currency__list')
-        this.tournamentButton = page.locator('#game-side-tournament')
-        this.sidebarTournament = page.locator('.game-tourn')
-        this.ingameCurrency = (text: string) => page.locator('.game-currency__code').filter({hasText: text})
-    }
+    private gameFrame: Locator = this.page.locator('.game-frame__frame')
+    private sideBarPanel: Locator = this.page.locator('.game-panel')
+    private sideNewGame: Locator = this.page.locator('#game_side_new')
+    private sideRecentGames: Locator = this.page.locator('#game_side_recently')
+    private sideFavoriteGames: Locator = this.page.locator('#game_side_fav')
+    private sideTopGames: Locator = this.page.locator('#game_side_fav')
+    private sideLastGames: Locator = this.page.locator('#game_side_last')
+    private sideTournaments: Locator = this.page.locator('#game-side-tournament')
+    private sideSupport: Locator = this.page.locator('#game_side_support')
+    private searchButton: Locator = this.page.locator('.game-panel__button-search')
+    private searchInput: Locator = this.page.locator('#games-search')
+    private gameButton: Locator = this.page.locator('#games-search-item-0')
+    private confirmButton: Locator = this.page.locator('.game-session-close-modal__buttons .btn--primary')
+    private twoScreensButton: Locator = this.page.locator('.game-controls__button--screen-2')
+    private gameWindow: Locator = this.page.locator('.page-game__grid-item')
+    private fourScreensButton: Locator = this.page.locator('.game-controls__button--screen-4')
+    private sidebarCurrencyDropdown: Locator = this.page.locator('#game-currency-select')
+    private gameCurrencyList: Locator = this.page.locator('.game-currency__list')
+    private tournamentButton: Locator = this.page.locator('#game-side-tournament')
+    private sidebarTournament: Locator = this.page.locator('.game-tourn')
+    private ingameCurrency = (text: string) => this.page.locator('.game-currency__code').filter({hasText: text})
 
 
     async triggerSideBarMenu() {

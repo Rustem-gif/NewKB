@@ -2,18 +2,9 @@ import { Locator, Page } from "@playwright/test";
 import BasePage from "../BasePage/BasePage";
 
 export default class FavoriteGames extends BasePage {
-    private favoriteGamesButton: Locator
-    private favoriteGameItem: Locator
-    private favoriteGamePageButton: Locator
-
-
-    constructor(page: Page){
-        super(page)
-
-        this.favoriteGamesButton = page.locator('.catalog__item:nth-of-type(1) .game__favorite')
-        this.favoriteGameItem = page.locator('.favorite-games__item')
-        this.favoriteGamePageButton = page.locator('.favorite-games__item .game__favorite')
-    }
+    private favoriteGamesButton: Locator = this.page.locator('.catalog__item:nth-of-type(1) .game__favorite')
+    private favoriteGameItem: Locator = this.page.locator('.favorite-games__item')
+    private favoriteGamePageButton: Locator = this.page.locator('.favorite-games__item .game__favorite')
 
     
     async clickOnFavoriteButton(): Promise<void>{

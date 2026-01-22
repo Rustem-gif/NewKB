@@ -7,13 +7,14 @@
     "test:au-healthcheck": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck\" npx playwright test --config=playwright.config.au-healthcheck.ts",
     "test:au-healthcheck-fast": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck Fast\" npx playwright test --config=playwright.config.au-healthcheck.ts",
     "test:dep-flow": "npx playwright test --config=playwright.config.dep-flow.ts --update-snapshots",
-    "test:dep-modal": "npx playwright test --config=playwright.config.dep-modal.ts --debug",
+    "test:dep-modal": "npx playwright test --config=playwright.config.dep-modal.ts --update-snapshots",
     "test:unpublish:prod": "npx playwright test --project=prod --config=playwright.config.unpublish.ts",
     "test:unpublish:staging": "npx playwright test --project=stage --config=playwright.config.unpublish.ts",
     "test:regression:default": "npx playwright test --project=Default-YesSetUp --project=Default-NoSetUp --config=playwright.config.regression.ts",
     "test:regression:kb-bet1": "npx playwright test --project=KB-Bet1-YesSetUp --project=KB-Bet1-NoSetUp --config=playwright.config.regression.ts",
     "test:regression:kb-win": "npx playwright test --project=KB-win26-YesSetUp --project=KB-win26-NoSetUp --config=playwright.config.regression.ts",
-    "test:regression:kb-17": "npx playwright test --project=KB-16-YesSetUp --project=KB-16-NoSetUp --config=playwright.config.regression.ts"
+    "test:regression:kb-17": "npx playwright test --project=KB-16-YesSetUp --project=KB-16-NoSetUp --config=playwright.config.regression.ts",
+    "dep-bible": "npx playwright test --config=playwright.config.dep-bible.ts --debug"
   },
   "repository": {
     "type": "git",

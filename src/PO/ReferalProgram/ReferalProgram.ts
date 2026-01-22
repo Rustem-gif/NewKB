@@ -2,27 +2,14 @@ import BasePage from "../BasePage/BasePage";
 import {Locator, Page} from "@playwright/test";
 
 export default class ReferalProgram extends BasePage {
-
-    private title: Locator
-    private refBonusBlock: Locator
-    private refPageStepper: Locator
-    private refFAQ: Locator
-    private refTermsAndCond: Locator
-    private generateLinkButton: Locator
-    private profileReferalLinkForm: Locator
-    private refLinkInputField: Locator
-
-    constructor(page: Page) {
-        super(page)
-        this.title = page.locator('h1')
-        this.refBonusBlock = page.locator('.referral-page__bonus')
-        this.refPageStepper = page.locator('.referral-page__steps-list')
-        this.refFAQ = page.locator('.referral-page__questions')
-        this.refTermsAndCond = page.locator('.description__preview ')
-        this.generateLinkButton = page.locator('.referral-page__bonus-button')
-        this.profileReferalLinkForm = page.locator('.referral-link-creation-form')
-        this.refLinkInputField = page.locator('.input__left-container + input')
-    }
+    private title: Locator = this.page.locator('h1')
+    private refBonusBlock: Locator = this.page.locator('.referral-page__bonus')
+    private refPageStepper: Locator = this.page.locator('.referral-page__steps-list')
+    private refFAQ: Locator = this.page.locator('.referral-page__questions')
+    private refTermsAndCond: Locator = this.page.locator('.description__preview ')
+    private generateLinkButton: Locator = this.page.locator('.referral-page__bonus-button')
+    private profileReferalLinkForm: Locator = this.page.locator('.referral-link-creation-form')
+    private refLinkInputField: Locator = this.page.locator('.input__left-container + input')
 
     
     async clickGenerateLinkButton() {
