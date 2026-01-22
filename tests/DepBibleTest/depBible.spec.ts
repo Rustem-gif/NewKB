@@ -12,9 +12,11 @@ for(const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
                 let status: string
                 const timeout = 30000;
                 const interval = 1000;
-                const startTime = Date.now();
 
+                const startTime = Date.now();
+                
                 test.beforeEach(async () => {
+
 
                     const currentStatus = await vpnController.vpnCheckStatus();
                     if (currentStatus === `connected to ${location}`) {
@@ -33,23 +35,28 @@ for(const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
                     do {
                         status = await vpnController.vpnCheckStatus();
                         console.log(`Current status: ${status}`);
-                        if (status === `connected to ${location}`) {
+                        if (status === `connected`) {
                             console.log(`Successfully connected to ${location}`);
                             break;
                         }
                         await new Promise(resolve => setTimeout(resolve, interval));
                     } while (Date.now() - startTime < timeout);
-
-                });
+        });
 
 
                 test(`Visual comparison of dep modal ${locale}. ${type}`, async ({kingBilly}) => {
                     await kingBilly.mainPage.navTo('/')
                     await kingBilly.mainPage.header.signIn(email, password)
                     await kingBilly.navTo('ProfileDeposit')
-                    await kingBilly.profilePage.paymentTable.screenshot({ path: `screenshots/${locale}/depMethods-${locale}-${type}.png`})
+                  
+
+                    await kingBilly.page.waitForTimeout(60000)
+                    await kingBilly.profilePage.paymentTableDeposit.screenshot({ path: `screenshots/${locale}/depMethods-${locale}-${type}.png`})
                     await kingBilly.navTo('ProfileWithdraw')
-                    await kingBilly.profilePage.paymentTable.screenshot({ path: `screenshots/${locale}/withdMethods-${locale}-${type}.png`})
+
+                    await kingBilly.page.waitForTimeout(60000)
+                    await kingBilly.profilePage.paymentTableWithdraw.screenshot({ path: `screenshots/${locale}/withdMethods-${locale}-${type}.png`})
+                    await kingBilly.page.close()
             })
         })
     }

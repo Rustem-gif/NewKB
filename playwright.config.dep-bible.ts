@@ -5,6 +5,7 @@ export default defineConfig({
   retries: 3,
   workers: 1,
   reporter: [['html']],
+  timeout: 240000,
   use: {
     trace: 'on',
     screenshot: 'only-on-failure',

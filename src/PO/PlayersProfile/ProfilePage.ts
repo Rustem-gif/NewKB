@@ -3,5 +3,7 @@ import {Locator, Page} from "@playwright/test";
 
 export default class ProfilePage extends BasePage {
     readonly profileTitle: Locator = this.page.locator('h1');
-    readonly paymentTable: Locator = this.page.locator('.payment-methods-bar__methods-block');
+    readonly paymentTableDeposit: Locator = this.page.locator('[data-testid="payment-tab-deposit"]');
+    readonly paymentTableWithdraw: Locator = this.page.locator('[data-testid="payment-tab-cashout"]');
+    readonly paymentCard: Locator = this.page.locator('.payment-card')
 }
