@@ -46,7 +46,7 @@ export default defineConfig({
     ],],
   
   use: {
-  
+  headless: false,
     trace: 'on',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

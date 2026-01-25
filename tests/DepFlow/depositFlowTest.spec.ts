@@ -2,7 +2,7 @@ import test, { expect } from "@playwright/test";
 import KingBilly from "../../src/PageManager/KingBilly";
 import { testData } from "../../src/Data/testDepositData/testDataDepositMonitor";
 import NeosurfPage from "../../src/PO/NeosurfPage/NeosurfPage";
-import { vpnController } from "../../helpers/vpnControllerInstance";
+import { VpnController } from "../../helpers/vpnController";
 
 // Map regions to VPN locations
 const regionToVpnLocation = {
@@ -15,8 +15,10 @@ const regionToVpnLocation = {
 test.describe("Deposit Flow Test", () => {
     const password = '193786Az()';
     let randomEmail: string;
+    const vpnController = new VpnController();
 
     test('Verify deposit flow AU credit card', async ({ browser }) => {
+ 
         // Connect to Australian VPN
         await vpnController.vpnDisconnect(); // Ensure disconnected first
         await vpnController.vpnConnect(regionToVpnLocation.AU);

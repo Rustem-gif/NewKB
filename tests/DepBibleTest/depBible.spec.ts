@@ -51,11 +51,11 @@ for(const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
                   
 
                     await kingBilly.page.waitForTimeout(60000)
-                    await kingBilly.profilePage.paymentTableDeposit.screenshot({ path: `screenshots/${locale}/depMethods-${locale}-${type}.png`})
+                    await kingBilly.profilePage.page.screenshot({ path: `screenshots/${locale}/depMethods-${locale}-${type}.png`})
                     await kingBilly.navTo('ProfileWithdraw')
 
                     await kingBilly.page.waitForTimeout(60000)
-                    await kingBilly.profilePage.paymentTableWithdraw.screenshot({ path: `screenshots/${locale}/withdMethods-${locale}-${type}.png`})
+                    await kingBilly.profilePage.page.screenshot({ path: `screenshots/${locale}/withdMethods-${locale}-${type}.png`})
                     await kingBilly.page.close()
             })
         })

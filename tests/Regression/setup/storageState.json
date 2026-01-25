@@ -1,38 +1,38 @@
 {
   "cookies": [
     {
-      "name": "first_visited",
-      "value": "dHJ1ZQ%3D%3D--c59c6695a2c8bcd8176a020debb0d924751fbd84",
-      "domain": "www.kingbillycasino.com",
+      "name": "referral_params",
+      "value": "eJxLSS3LTE61TUktzi7JLwAAKbQFqA%3D%3D",
+      "domain": ".kingbillywin29.com",
       "path": "/",
-      "expires": 1803592865.94052,
+      "expires": 1772033426.151402,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
-      "name": "referral_params",
-      "value": "eJxLSS3LTE61TUktzi7JLwAAKbQFqA%3D%3D",
-      "domain": ".kingbillycasino.com",
+      "name": "first_visited",
+      "value": "dHJ1ZQ%3D%3D--c59c6695a2c8bcd8176a020debb0d924751fbd84",
+      "domain": "www.kingbillywin29.com",
       "path": "/",
-      "expires": 1771711265.958961,
+      "expires": 1803915026.186416,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "route",
-      "value": "1769032867.535.301.168880|872f7b71b6938e7c1b83913968eafb0c",
-      "domain": "www.kingbillycasino.com",
+      "value": "1769355030.579.296.759696|872f7b71b6938e7c1b83913968eafb0c",
+      "domain": "www.kingbillywin29.com",
       "path": "/",
-      "expires": 1769205667.759599,
+      "expires": 1769527830.536797,
       "httpOnly": true,
       "secure": true,
       "sameSite": "Lax"
     },
     {
       "name": "_cfuvid",
-      "value": "B9zlzSbb.XRg7XRrXfrruicykRe9YPEqSog0BJywKuk-1769032867356-0.0.1.1-604800000",
+      "value": "8TKIUyr4iO2z8Q768lcl73Plu4Iv9PCXkf4yJL3Xlg8-1769355031746-0.0.1.1-604800000",
       "domain": ".p6m.live",
       "path": "/",
       "expires": -1,
@@ -42,60 +42,60 @@
     },
     {
       "name": "_cioanonid",
-      "value": "3a7ec5e8-88f0-9864-fc55-06d3f2455eb6",
-      "domain": ".kingbillycasino.com",
+      "value": "c6bf5d6a-c466-33d5-570c-9a9bdcfc669a",
+      "domain": ".kingbillywin29.com",
       "path": "/",
-      "expires": 1800568868,
+      "expires": 1800891038,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
+    },
+    {
+      "name": "_dd_s",
+      "value": "aid=3df7f6e9-a2d3-4186-a977-2fe6b1cef8a9&rum=0&expire=1769355943112",
+      "domain": "www.kingbillywin29.com",
+      "path": "/",
+      "expires": 1769355943,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
     },
     {
       "name": "_ga",
-      "value": "GA1.1.1147398755.1769032869",
-      "domain": ".kingbillycasino.com",
+      "value": "GA1.1.58043190.1769355044",
+      "domain": ".kingbillywin29.com",
       "path": "/",
-      "expires": 1803592868.919721,
+      "expires": 1803915043.584228,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
-      "name": "intercom-id-gh60paq6",
-      "value": "1d4f76a6-4b7d-43b9-a34b-5c2083008587",
-      "domain": ".kingbillycasino.com",
+      "name": "CLID",
+      "value": "6ebddbf5cd28467da7c79e77c8994829.20260125.20270125",
+      "domain": "www.clarity.ms",
       "path": "/",
-      "expires": 1792362869,
-      "httpOnly": false,
-      "secure": false,
-      "sameSite": "Lax"
-    },
-    {
-      "name": "intercom-device-id-gh60paq6",
-      "value": "a4664104-60d8-48a3-9dcb-023b6edfdcaf",
-      "domain": ".kingbillycasino.com",
-      "path": "/",
-      "expires": 1792362878,
-      "httpOnly": false,
-      "secure": false,
-      "sameSite": "Lax"
+      "expires": 1800891044.165495,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
     },
     {
       "name": "original_user_id",
       "value": "MTYwNjQwOQ%3D%3D--d4c286ba48dd0b1163747181635cd3e04c887d5d",
-      "domain": "www.kingbillycasino.com",
+      "domain": "www.kingbillywin29.com",
       "path": "/",
-      "expires": 1803592872.988345,
+      "expires": 1803915044.392951,
       "httpOnly": false,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "_casino_session",
-      "value": "eyJ0eXAiOiJKV1QiLCJraWQiOjgsImFsZyI6IlJTNTEyIn0.eyJzZXNzaW9uIjoiMTJhOTAzNTMxMzI1OTFiNWQyMjRhM2E2M2IxNDkwMTMiLCJ1c2VyX2lkIjoxNjA2NDA5LCJpcCI6IjE4NS4xOTIuMTYuMjkiLCJjYXNpbm9fY29kZW5hbWUiOiJraW5nYmlsbHkiLCJleHAiOjE3NzA4NDcyNzIsImlhdCI6MTc2OTAzMjg3MiwianRpIjoiMzVhZmQzZTYtMDU1Ny00NjhmLWE3YTItNjIyMDkyMjM4YTdlIn0.euiQO94Y2NnTYzvaQoaFIV3w17XKIXVvDvS4vi20xGZzgAXyTEoq8GY8KC8Ch2_Se2H2fzinT2I5OqUzP65UsWnIk6eEsqHa1v_XzEPQB47N9jQH-ThQ5eBdeASZT8KUdSJxDbAedCN2dtVO3nzTUql2a9D4tiyM93-4C809jhqnT3mSc5Kj_3LTq47gf0kCM-aJ2KydXe_zkZh_4BIwHOK7jtAHJV7XQoR9zIc7LZ0eae18E22K99acC_UT0pcdHC2nZWciors0DoNbfsmCKcJCYaZwtmMR7ijV5I7zNGdoKwf8RcfIwT2iJyZR6n9hqfnO2SOIlAM2MqGy0l0CtA",
-      "domain": ".kingbillycasino.com",
+      "value": "eyJ0eXAiOiJKV1QiLCJraWQiOjgsImFsZyI6IlJTNTEyIn0.eyJzZXNzaW9uIjoiZjRiMTlkYmIzZTcyMjRhYmFlMTM2ZWE3YTZjYmVkOTMiLCJ1c2VyX2lkIjoxNjA2NDA5LCJpcCI6IjQ1LjEzMi4yMjUuMTc3IiwiY2FzaW5vX2NvZGVuYW1lIjoia2luZ2JpbGx5IiwiZXhwIjoxNzcxMTY5NDQzLCJpYXQiOjE3NjkzNTUwNDMsImp0aSI6ImNjNjlmNTlhLTQ0NjEtNDY5Ny1iNzRhLTRmOTA4MzhlOTRjMyJ9.yPPxh2Mln_mAPvM5lCrZdwQYYbDfeiDRCsc85w2mzaMkpQBIVv5TbBvtdAa94y8tS9Xtrj4rOkWIc3Fe6XTcXQpgeKV-p1uQUSxY2J0Nch6CYvdK-0CjHGixQIHUFHruZalu-ZoOhIa_10igY4wn8sgZa8R_gDJ60JdaXVbrnOrjsgXckSQ3YkR_xKFYhMtxVD8S2XJgnYhXTrqaIFJ2vbyrDBxMUjph75SiBq-uRbzL4km-47rWpyXSWilexyue9ihOk9PE-e3D4uSvbL3AAiGl6gt4LbXRCGdRpUA3vOmlItB7GGcXKnMjtTs765v7Z5-BX4-z7_VsBLPuMlNiKA",
+      "domain": ".kingbillywin29.com",
       "path": "/",
-      "expires": 1771624878.37194,
+      "expires": 1771947047.704596,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
@@ -103,9 +103,9 @@
     {
       "name": "_cioid",
       "value": "kingbilly%3A1606409",
-      "domain": ".kingbillycasino.com",
+      "domain": ".kingbillywin29.com",
       "path": "/",
-      "expires": 1800568873,
+      "expires": 1800891045,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -113,7 +113,7 @@
     {
       "name": "is_beta_player",
       "value": "false",
-      "domain": "www.kingbillycasino.com",
+      "domain": "www.kingbillywin29.com",
       "path": "/",
       "expires": -1,
       "httpOnly": false,
@@ -121,39 +121,19 @@
       "sameSite": "Lax"
     },
     {
-      "name": "ph_phc_PG1snN3B55gIxB0vgYdp5HiVyTmOyCxUNLXRGKmnffO_posthog",
-      "value": "%7B%22%24device_id%22%3A%22019be293-6529-7b15-9bea-6c8fd1160615%22%2C%22distinct_id%22%3A%221606409%22%2C%22%24epp%22%3Atrue%7D",
-      "domain": ".kingbillycasino.com",
-      "path": "/",
-      "expires": 1800568875,
-      "httpOnly": false,
-      "secure": true,
-      "sameSite": "Lax"
-    },
-    {
       "name": "_ga_VCHG5HRS29",
-      "value": "GS2.1.s1769032868$o1$g1$t1769032876$j52$l0$h0",
-      "domain": ".kingbillycasino.com",
+      "value": "GS2.1.s1769355043$o1$g0$t1769355046$j57$l0$h0",
+      "domain": ".kingbillywin29.com",
       "path": "/",
-      "expires": 1803592876.680992,
+      "expires": 1803915046.587649,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
-    },
-    {
-      "name": "_dd_s",
-      "value": "aid=fd6b185e-9490-4aa0-adc3-9051f050e49b&rum=0&expire=1769033777644",
-      "domain": "www.kingbillycasino.com",
-      "path": "/",
-      "expires": 1769033777,
-      "httpOnly": false,
-      "secure": false,
-      "sameSite": "Strict"
     },
     {
       "name": "locale",
-      "value": "ImVuIg%3D%3D--9852d6265eff7c06f084796dc582882269b0da1a",
-      "domain": ".kingbillycasino.com",
+      "value": "ImVuLUFVIg%3D%3D--4973d7a632fa19a04f3eed50ad6d0648a8dfb9fc",
+      "domain": ".kingbillywin29.com",
       "path": "/",
       "expires": -1,
       "httpOnly": false,
@@ -161,51 +141,55 @@
       "sameSite": "None"
     },
     {
-      "name": "intercom-session-gh60paq6",
-      "value": "NmF6MDdLTzFoMkhGcS9nSnZML0hZQi9id1Rxci9iNkYvSFhUalV0b1pTWnFYY08rcVFMaFZUdEliZEtWbWQ0Z3ZQV3pCVlRhZ1FlWE9PWERQMDJNMkZEWVZwNFpxN1RFNVFGeC8yek1ib1E9LS1QbE1OVysrUDMyQ0lhVGQvQjNRbW1BPT0=--9984cb44c1179d5f69de5b1a5a58331c1abe51a4",
-      "domain": ".kingbillycasino.com",
+      "name": "ph_phc_PG1snN3B55gIxB0vgYdp5HiVyTmOyCxUNLXRGKmnffO_posthog",
+      "value": "%7B%22%24device_id%22%3A%22019bf5c7-6c09-7615-8161-2d21031e852d%22%2C%22distinct_id%22%3A%221606409%22%2C%22%24epp%22%3Atrue%7D",
+      "domain": ".kingbillywin29.com",
       "path": "/",
-      "expires": 1769637677,
+      "expires": 1800891046,
       "httpOnly": false,
-      "secure": false,
+      "secure": true,
       "sameSite": "Lax"
     }
   ],
   "origins": [
     {
-      "origin": "https://www.kingbillycasino.com",
+      "origin": "https://www.kingbillywin29.com",
       "localStorage": [
         {
           "name": "ACTIVE_GTM_PAGE_ID",
-          "value": "1769032865535"
+          "value": "1769355024033"
+        },
+        {
+          "name": "gist.web.userQueueNextPullCheck",
+          "value": "{\"value\":600,\"expiry\":\"2026-01-25T15:40:46.396Z\"}"
         },
         {
           "name": "gist.web.userToken",
-          "value": "{\"value\":\"kingbilly:1606409\",\"expiry\":\"2026-02-20T22:01:13.275Z\"}"
+          "value": "{\"value\":\"kingbilly:1606409\",\"expiry\":\"2026-02-24T15:30:45.392Z\"}"
+        },
+        {
+          "name": "REGISTRATION_MODEL",
+          "value": "{\"country\":\"AU\",\"currency\":\"AUD\"}"
+        },
+        {
+          "name": "ph_phc_PG1snN3B55gIxB0vgYdp5HiVyTmOyCxUNLXRGKmnffO_posthog",
+          "value": "{\"$device_id\":\"019bf5c7-6c09-7615-8161-2d21031e852d\",\"distinct_id\":\"1606409\",\"$initialization_time\":\"2026-01-25T15:30:46.667Z\",\"$configured_session_timeout_ms\":1800000,\"$user_state\":\"identified\",\"$epp\":true,\"$user_id\":\"1606409\",\"$stored_person_properties\":{\"depositsCout\":0,\"uid\":1606409}}"
         },
         {
           "name": "gist.web.sessionId",
-          "value": "{\"value\":\"57afa87c-0f40-441b-ac79-507f2bb181a8\",\"expiry\":\"2026-01-21T22:31:16.295Z\"}"
+          "value": "{\"value\":\"0fece27f-d5d8-42e2-9cd7-d12bb3afc54c\",\"expiry\":\"2026-01-25T16:00:45.392Z\"}"
         },
         {
           "name": "gist.web.userQueueUseSSE",
-          "value": "{\"value\":true,\"expiry\":\"2026-01-21T22:02:16.382Z\"}"
+          "value": "{\"value\":false,\"expiry\":\"2026-01-25T15:31:46.396Z\"}"
         },
         {
           "name": "isFirstSignIn",
           "value": "true"
         },
         {
-          "name": "gist.web.inbox.messages.8737dbab499dec6bfd6e6700afe9318e1269a33d05b5484a709b85d12b7e1232",
-          "value": "{\"value\":[],\"expiry\":\"2026-01-21T23:01:15.069Z\"}"
-        },
-        {
-          "name": "gist.web.message.broadcasts.8737dbab499dec6bfd6e6700afe9318e1269a33d05b5484a709b85d12b7e1232",
-          "value": "{\"value\":[],\"expiry\":\"2026-01-21T23:01:15.069Z\"}"
-        },
-        {
           "name": "intercom.intercom-state",
-          "value": "{\"app\":{\"openConfig\":{\"unifiedStyling\":true,\"openTo\":\"home\",\"spaces\":[{\"type\":\"home\",\"label\":\"Home\",\"navigationLabel\":\"Home\",\"badge\":null},{\"type\":\"messages\",\"label\":\"Messages\",\"navigationLabel\":\"Messages\",\"badge\":null},{\"type\":\"tickets\",\"label\":\"Tickets\",\"navigationLabel\":\"Tickets\",\"badge\":null},{\"type\":\"help\",\"label\":\"Help\",\"navigationLabel\":\"Help\",\"badge\":null}],\"userHasReceivedChecklists\":false,\"userHasLiveNewsfeed\":false,\"userHasTickets\":false},\"selfServeSuggestionsMatch\":false,\"name\":\"Betncare\",\"features\":{\"anonymousInboundMessages\":true,\"googleAnalytics\":true,\"hubspotInstalled\":false,\"inboundMessages\":true,\"marketoEnrichmentInstalled\":false,\"googleAnalytics4Integration\":true},\"helpCenterSiteUrl\":\"https://intercom-help.eu/kingbilly-help\",\"inboundConversationsDisabled\":false,\"isDeveloperWorkspace\":false,\"customGoogleAnalyticsTrackerId\":null},\"launcher\":{\"isLauncherEnabled\":true},\"launcherDiscoveryMode\":{\"hasDiscoveredLauncher\":true},\"launcherSettings\":{\"alignment\":\"right\",\"color\":\"#DD6440\",\"colorDark\":\"#DD6440\",\"hasRequiredFeatures\":true,\"horizontalPadding\":50,\"instantBootEnabled\":true,\"launcherLogoUrl\":\"https://downloads.intercomcdn.eu/i/o/gh60paq6/33570/26b6c5a4526fccc514caa0483c77/c076fd3c98c6dcd7fa7d70a3fb507e5b.png\",\"launcherLogoDarkUrl\":\"https://downloads.intercomcdn.eu/i/o/gh60paq6/29063/d922a009863fafcf4f659527ed6c/4bfe0ab338806979fe01d6d51e132243.png\",\"secondaryColor\":\"#DD6440\",\"secondaryColorDark\":\"#DD6440\",\"showLauncher\":true,\"themeMode\":\"system\",\"updatedAt\":1769000424,\"verticalPadding\":75,\"isLoading\":false},\"user\":{\"role\":\"user\",\"locale\":\"en\",\"hasConversations\":false},\"message\":{},\"conversations\":{\"byId\":{}},\"openOnBoot\":{\"type\":null,\"metadata\":{},\"lastOpenAtTimestamp\":1769032878340},\"operator\":{\"lastComposerEvent\":0},\"router\":{\"isInitialized\":false,\"navigationQueue\":[]}}"
+          "value": "{\"app\":{\"openConfig\":{\"unifiedStyling\":true,\"spaces\":[],\"userHasReceivedChecklists\":false,\"userHasLiveNewsfeed\":false,\"userHasTickets\":false},\"selfServeSuggestionsMatch\":false,\"features\":{\"anonymousInboundMessages\":false,\"googleAnalytics\":false,\"inboundMessages\":false,\"googleAnalytics4Integration\":false},\"isDeveloperWorkspace\":false},\"launcher\":{\"isLauncherEnabled\":false},\"launcherDiscoveryMode\":{\"hasDiscoveredLauncher\":false},\"launcherSettings\":{\"isLoading\":true},\"user\":{},\"message\":{},\"conversations\":{\"byId\":{}},\"openOnBoot\":{\"type\":null,\"metadata\":{},\"lastOpenAtTimestamp\":1769355047624},\"operator\":{\"lastComposerEvent\":0},\"router\":{\"isInitialized\":false,\"navigationQueue\":[]}}"
         },
         {
           "name": "PLAYED_GAMES_IDS_LS_KEY",
@@ -214,26 +198,6 @@
         {
           "name": "open_tabs_count",
           "value": "1"
-        },
-        {
-          "name": "gist.web.userQueueNextPullCheck",
-          "value": "{\"value\":\"10\",\"expiry\":\"2026-01-21T22:01:26.382Z\"}"
-        },
-        {
-          "name": "REGISTRATION_MODEL",
-          "value": "{\"country\":\"IE\",\"currency\":\"EUR\"}"
-        },
-        {
-          "name": "ph_phc_PG1snN3B55gIxB0vgYdp5HiVyTmOyCxUNLXRGKmnffO_posthog",
-          "value": "{\"$device_id\":\"019be293-6529-7b15-9bea-6c8fd1160615\",\"distinct_id\":\"1606409\",\"$initialization_time\":\"2026-01-21T22:01:15.472Z\",\"$configured_session_timeout_ms\":1800000,\"$user_state\":\"identified\",\"$session_recording_remote_config\":{\"enabled\":true,\"consoleLogRecordingEnabled\":true,\"endpoint\":\"/s/\",\"eventTriggers\":[],\"linkedFlag\":null,\"masking\":null,\"minimumDurationMilliseconds\":null,\"networkPayloadCapture\":{\"capturePerformance\":{\"network_timing\":true,\"web_vitals\":false,\"web_vitals_allowed_metrics\":null}},\"recorderVersion\":\"v2\",\"sampleRate\":null,\"scriptConfig\":{\"script\":\"posthog-recorder\"},\"triggerMatchType\":null,\"urlBlocklist\":[],\"urlTriggers\":[],\"canvasRecording\":{}},\"$autocapture_disabled_server_side\":false,\"$heatmaps_enabled_server_side\":true,\"$product_tours_enabled_server_side\":false,\"$web_vitals_enabled_server_side\":false,\"$web_vitals_allowed_metrics\":null,\"$exception_capture_enabled_server_side\":false,\"$error_tracking_suppression_rules\":[],\"$dead_clicks_enabled_server_side\":false,\"$active_feature_flags\":[],\"$enabled_feature_flags\":{},\"$feature_flag_payloads\":{},\"$feature_flag_details\":{},\"$feature_flag_request_id\":\"cfa83acb-6a0c-4780-a8cb-4500565048eb\",\"$feature_flag_evaluated_at\":1769032875021,\"$epp\":true,\"$user_id\":\"1606409\",\"$stored_person_properties\":{\"depositsCout\":0,\"uid\":1606409}}"
-        },
-        {
-          "name": "gist.web.activeSSEConnection",
-          "value": "{\"value\":\"70594bf3-bb41-45c8-8742-8a30158cda1e\",\"expiry\":\"2026-01-21T22:01:51.295Z\"}"
-        },
-        {
-          "name": "gist.web.message.user.8737dbab499dec6bfd6e6700afe9318e1269a33d05b5484a709b85d12b7e1232",
-          "value": "{\"value\":[],\"expiry\":\"2026-01-21T23:01:15.069Z\"}"
         }
       ]
     }

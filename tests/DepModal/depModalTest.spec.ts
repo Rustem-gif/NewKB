@@ -1,5 +1,5 @@
 import {expect, test} from "@playwright/test";
-import { vpnController } from "../../helpers/vpnControllerInstance";
+import { VpnController } from "../../helpers/vpnController";
 import KingBilly from "../../src/PageManager/KingBilly";
 import { USERS_DEPOSIT_MODAL } from "../../src/Data/testDepositData/depositModalTestUsers";
 
@@ -18,6 +18,7 @@ for(const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
 
                 test.beforeEach(async ({page}) => {
                     kingBilly = new KingBilly(page)
+                    const vpnController = new VpnController();
 
                     const currentStatus = await vpnController.vpnCheckStatus();
                     if (currentStatus === `connected to ${location}`) {
@@ -36,7 +37,7 @@ for(const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
                     do {
                         status = await vpnController.vpnCheckStatus();
                         console.log(`Current status: ${status}`);
-                        if (status === `connected`) {
+                        if (status === `connected to ${location}`) {
                             console.log(`Successfully connected to ${location}`);
                             break;
                         }

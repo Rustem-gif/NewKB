@@ -4,7 +4,7 @@ export default defineConfig({
   fullyParallel: true,
   retries: 3,
   workers: 1,
-  reporter: [['html']],
+  reporter: [['html'], ['list']],
   timeout: 240000,
   use: {
     trace: 'on',
