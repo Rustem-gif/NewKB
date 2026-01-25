@@ -63,8 +63,15 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'au-healthcheck',
+      testDir: './tests/AUHealth',
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'au-healthcheck-fast',
+      testDir: './tests/AUHealth',
+      use: { ...devices['Desktop Chrome'] },
+      grep: /@fast/,
     },
   ],
 });

@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "slack-bot": "node app_slack.js",
-    "test:au-healthcheck": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck\" npx playwright test --config=playwright.config.au-healthcheck.ts",
-    "test:au-healthcheck-fast": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck Fast\" npx playwright test --config=playwright.config.au-healthcheck.ts",
+    "test:au-healthcheck": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck\" npx playwright test --project=au-healthcheck --config=playwright.config.au-healthcheck.ts",
+    "test:au-healthcheck-fast": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck Fast\" npx playwright test --project=au-healthcheck-fast --config=playwright.config.au-healthcheck.ts",
     "test:dep-flow": "npx playwright test --config=playwright.config.dep-flow.ts --update-snapshots",
     "test:dep-modal": "npx playwright test --config=playwright.config.dep-modal.ts --update-snapshots",
     "test:unpublish:prod": "npx playwright test --project=prod --config=playwright.config.unpublish.ts",
