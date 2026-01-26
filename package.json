@@ -12,8 +12,8 @@
     "slack-bot": "node app_slack.js",
     "test:au-healthcheck": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck\" npx playwright test --project=au-healthcheck --config=playwright.config.au-healthcheck.ts",
     "test:au-healthcheck-fast": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck Fast\" npx playwright test --project=au-healthcheck-fast --config=playwright.config.au-healthcheck.ts",
-    "test:dep-flow": "npx playwright test --config=playwright.config.dep-flow.ts --update-snapshots",
-    "test:dep-modal": "npx playwright test --config=playwright.config.dep-modal.ts --update-snapshots",
+    "test:dep-flow": "npx playwright test --config=playwright.config.dep-flow.ts",
+    "test:dep-modal": "npx playwright test --config=playwright.config.dep-modal.ts",
     "test:unpublish:prod": "npx playwright test --project=prod --config=playwright.config.unpublish.ts",
     "test:unpublish:staging": "npx playwright test --project=stage --config=playwright.config.unpublish.ts",
     "test:regression:default": "npx playwright test --project=Default-YesSetUp --project=Default-NoSetUp --config=playwright.config.regression.ts",
@@ -37,6 +37,7 @@
     "@playwright/test": "^1.57.0",
     "@types/node": "^22.10.10",
     "cross-env": "^7.0.3",
+    "husky": "^9.1.7",
     "playwright-qase-reporter": "^2.0.16",
     "playwright-slack-report": "^1.1.99",
     "typescript": "^5.9.2"

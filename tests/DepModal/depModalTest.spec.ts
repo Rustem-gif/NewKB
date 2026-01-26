@@ -11,12 +11,26 @@ for (const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
 
     test.describe(`Check ${locale}, ${type}`, () => {
       let kingBilly: KingBilly;
+      let vpnController: VpnController;
+
+      test.beforeAll(async () => {
+        vpnController = new VpnController();
+        const vpnStatus = await vpnController.vpnCheckStatus();
+
+        if (vpnStatus.includes('connected')) {
+            await vpnController.vpnDisconnect();
+        }
+      });
 
       test.beforeEach(async ({ page }) => {
         kingBilly = new KingBilly(page);
-        const vpnController = new VpnController();
         await vpnController.vpnConnect(location);
         await vpnController.sleepVPN(5000);
+      });
+
+      test.afterEach(async () => {
+        await vpnController.vpnDisconnect();
+        await vpnController.vpnDisconnect();
       });
 
       test(`Visual comparison of dep modal ${locale}. ${type}`, async () => {
