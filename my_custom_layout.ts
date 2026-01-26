@@ -3,11 +3,9 @@ import { SummaryResults } from 'playwright-slack-report/dist/src';
 import { WebClient } from '@slack/web-api';
 import fs from 'fs';
 
-
-
 // Outstanding Block Kit layout for Playwright results
 export default async function generateCustomLayoutAsync(
-  summaryResults: SummaryResults,
+  summaryResults: SummaryResults
 ): Promise<Array<KnownBlock | Block>> {
   const slackClient = new WebClient(process.env.SLACK_BOT_USER_OAUTH_TOKEN);
   const slackChannelId = process.env.SLACK_CHANNEL_ID;
@@ -85,7 +83,9 @@ export default async function generateCustomLayoutAsync(
           } catch (err) {
             blocks.push({
               type: 'context',
-              elements: [{ type: 'mrkdwn', text: `:warning: Failed to upload ${fileName} for ${test.name}` }],
+              elements: [
+                { type: 'mrkdwn', text: `:warning: Failed to upload ${fileName} for ${test.name}` },
+              ],
             });
           }
         } else {
@@ -115,7 +115,9 @@ export default async function generateCustomLayoutAsync(
             } catch (err) {
               blocks.push({
                 type: 'context',
-                elements: [{ type: 'mrkdwn', text: `:warning: Failed to upload ${a.name} for ${test.name}` }],
+                elements: [
+                  { type: 'mrkdwn', text: `:warning: Failed to upload ${a.name} for ${test.name}` },
+                ],
               });
             }
           }
@@ -126,15 +128,15 @@ export default async function generateCustomLayoutAsync(
   }
 
   // Optionally, add a summary of all tests (uncomment if needed)
- blocks.push({ type: 'divider' });
- blocks.push({
-  type: 'section',
-  text: {
-    type: 'mrkdwn',
-    text: `*All Tests:*\n${summaryResults.tests.map(t => `${t.status === 'failed' ? '❌' : t.status === 'skipped' ? '⏩' : '✅'} ${t.name}`).join('\n')}`,
-  },
-  block_id: 'all-tests',
-});
+  blocks.push({ type: 'divider' });
+  blocks.push({
+    type: 'section',
+    text: {
+      type: 'mrkdwn',
+      text: `*All Tests:*\n${summaryResults.tests.map(t => `${t.status === 'failed' ? '❌' : t.status === 'skipped' ? '⏩' : '✅'} ${t.name}`).join('\n')}`,
+    },
+    block_id: 'all-tests',
+  });
 
   // Ensure we return a valid array of blocks (not a string or object)
   if (!Array.isArray(blocks)) {

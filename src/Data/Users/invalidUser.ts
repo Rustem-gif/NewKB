@@ -1,4 +1,4 @@
 export const INVALID_USER = {
-    email: "ajopfjweopfjawpoef@gmail.com",
-    password: "1720374",
-}
+  email: 'ajopfjweopfjawpoef@gmail.com',
+  password: '1720374',
+};

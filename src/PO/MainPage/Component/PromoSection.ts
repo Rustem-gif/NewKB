@@ -1,77 +1,79 @@
-import { BlobOptions } from "buffer";
-import BaseComponent from "../../../Components/BaseComponent";
-import {Locator, Page} from "@playwright/test";
+import { BlobOptions } from 'buffer';
+import BaseComponent from '../../../Components/BaseComponent';
+import { Locator, Page } from '@playwright/test';
 
 export default class PromoSection extends BaseComponent {
-    private promoCards: Locator = this.page.locator('.promo-item')
-    private closeButton: Locator = this.page.locator('button.modal__close-button')
-    private infoModal: Locator = this.page.locator('.promo-modal__container')
-    private promoSection: Locator = this.page.locator('.promos-slider')
-    private sliderButtonOne: Locator = this.page.locator('.promos-slider .slick-arrow:nth-of-type(1)')
-    private sliderButtonTwo: Locator = this.page.locator('.promos-slider .slick-arrow:nth-of-type(2)')
+  private promoCards: Locator = this.page.locator('.promo-item');
+  private closeButton: Locator = this.page.locator('button.modal__close-button');
+  private infoModal: Locator = this.page.locator('.promo-modal__container');
+  private promoSection: Locator = this.page.locator('.promos-slider');
+  private sliderButtonOne: Locator = this.page.locator(
+    '.promos-slider .slick-arrow:nth-of-type(1)'
+  );
+  private sliderButtonTwo: Locator = this.page.locator(
+    '.promos-slider .slick-arrow:nth-of-type(2)'
+  );
 
-    private promoCard = (index: number) => this.page.locator(`.promo-item:nth-of-type(${index})`)
-    private promoInfoButton = (index: number) => this.page.locator(`div[data-index='${index}'] .promo-item__info`)
-    private promoGetItButton = (index: number) => this.page.locator(`div[data-index='${index}'] .promo-item__button`)
+  private promoCard = (index: number) => this.page.locator(`.promo-item:nth-of-type(${index})`);
+  private promoInfoButton = (index: number) =>
+    this.page.locator(`div[data-index='${index}'] .promo-item__info`);
+  private promoGetItButton = (index: number) =>
+    this.page.locator(`div[data-index='${index}'] .promo-item__button`);
 
-    async getNumberOfCards(): Promise<number> {
-        return await this.promoCards.count()
-    }
+  async getNumberOfCards(): Promise<number> {
+    return await this.promoCards.count();
+  }
 
-    async getPromoCards(): Promise<Array<Locator>> {
-        return await this.promoCards.all();
-    }
+  async getPromoCards(): Promise<Array<Locator>> {
+    return await this.promoCards.all();
+  }
 
-    async checkIfPromoCardIsActive(index: number): Promise<boolean> {
+  async checkIfPromoCardIsActive(index: number): Promise<boolean> {
+    return await this.page.evaluate(i => {
+      const promoCard = document.querySelector(`.promos-slider div[data-index='${i}']`);
+      if (promoCard) {
+        const isBlurred = promoCard.classList.contains('promo-item__active');
 
-        return await this.page.evaluate((i) => {
-            const promoCard = document.querySelector(`.promos-slider div[data-index='${i}']`);
-            if(promoCard) {
+        return !isBlurred;
+      } else {
+        throw new Error(`No promo cards found on the page`);
+      }
+    }, index);
+  }
 
-                const isBlurred = promoCard.classList.contains('promo-item__active')
+  async clickOnInfoButton(index: number): Promise<void> {
+    await this.promoInfoButton(index).click();
+  }
 
-                return !isBlurred;
+  async clickOnGetItButton(index: number): Promise<void> {
+    await this.promoGetItButton(index).click();
+  }
 
-            } else {
-                throw new Error(`No promo cards found on the page`)
-            }
-        }, index)
-    }
+  async expectedPromoCardTOBeVisible(index: number): Promise<boolean> {
+    return await this.promoInfoButton(index).isVisible();
+  }
 
-    async clickOnInfoButton(index: number): Promise<void> {
-        await this.promoInfoButton(index).click()
-    }
+  async closeInfoModal(): Promise<void> {
+    await this.closeButton.click();
+  }
 
-    async clickOnGetItButton(index: number): Promise<void> {
-        await this.promoGetItButton(index).click()
-    }
+  async clickOnSliderButtonTwo(): Promise<void> {
+    await this.sliderButtonTwo.click();
+  }
 
-    async expectedPromoCardTOBeVisible(index: number): Promise<boolean>{
-        return await this.promoInfoButton(index).isVisible()
-    }
+  get getInfoModal(): Locator {
+    return this.infoModal;
+  }
 
-    async closeInfoModal(): Promise<void> {
-        await this.closeButton.click()
-    }
+  get getSliderButton(): Locator {
+    return this.sliderButtonOne;
+  }
 
-    async clickOnSliderButtonTwo(): Promise<void> {
-        await this.sliderButtonTwo.click()
-    }
+  get getSliderButtonTwo(): Locator {
+    return this.sliderButtonTwo;
+  }
 
-    get getInfoModal(): Locator {
-        return this.infoModal
-    }
-
-    get getSliderButton(): Locator {
-        return this.sliderButtonOne
-    }
-
-    get getSliderButtonTwo(): Locator {
-        return this.sliderButtonTwo
-    }
-
-    get getPromoSection(): Locator {
-        return this.promoSection
-    }
-
+  get getPromoSection(): Locator {
+    return this.promoSection;
+  }
 }

@@ -10,7 +10,7 @@ export default defineConfig({
     trace: 'on',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    baseURL: 'https://www.kingbillycasino.com'
+    baseURL: 'https://www.kingbillycasino.com',
   },
   projects: [
     {

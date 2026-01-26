@@ -8,7 +8,7 @@ export default defineConfig({
   testDir: './tests/DepFlow',
   /* Run tests in files in parallel */
   fullyParallel: true,
-  timeout: 100 * 10000, 
+  timeout: 100 * 10000,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -40,11 +40,11 @@ export default defineConfig({
     trace: 'on',
     screenshot: 'on',
     video: 'retain-on-failure',
-    
+
     /* Increase timeouts for VPN operations */
     navigationTimeout: 30000,
     actionTimeout: 15000,
-  
+
     /* Visual regression: allow larger differences before failing */
   },
 
@@ -52,7 +52,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'],  },
+      use: { ...devices['Desktop Chrome'] },
     },
   ],
 

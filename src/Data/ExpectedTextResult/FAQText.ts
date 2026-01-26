@@ -620,4 +620,4 @@ The app reflects the current version of the site. Yet, you’ll receive a notifi
 
 How do I turn app notifications on/off?
 
-Our mobile app uses push notifications to keep our players updated. Push notifications can’t be managed from your casino profile and adjusting “Subscriptions” there won’t affect them. Yet, you are still welcome to manage mobile app notifications from the “Settings” → “Notifications” menu of your device. The exact process may vary depending on your smartphone, but generally speaking, you can manage the King Billy app permission to send push notifications by accessing the mentioned menu.`
+Our mobile app uses push notifications to keep our players updated. Push notifications can’t be managed from your casino profile and adjusting “Subscriptions” there won’t affect them. Yet, you are still welcome to manage mobile app notifications from the “Settings” → “Notifications” menu of your device. The exact process may vary depending on your smartphone, but generally speaking, you can manage the King Billy app permission to send push notifications by accessing the mentioned menu.`;

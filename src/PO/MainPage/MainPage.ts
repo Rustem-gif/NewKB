@@ -1,381 +1,408 @@
-import BasePage from "../BasePage/BasePage";
-import {Locator, Page} from "@playwright/test";
-import {IGameCategories} from "../../Interfaces/gameCategories";
-import SidebarMenu from "../../Components/SidebarMenu";
-import {DepModal} from "../../Components/DepModal";
-import SupportMessanger from "../../Components/SupportButton";
-import PromoSection from "./Component/PromoSection";
-
+import BasePage from '../BasePage/BasePage';
+import { Locator, Page } from '@playwright/test';
+import { IGameCategories } from '../../Interfaces/gameCategories';
+import SidebarMenu from '../../Components/SidebarMenu';
+import { DepModal } from '../../Components/DepModal';
+import SupportMessanger from '../../Components/SupportButton';
+import PromoSection from './Component/PromoSection';
 
 export default class MainPage extends BasePage {
-    private mainPage: Page = this.page
-    private allProviders: Locator = this.page.locator('.games-filter__cell--providers')
-    private providersBlock: Locator = this.page.locator('.menu-providers-select__content')
-    public promoSection: PromoSection = new PromoSection(this.page)
+  private mainPage: Page = this.page;
+  private allProviders: Locator = this.page.locator('.games-filter__cell--providers');
+  private providersBlock: Locator = this.page.locator('.menu-providers-select__content');
+  public promoSection: PromoSection = new PromoSection(this.page);
 
-    private subcategoryDropdown: Locator = this.page.locator('.top-games-menu')
-    private categorySlider: Locator = this.page.locator('.games-filter__category')
-    private categoryTitle: Locator = this.page.locator('.games__title')
-    private lobbyCategory: Locator = this.page.locator('#lobby_category')
-    private newCategory: Locator = this.page.getByRole('link', { name: 'New', exact: true })
-    private topCategory: Locator = this.page.getByRole('link', { name: 'Top', exact: true })
-    private popularCategory: Locator = this.page.getByRole('link', { name: 'Popular', exact: true })
-    private jackpotsCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Jackpots"}).nth(1)
-    private slotsCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Slots"}).nth(1)
-    private accumulatingCategory: Locator = this.page.locator('#slots_accumulating')
-    private bonusBuyCategory: Locator = this.page.locator('#slots_bonus_buy')
-    private megawaysCategory: Locator = this.page.locator('#slots_megaways')
-    private crashCategory: Locator = this.page.locator('#slots_crash')
-    private bookCategory: Locator = this.page.locator('#slots_book')
-    private exclusiveCategory: Locator = this.page.locator('#slots_exclusive')
-    private liveCategory: Locator = this.page.locator('.games-filter .game-category-helper__name').filter({hasText: "Live"}).nth(1)
-    private blackjackCategory: Locator = this.page.locator('#live_blackjack')
-    private rouletteCategory: Locator = this.page.locator('#live_roulette')
-    private baccaratCategory: Locator = this.page.locator('#live_baccarat')
-    private pokerCategory: Locator = this.page.locator('#live_poker')
-    private tableGamesCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Table games"}).nth(1)
-    private tableOnlineRoulette: Locator = this.page.locator('#table_online_roulette')
-    private recentGamesCategory: Locator = this.page.locator('#recent_games_category')
-    protected gameItem: Locator = this.page.locator('.catalog__item')
-    private topGamesShowMoreButton: Locator = this.page.locator('#top_show_more_btn')
-    private newGamesShowMoreButton: Locator = this.page.locator('#new_show_more_btn')
-    private promoShowMoreButton: Locator = this.page.locator('#main_pg_promo_show_more')
-    private gameItemSelector: string = '.catalog__item'
-    private getItButton: Locator = this.page.locator('.banner-slide__button ')
-    private promoModal: Locator = this.page.locator('.promo-modal__container')
-    private sidebarButton: Locator = this.page.locator('#burger_menu_btn')
-    private seccessRegPopUp: Locator = this.page.locator('.modal__content')
-    private depositAndPlayPostReg: Locator = this.page.locator('#deposit_play_btn')
-    private topWinnersSection: Locator = this.page.locator('.jackpot-winners-section-home')
-    private supportButton: Locator = this.page.locator(`body .intercom-lightweight-app-launcher-icon-open`)
-    private sliderRegForm: Locator = this.page.locator('.main-slide-anon__register-form')
-    private kingsChoiceCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "King's Choice"}).nth(1)
-    private pokiesCategory: Locator = this.page.locator('.home__filter .game-category-helper__name').filter({hasText: "Pokies"}).nth(1)
-    readonly arrowMainSlider: Locator = this.page.locator('#arrow_main_slider_left')
+  private subcategoryDropdown: Locator = this.page.locator('.top-games-menu');
+  private categorySlider: Locator = this.page.locator('.games-filter__category');
+  private categoryTitle: Locator = this.page.locator('.games__title');
+  private lobbyCategory: Locator = this.page.locator('#lobby_category');
+  private newCategory: Locator = this.page.getByRole('link', { name: 'New', exact: true });
+  private topCategory: Locator = this.page.getByRole('link', { name: 'Top', exact: true });
+  private popularCategory: Locator = this.page.getByRole('link', { name: 'Popular', exact: true });
+  private jackpotsCategory: Locator = this.page
+    .locator('.home__filter .game-category-helper__name')
+    .filter({ hasText: 'Jackpots' })
+    .nth(1);
+  private slotsCategory: Locator = this.page
+    .locator('.home__filter .game-category-helper__name')
+    .filter({ hasText: 'Slots' })
+    .nth(1);
+  private accumulatingCategory: Locator = this.page.locator('#slots_accumulating');
+  private bonusBuyCategory: Locator = this.page.locator('#slots_bonus_buy');
+  private megawaysCategory: Locator = this.page.locator('#slots_megaways');
+  private crashCategory: Locator = this.page.locator('#slots_crash');
+  private bookCategory: Locator = this.page.locator('#slots_book');
+  private exclusiveCategory: Locator = this.page.locator('#slots_exclusive');
+  private liveCategory: Locator = this.page
+    .locator('.games-filter .game-category-helper__name')
+    .filter({ hasText: 'Live' })
+    .nth(1);
+  private blackjackCategory: Locator = this.page.locator('#live_blackjack');
+  private rouletteCategory: Locator = this.page.locator('#live_roulette');
+  private baccaratCategory: Locator = this.page.locator('#live_baccarat');
+  private pokerCategory: Locator = this.page.locator('#live_poker');
+  private tableGamesCategory: Locator = this.page
+    .locator('.home__filter .game-category-helper__name')
+    .filter({ hasText: 'Table games' })
+    .nth(1);
+  private tableOnlineRoulette: Locator = this.page.locator('#table_online_roulette');
+  private recentGamesCategory: Locator = this.page.locator('#recent_games_category');
+  protected gameItem: Locator = this.page.locator('.catalog__item');
+  private topGamesShowMoreButton: Locator = this.page.locator('#top_show_more_btn');
+  private newGamesShowMoreButton: Locator = this.page.locator('#new_show_more_btn');
+  private promoShowMoreButton: Locator = this.page.locator('#main_pg_promo_show_more');
+  private gameItemSelector: string = '.catalog__item';
+  private getItButton: Locator = this.page.locator('.banner-slide__button ');
+  private promoModal: Locator = this.page.locator('.promo-modal__container');
+  private sidebarButton: Locator = this.page.locator('#burger_menu_btn');
+  private seccessRegPopUp: Locator = this.page.locator('.modal__content');
+  private depositAndPlayPostReg: Locator = this.page.locator('#deposit_play_btn');
+  private topWinnersSection: Locator = this.page.locator('.jackpot-winners-section-home');
+  private supportButton: Locator = this.page.locator(
+    `body .intercom-lightweight-app-launcher-icon-open`
+  );
+  private sliderRegForm: Locator = this.page.locator('.main-slide-anon__register-form');
+  private kingsChoiceCategory: Locator = this.page
+    .locator('.home__filter .game-category-helper__name')
+    .filter({ hasText: "King's Choice" })
+    .nth(1);
+  private pokiesCategory: Locator = this.page
+    .locator('.home__filter .game-category-helper__name')
+    .filter({ hasText: 'Pokies' })
+    .nth(1);
+  readonly arrowMainSlider: Locator = this.page.locator('#arrow_main_slider_left');
 
-    private subCategoriesDropdown = (category: Locator) => category.locator(`.game-category-helper__btn`)
-    private provider = (index: number) => this.page.locator(`#games-page-providers-filter-item-${index}`)
-    private showMoreButton = (index: number) => this.page.locator(`.home-slider__top .home-slider__see-more-btn:nth-of-type(${index})`)
-    private topWinnerGame = (index: number) => this.page.locator(`.winners-game__wrap div[data-index='${index}']`)
+  private subCategoriesDropdown = (category: Locator) =>
+    category.locator(`.game-category-helper__btn`);
+  private provider = (index: number) =>
+    this.page.locator(`#games-page-providers-filter-item-${index}`);
+  private showMoreButton = (index: number) =>
+    this.page.locator(`.home-slider__top .home-slider__see-more-btn:nth-of-type(${index})`);
+  private topWinnerGame = (index: number) =>
+    this.page.locator(`.winners-game__wrap div[data-index='${index}']`);
 
-    public gameCategories: IGameCategories = {
-        New:{
-            locator: this.newCategory,
-            title: 'New online games'
-        },
-        Top: {
-            locator: this.topCategory,
-            title: 'Top casino games'
-        },
-        Popular: {
-            locator: this.popularCategory,
-            title: 'Popular'
-        },
-        KingsChoice: {
-            locator: this.kingsChoiceCategory,
-            title: "King's Choice"
-        },
-        Jackpots: {
-            locator: this.jackpotsCategory,
-            title: 'Casino jackpots'
-        },
-        Slots: {
-            locator: this.slotsCategory,
-            title: 'Slots'
-        },
-        Pokies: {
-            locator: this.pokiesCategory,
-            title: 'Pokies'
-        },
-        Live: {
-            locator: this.liveCategory,
-            title: 'Live casino'
-        },
-        Table: {
-            locator: this.tableGamesCategory,
-            title: 'Casino table games'
+  public gameCategories: IGameCategories = {
+    New: {
+      locator: this.newCategory,
+      title: 'New online games',
+    },
+    Top: {
+      locator: this.topCategory,
+      title: 'Top casino games',
+    },
+    Popular: {
+      locator: this.popularCategory,
+      title: 'Popular',
+    },
+    KingsChoice: {
+      locator: this.kingsChoiceCategory,
+      title: "King's Choice",
+    },
+    Jackpots: {
+      locator: this.jackpotsCategory,
+      title: 'Casino jackpots',
+    },
+    Slots: {
+      locator: this.slotsCategory,
+      title: 'Slots',
+    },
+    Pokies: {
+      locator: this.pokiesCategory,
+      title: 'Pokies',
+    },
+    Live: {
+      locator: this.liveCategory,
+      title: 'Live casino',
+    },
+    Table: {
+      locator: this.tableGamesCategory,
+      title: 'Casino table games',
+    },
+  };
+
+  async openGameCategory(gameCategory: Locator): Promise<void> {
+    await gameCategory.click();
+    // const isClickable = await gameCategory.isVisible()
+    // if (!isClickable) {
+    //     await this.page.locator('#slider_arrow_right').click()
+    // await this.openGameCategory(gameCategory)
+    // }
+  }
+
+  async clickOnCategoryDropdown(element: string) {
+    await this.page.locator(element).nth(2).click();
+  }
+  async getCategoryTitleName(): Promise<string> {
+    return await this.categoryTitle.innerText();
+  }
+
+  async openShowMore(index: number): Promise<void> {
+    await this.showMoreButton(index).click();
+  }
+
+  async openAllProviders(): Promise<void> {
+    await this.allProviders.click();
+  }
+
+  async getAllProviders(): Promise<Array<string>> {
+    await this.openAllProviders();
+
+    return await this.page.evaluate(() => {
+      const allProviders = document.querySelector('.menu-providers-select__content');
+      if (!allProviders) {
+        return [];
+      }
+      const providersList = (allProviders as HTMLElement).innerText;
+
+      return providersList
+        .split('\n')
+        .map((provider: string) => provider.trim().replace(/\d+$/g, ''))
+        .filter((provider: string) => provider !== '');
+    });
+  }
+
+  async clickOnProvider(index: number): Promise<void> {
+    await this.provider(index).click();
+  }
+
+  async getProviderName(index: number): Promise<string> {
+    const str = await this.provider(index).innerText();
+
+    const providerName = str.replace(/\d+$/g, '').trim();
+
+    return providerName;
+  }
+
+  async getNumberOfGames(): Promise<number> {
+    return await this.gameItem.count();
+  }
+
+  async openSubcategory(category: Locator): Promise<void> {
+    await this.subCategoriesDropdown(category).click();
+  }
+
+  async clickOnTopShowMoreButton(): Promise<void> {
+    await this.topGamesShowMoreButton.click();
+  }
+
+  async clickOnNewShowMoreButton(): Promise<void> {
+    await this.newGamesShowMoreButton.click();
+  }
+
+  async clickOnPromoShowMoreButton(): Promise<void> {
+    await this.promoShowMoreButton.click();
+  }
+
+  async clickOnGetItButton(): Promise<void> {
+    await this.getItButton.nth(1).click();
+  }
+
+  async clickOnSidebarButton(): Promise<SidebarMenu> {
+    await this.sidebarButton.click();
+    return new SidebarMenu(this.page);
+  }
+
+  async clickOnDepositAndPlayPostReg(): Promise<DepModal> {
+    await this.depositAndPlayPostReg.click();
+    return new DepModal(this.page);
+  }
+
+  async getNumberOfTopWinnerGames(): Promise<number> {
+    const numberOfGames = await this.page.evaluate(() => {
+      const gameItems = document.querySelectorAll('.winners-game__item');
+
+      return gameItems.length;
+    });
+    if (numberOfGames < 1) {
+      throw new Error('No top winner games found');
+    }
+
+    return numberOfGames;
+  }
+
+  async clickOnTopWinnersGame(index: number): Promise<void> {
+    await this.topWinnerGame(index).click();
+  }
+
+  async clickOnSupportButton(): Promise<SupportMessanger> {
+    await this.supportButton.click();
+    return new SupportMessanger(this.page);
+  }
+
+  async clickThroughAllBanners(): Promise<void> {
+    const numberOfBanners: number = await this.page.evaluate(() => {
+      // @ts-ignore
+      let number: number = document.querySelector('.slick-dots').childElementCount;
+      return number;
+    });
+
+    for (let i = 0; i < numberOfBanners; i++) {
+      await this.arrowMainSlider.click();
+      await this.page.waitForTimeout(1000);
+    }
+  }
+
+  async getPromoMainText(): Promise<Array<string>> {
+    return await this.page.evaluate(async () => {
+      let nodeList = document.querySelectorAll('span.banner-slide__text');
+      if (nodeList !== null) {
+        let array = Array.from(nodeList).map(
+          title => title.textContent?.trim().toUpperCase() || ''
+        );
+        if (array.length > 0) {
+          return array;
+        } else {
+          console.error('Array is empty');
         }
+      }
+      return [];
+    });
+  }
+
+  async checkPromoTourn({
+    promoType,
+    lang,
+    expectedValue,
+    section,
+  }: {
+    promoType: 'mainSlider' | 'footer' | 'tournament';
+    lang: string;
+    expectedValue: string;
+    section: 'mainSlider' | 'footer' | 'tournament';
+  }): Promise<boolean> {
+    let receivedArray;
+    let titleIsNotFound;
+
+    if (section === 'mainSlider') {
+      receivedArray = await this.getPromoMainText();
+      titleIsNotFound = await this.checkTitle({ receivedArray, expectedValue });
+      //console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`))
+    } else if (section === 'footer') {
+      receivedArray = await this.getFooterPromoTitles();
+      titleIsNotFound = await this.checkTitle({ receivedArray, expectedValue });
+      //console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`))
+    } else if (section === 'tournament') {
+      receivedArray = await this.getTournamentMainText();
+      titleIsNotFound = await this.checkTitle({ receivedArray, expectedValue });
+      //console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`))
+    } else {
+      throw new Error(`Invalid section: ${section}`);
     }
+    console.log(titleIsNotFound);
+    return titleIsNotFound;
+  }
 
-
-    async openGameCategory(gameCategory: Locator): Promise<void> {
-        await gameCategory.click()
-        // const isClickable = await gameCategory.isVisible()
-        // if (!isClickable) {
-        //     await this.page.locator('#slider_arrow_right').click()
-            // await this.openGameCategory(gameCategory)
-        // }
-    }
-
-    async clickOnCategoryDropdown(element: string){
-        await this.page.locator(element).nth(2).click()
-    }
-    async getCategoryTitleName(): Promise<string>{
-        return await this.categoryTitle.innerText()
-    }
-
-    async openShowMore(index: number): Promise<void> {
-        await this.showMoreButton(index).click()
-    }
-
-    async openAllProviders(): Promise<void> {
-        await this.allProviders.click()
-    }
-
-    async getAllProviders(): Promise<Array<string>>{
-        await this.openAllProviders()
-
-        return await this.page.evaluate(() => {
-            const allProviders = document.querySelector('.menu-providers-select__content');
-            if (!allProviders){
-                return []
-            }
-            const providersList = (allProviders as HTMLElement).innerText;
-            
-
-            return providersList.split("\n").map((provider: string) => provider.trim().replace(/\d+$/g, '')).filter((provider: string) => provider !== "")
-        })
-    }
-
-    async clickOnProvider(index: number): Promise<void> {
-        await this.provider(index).click()
-    }
-
-    async getProviderName(index: number): Promise<string> {
-        const str = await this.provider(index).innerText()
-
-        const providerName = str.replace(/\d+$/g, '').trim()
-
-        return providerName
-    }
-
-    async getNumberOfGames(): Promise<number>{
-        return await this.gameItem.count()
-    }
-
-    async openSubcategory(category: Locator): Promise<void> {
-        await this.subCategoriesDropdown(category).click()
-    }
-
-    async clickOnTopShowMoreButton(): Promise<void> {
-        await this.topGamesShowMoreButton.click()
-    }
-
-    async clickOnNewShowMoreButton(): Promise<void> {
-        await this.newGamesShowMoreButton.click()
-    }
-
-    async clickOnPromoShowMoreButton(): Promise<void> {
-        await this.promoShowMoreButton.click()
-    }
-
-    async clickOnGetItButton(): Promise<void> {
-        await this.getItButton.nth(1).click()
-    }
-
-    async clickOnSidebarButton(): Promise<SidebarMenu> {
-        await this.sidebarButton.click()
-        return new SidebarMenu(this.page)
-    }
-
-    async clickOnDepositAndPlayPostReg(): Promise<DepModal> {
-        await this.depositAndPlayPostReg.click()
-        return new DepModal(this.page)
-    }
-
-    async getNumberOfTopWinnerGames(): Promise<number> {
-        const numberOfGames = await this.page.evaluate(() => {
-            const gameItems = document.querySelectorAll('.winners-game__item')
-
-            return gameItems.length
-        })
-        if (numberOfGames < 1){
-            throw new Error('No top winner games found')
-        }
-
-        return numberOfGames
-    }
-
-    async clickOnTopWinnersGame(index: number): Promise<void> {
-
-        await this.topWinnerGame(index).click()
-    }
-
-    async clickOnSupportButton(): Promise<SupportMessanger> {
-        await this.supportButton.click()
-        return new SupportMessanger(this.page)
-    }
-
-    async clickThroughAllBanners(): Promise<void> {
-        const numberOfBanners: number = await this.page.evaluate(() => {
-            // @ts-ignore
-            let number: number = document.querySelector('.slick-dots').childElementCount
-            return number
-        })
-
-        for (let i = 0; i < numberOfBanners; i++) {
-            await this.arrowMainSlider.click()
-            await this.page.waitForTimeout(1000)
-        }
-    }
-
-        async getPromoMainText(): Promise<Array<string>> {
-        return await this.page.evaluate(async () => {
-            let nodeList = document.querySelectorAll('span.banner-slide__text')
-            if (nodeList !== null) {
-                let array = Array.from(nodeList).map(title => title.textContent?.trim().toUpperCase() || '')
-                if (array.length > 0) {
-                    return array
-                } else {
-                    console.error("Array is empty")
-                }
-            }
-            return []
-        })
-    }
-
-     async checkPromoTourn(
-        {promoType, lang, expectedValue, section}:
-            {promoType: 'mainSlider' | 'footer' | 'tournament', lang: string, expectedValue: string, section: 'mainSlider' | 'footer' | 'tournament'}): Promise<boolean> {
-        let receivedArray
-        let titleIsNotFound
-
-        if (section === 'mainSlider'){
-            receivedArray = await this.getPromoMainText()
-            titleIsNotFound = await this.checkTitle({receivedArray, expectedValue})
-            //console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`))
-
-
-        } else if (section === 'footer') {
-            receivedArray = await this.getFooterPromoTitles()
-            titleIsNotFound = await this.checkTitle({receivedArray, expectedValue})
-            //console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`))
-
-
-        } else if (section === 'tournament') {
-            receivedArray = await this.getTournamentMainText()
-            titleIsNotFound = await this.checkTitle({receivedArray, expectedValue})
-            //console.log(chalk.green(`${lang}\n ${promoType}\n ${receivedArray}`))
-
-        } 
-        else {
-            throw new Error(`Invalid section: ${section}`)
-        }
-        console.log(titleIsNotFound)
-        return titleIsNotFound
-    }
-
-    //accessors
-
-    get getCategorySlider(): Locator {
-        return this.categorySlider
-    }
-
-    get getSubCategoryDropdown(): Locator {
-        return this.subcategoryDropdown
-    }
-
-    get getPromoModal(): Locator {
-        return this.promoModal
-    }
-
-    get lobby(): Locator {
-        return this.lobbyCategory
-    }
-
-    get new(): Locator {
-        return this.newCategory
-    }
-
-    get top(): Locator {
-        return this.topCategory
-    }
-
-    get popular(): Locator {
-        return this.popularCategory
-    }
-
-    get jackpots(): Locator {
-        return this.jackpotsCategory
-    }
-
-    get slots(): Locator {
-        return this.slotsCategory
-    }
-
-    get accumulating(): Locator {
-        return this.accumulatingCategory
-    }
-
-    get bonusBuy(): Locator {
-        return this.bonusBuyCategory
-    }
-
-    get megaways(): Locator {
-        return this.megawaysCategory
-    }
-
-    get crash(): Locator {
-        return this.crashCategory
-    }
-
-    get book(): Locator {
-        return this.bookCategory
-    }
-
-    get exclusive(): Locator {
-        return this.exclusiveCategory
-    }
-
-    get live(): Locator {
-        return this.liveCategory
-    }
-
-    get blackjack(): Locator {
-        return this.blackjackCategory
-    }
-
-    get roulette(): Locator {
-        return this.rouletteCategory
-    }
-
-    get baccarat(): Locator {
-        return this.baccaratCategory
-    }
-
-    get poker(): Locator {
-        return this.pokerCategory
-    }
-
-    get tableGames(): Locator {
-        return this.tableGamesCategory
-    }
-
-    get tableOnline(): Locator {
-        return this.tableOnlineRoulette
-    }
-
-    get recentGames(): Locator {
-        return this.recentGamesCategory
-    }
-
-    get getGameItemSelector(): string {
-        return this.gameItemSelector
-    }
-
-    get getPromoShowMoreButton(): Locator {
-        return this.promoShowMoreButton
-    }
-
-    get getSuccessRegPopUp(): Locator {
-        return this.seccessRegPopUp
-    }
-
-    get getTopWinnersSection(): Locator {
-        return this.topWinnersSection
-    }
-
-    get getsliderRegForm(): Locator {
-        return this.sliderRegForm
-    }
+  //accessors
+
+  get getCategorySlider(): Locator {
+    return this.categorySlider;
+  }
+
+  get getSubCategoryDropdown(): Locator {
+    return this.subcategoryDropdown;
+  }
+
+  get getPromoModal(): Locator {
+    return this.promoModal;
+  }
+
+  get lobby(): Locator {
+    return this.lobbyCategory;
+  }
+
+  get new(): Locator {
+    return this.newCategory;
+  }
+
+  get top(): Locator {
+    return this.topCategory;
+  }
+
+  get popular(): Locator {
+    return this.popularCategory;
+  }
+
+  get jackpots(): Locator {
+    return this.jackpotsCategory;
+  }
+
+  get slots(): Locator {
+    return this.slotsCategory;
+  }
+
+  get accumulating(): Locator {
+    return this.accumulatingCategory;
+  }
+
+  get bonusBuy(): Locator {
+    return this.bonusBuyCategory;
+  }
+
+  get megaways(): Locator {
+    return this.megawaysCategory;
+  }
+
+  get crash(): Locator {
+    return this.crashCategory;
+  }
+
+  get book(): Locator {
+    return this.bookCategory;
+  }
+
+  get exclusive(): Locator {
+    return this.exclusiveCategory;
+  }
+
+  get live(): Locator {
+    return this.liveCategory;
+  }
+
+  get blackjack(): Locator {
+    return this.blackjackCategory;
+  }
+
+  get roulette(): Locator {
+    return this.rouletteCategory;
+  }
+
+  get baccarat(): Locator {
+    return this.baccaratCategory;
+  }
+
+  get poker(): Locator {
+    return this.pokerCategory;
+  }
+
+  get tableGames(): Locator {
+    return this.tableGamesCategory;
+  }
+
+  get tableOnline(): Locator {
+    return this.tableOnlineRoulette;
+  }
+
+  get recentGames(): Locator {
+    return this.recentGamesCategory;
+  }
+
+  get getGameItemSelector(): string {
+    return this.gameItemSelector;
+  }
+
+  get getPromoShowMoreButton(): Locator {
+    return this.promoShowMoreButton;
+  }
+
+  get getSuccessRegPopUp(): Locator {
+    return this.seccessRegPopUp;
+  }
+
+  get getTopWinnersSection(): Locator {
+    return this.topWinnersSection;
+  }
+
+  get getsliderRegForm(): Locator {
+    return this.sliderRegForm;
+  }
 }

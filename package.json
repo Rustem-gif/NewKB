@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ext .ts,.js --fix",
+    "lint:check": "eslint . --ext .ts,.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:ui": "playwright test --ui",
+    "prepare": "husky",
     "slack-bot": "node app_slack.js",
     "test:au-healthcheck": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck\" npx playwright test --project=au-healthcheck --config=playwright.config.au-healthcheck.ts",
     "test:au-healthcheck-fast": "cross-env TEST_RUN_TITLE=\"KB AU Healthcheck Fast\" npx playwright test --project=au-healthcheck-fast --config=playwright.config.au-healthcheck.ts",
@@ -15,8 +21,6 @@
     "test:regression:kb-win": "npx playwright test --project=KB-win26-YesSetUp --project=KB-win26-NoSetUp --config=playwright.config.regression.ts",
     "test:regression:kb-17": "npx playwright test --project=KB-16-YesSetUp --project=KB-16-NoSetUp --config=playwright.config.regression.ts",
     "dep-bible": "npx playwright test --config=playwright.config.dep-bible.ts --headed"
-
-
   },
   "repository": {
     "type": "git",
@@ -43,6 +47,7 @@
     "dotenv": "^17.2.1",
     "moment": "^2.30.1",
     "p-limit": "^7.2.0",
+    "prettier": "^3.8.1",
     "speakeasy": "^2.0.0"
   }
 }

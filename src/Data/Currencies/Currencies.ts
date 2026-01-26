@@ -1,1 +1,13 @@
-export const CURRENCIES = ['EUR', 'USD', 'NOK', 'AUD', 'NZD', 'CAD', 'ZAR', 'BTC', 'ETH', 'LTC', 'USDT']
+export const CURRENCIES = [
+  'EUR',
+  'USD',
+  'NOK',
+  'AUD',
+  'NZD',
+  'CAD',
+  'ZAR',
+  'BTC',
+  'ETH',
+  'LTC',
+  'USDT',
+];

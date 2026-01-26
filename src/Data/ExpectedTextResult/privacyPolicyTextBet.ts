@@ -329,4 +329,4 @@ Consequently, we endeavor to protect your personal information and respect your 
 
 We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.
 
-Player Accounts can only be accessed with the player’s unique ID and password. You may also set up two-factor authentication (2FA) as additional protection from unauthorized use of your account. You are responsible for keeping your login information confidential and making sure it cannot be accessed by another person.`
+Player Accounts can only be accessed with the player’s unique ID and password. You may also set up two-factor authentication (2FA) as additional protection from unauthorized use of your account. You are responsible for keeping your login information confidential and making sure it cannot be accessed by another person.`;

@@ -70,4 +70,4 @@ x3\tx3\tx3\tx3\tx3\tx3\tNO WAGER\tNO WAGER
 
 8. General Terms and Conditions apply.
 
-SHOW MORE`
+SHOW MORE`;

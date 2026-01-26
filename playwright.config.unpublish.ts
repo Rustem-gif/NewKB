@@ -24,9 +24,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html'],
-    ['list'],
-],
+  reporter: [['html'], ['list']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -34,24 +32,22 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
-    headless: false
-
- 
+    headless: false,
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'prod',
-      use: { viewport: {'width': 1024, 'height': 1980}},
-      testMatch: '**/tests/Unpublish/Prod/*.spec.ts'
-      ,
+      use: { viewport: { width: 1024, height: 1980 } },
+      testMatch: '**/tests/Unpublish/Prod/*.spec.ts',
     },
     //
     {
       name: 'stage',
-      use: { viewport: {'width': 1024, 'height': 1980},
-      httpCredentials: {
+      use: {
+        viewport: { width: 1024, height: 1980 },
+        httpCredentials: {
           username: 'kingbilly-staging',
           password: '616113',
         },
@@ -61,19 +57,20 @@ export default defineConfig({
 
     {
       name: 'prod-vip',
-      use: { viewport: {'width': 1024, 'height': 1980}},
-      testMatch: '**/tests/Unpublish/VIP/*.vip.ts'
-      ,
+      use: { viewport: { width: 1024, height: 1980 } },
+      testMatch: '**/tests/Unpublish/VIP/*.vip.ts',
     },
 
     {
       name: 'stage-vip',
-      use: { viewport: {'width': 1024, 'height': 1980},
-      httpCredentials: {
+      use: {
+        viewport: { width: 1024, height: 1980 },
+        httpCredentials: {
           username: 'kingbilly-staging',
           password: '616113',
-        }},
-      testMatch: '**/tests/Unpublish/VIP/*.stage.ts'
+        },
+      },
+      testMatch: '**/tests/Unpublish/VIP/*.stage.ts',
     },
     // {
     //   name: 'firefox',

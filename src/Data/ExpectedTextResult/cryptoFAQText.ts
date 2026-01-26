@@ -75,4 +75,4 @@ bitcoin.org/en/resources
 
 
 
-bitcoin.org/en/faq`
+bitcoin.org/en/faq`;

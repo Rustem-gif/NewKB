@@ -1,8 +1,8 @@
-import {Locator} from "@playwright/test";
+import { Locator } from '@playwright/test';
 
 export interface IGameCategories {
-    [key: string]: {
-        locator: Locator;
-        title: string
-    }
+  [key: string]: {
+    locator: Locator;
+    title: string;
+  };
 }

@@ -312,4 +312,4 @@ The Affiliate Agreement was first drafted in English. Should there be any confli
 
 We may modify any of the terms and conditions contained in the Affiliate Agreement or replace it at any time and in our sole discretion by posting a change notice or a new agreement on our site. Modifications may include, for example, changes in the scope of available Commissions and Affiliate Program rules.
 
-If any modification is unacceptable to you, your need to terminate the Affiliate Agreement. Your continued participation in our Affiliate Program following our posting of a change notice or new agreement will constitute binding acceptance of the modification or of the new agreement.`
+If any modification is unacceptable to you, your need to terminate the Affiliate Agreement. Your continued participation in our Affiliate Program following our posting of a change notice or new agreement will constitute binding acceptance of the modification or of the new agreement.`;

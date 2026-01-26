@@ -26,8 +26,8 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: 8,
 
-
-  reporter: [['html', { outputFolder: 'playwright-report' }],
+  reporter: [
+    ['html', { outputFolder: 'playwright-report' }],
     ['list'],
     // ['json', { outputFile: 'playwright-report/results.json' }],
     // ['playwright-qase-reporter', {
@@ -38,7 +38,7 @@ export default defineConfig({
     //                 api: {
     //                   token: '2b3e65ab1ee17f1440a13c94b9d1da5429f590fdbcc8d080ddc41268ae50305b',
     //                 },
-  
+
     //                 project: 'AUTOMATION',
     //                 uploadAttachments: true,
     //                 run: {
@@ -48,7 +48,7 @@ export default defineConfig({
     //               }
     //             }
     //           ]
-         ],
+  ],
 
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -61,10 +61,10 @@ export default defineConfig({
 
   expect: {
     toHaveScreenshot: {
-        maxDiffPixels: 1000,
-        maxDiffPixelRatio: 0.03,
-        threshold: 0.3,
-        scale: 'css'
+      maxDiffPixels: 1000,
+      maxDiffPixelRatio: 0.03,
+      threshold: 0.3,
+      scale: 'css',
     },
   },
 
@@ -74,22 +74,22 @@ export default defineConfig({
     {
       name: 'setup-default',
       testMatch: 'setup/**/*.setup.ts',
-      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillycasino.com' }
+      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillycasino.com' },
     },
     {
       name: 'setup-bet1',
       testMatch: 'setup/**/*.setup.ts',
-      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillybet1.com' }
+      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillybet1.com' },
     },
     {
       name: 'setup-win26',
       testMatch: 'setup/**/*.setup.ts',
-      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillywin26.com' }
+      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillywin26.com' },
     },
     {
       name: 'setup-16',
       testMatch: 'setup/**/*.setup.ts',
-      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillycasino17.com' }
+      use: { ...devices['Desktop Chrome'], baseURL: 'https://www.kingbillycasino17.com' },
     },
 
     // Default
@@ -97,7 +97,11 @@ export default defineConfig({
       name: 'Default-YesSetUp',
       dependencies: ['setup-default'],
       testMatch: 'YesSetUp/**/*.spec.ts',
-      use: { ...devices['Desktop Chrome'], storageState: './tests/Regression/setup/storageState.json', baseURL: 'https://www.kingbillycasino.com' },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: './tests/Regression/setup/storageState.json',
+        baseURL: 'https://www.kingbillycasino.com',
+      },
     },
     {
       name: 'Default-NoSetUp',
@@ -110,7 +114,11 @@ export default defineConfig({
       name: 'KB-Bet1-YesSetUp',
       dependencies: ['setup-bet1'],
       testMatch: 'YesSetUp/**/*.spec.ts',
-      use: { ...devices['Desktop Chrome'], storageState: './tests/Regression/setup/storageState.json', baseURL: 'https://www.kingbillybet1.com' },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: './tests/Regression/setup/storageState.json',
+        baseURL: 'https://www.kingbillybet1.com',
+      },
     },
     {
       name: 'KB-Bet1-NoSetUp',
@@ -123,7 +131,11 @@ export default defineConfig({
       name: 'KB-win26-YesSetUp',
       dependencies: ['setup-win26'],
       testMatch: 'YesSetUp/**/*.spec.ts',
-      use: { ...devices['Desktop Chrome'], storageState: './tests/Regression/setup/storageState.json', baseURL: 'https://www.kingbillywin29.com' },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: './tests/Regression/setup/storageState.json',
+        baseURL: 'https://www.kingbillywin29.com',
+      },
     },
     {
       name: 'KB-win26-NoSetUp',
@@ -136,7 +148,11 @@ export default defineConfig({
       name: 'KB-16-YesSetUp',
       dependencies: ['setup-16'],
       testMatch: 'YesSetUp/**/*.spec.ts',
-      use: { ...devices['Desktop Chrome'], storageState: './tests/Regression/setup/storageState.json', baseURL: 'https://www.kingbillycasino18.com' },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: './tests/Regression/setup/storageState.json',
+        baseURL: 'https://www.kingbillycasino18.com',
+      },
     },
     {
       name: 'KB-16-NoSetUp',

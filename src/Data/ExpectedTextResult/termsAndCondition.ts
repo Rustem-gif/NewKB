@@ -1126,4 +1126,4 @@ Please note that cashout requests submitted after 16:00 UTC on Friday will not 
 
 
 
-20.5 All costs that may occur upon refund procedure are on the player.`
+20.5 All costs that may occur upon refund procedure are on the player.`;

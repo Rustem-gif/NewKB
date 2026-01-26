@@ -1,1 +1,1 @@
-export const SEARCH_GAME: string = 'Fire lightning'
+export const SEARCH_GAME: string = 'Fire lightning';

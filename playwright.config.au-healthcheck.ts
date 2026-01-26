@@ -24,8 +24,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { open: 'never' }], ['list'],
- [
+  reporter: [
+    ['html', { open: 'never' }],
+    ['list'],
+    [
       'playwright-qase-reporter',
       {
         // debug: true,
@@ -43,10 +45,11 @@ export default defineConfig({
           },
         },
       },
-    ],],
-  
+    ],
+  ],
+
   use: {
-  headless: true,
+    headless: true,
     trace: 'on',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -54,7 +57,8 @@ export default defineConfig({
     baseURL: 'https://kingbillywin29.com',
 
     proxy: {
-      username: 'geonode_Zr3aVjywHC-type-residential-country-au-state-queensland-city-brisbane-asn-1221',
+      username:
+        'geonode_Zr3aVjywHC-type-residential-country-au-state-queensland-city-brisbane-asn-1221',
       password: 'bebe29a2-c13b-4aa5-8c20-eb3dd10a8afd',
       server: 'proxy.geonode.io:9000',
     },

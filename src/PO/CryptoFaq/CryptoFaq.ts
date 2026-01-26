@@ -1,17 +1,15 @@
-import BasePage from "../BasePage/BasePage";
-import {Locator, Page} from "@playwright/test";
+import BasePage from '../BasePage/BasePage';
+import { Locator, Page } from '@playwright/test';
 
 export default class CryptoFaq extends BasePage {
-    private pageTitle: Locator = this.page.locator('h1').filter({hasText: 'CRYPTO CURRENCIES FAQ'})
-    private collapseBlocks: Locator = this.page.locator('p + .questions-list')
+  private pageTitle: Locator = this.page.locator('h1').filter({ hasText: 'CRYPTO CURRENCIES FAQ' });
+  private collapseBlocks: Locator = this.page.locator('p + .questions-list');
 
-    
-    async getCollapseBlocksText(): Promise<string> {
-        return this.collapseBlocks.innerText()
-    }
+  async getCollapseBlocksText(): Promise<string> {
+    return this.collapseBlocks.innerText();
+  }
 
-
-    get getPageTitle() {
-        return this.pageTitle
-    }
+  get getPageTitle() {
+    return this.pageTitle;
+  }
 }

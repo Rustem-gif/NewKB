@@ -4,18 +4,18 @@ import MainPage from '../../../src/PO/MainPage/MainPage';
 
 setup.describe('Setup Session Storage', () => {
   let mainPage: MainPage;
-  setup.skip('Set up session storage for main account via API', async ({baseURL}) => {
+  setup.skip('Set up session storage for main account via API', async ({ baseURL }) => {
     console.log('Setting up session state for the main account via API...');
-    
+
     // Create a new request context
     const apiRequest = await request.newContext({
       baseURL: baseURL,
       extraHTTPHeaders: {
-        'Accept': 'application/vnd.s.v1+json',
+        Accept: 'application/vnd.s.v1+json',
         'Content-Type': 'application/json',
-        'Origin': `${baseURL}`,
-        'Referer': `${baseURL}/?sign-in=modal`
-      }
+        Origin: `${baseURL}`,
+        Referer: `${baseURL}/?sign-in=modal`,
+      },
     });
 
     console.log('Request context created with baseURL:', baseURL);
@@ -25,9 +25,9 @@ setup.describe('Setup Session Storage', () => {
       data: {
         user: {
           email: MAIN_USER.email,
-          password: MAIN_USER.password
-        }
-      }
+          password: MAIN_USER.password,
+        },
+      },
     });
 
     // Check response
@@ -37,13 +37,12 @@ setup.describe('Setup Session Storage', () => {
     }
 
     console.log('API login successful, status:', response.status());
-    
+
     // Save storage state from the API context
     await apiRequest.storageState({ path: './tests/Regression/setup/storageState.json' });
-    
+
     console.log('Storage state saved successfully!');
   });
-
 
   setup('UI SetUp', async ({ page }) => {
     console.log('Setting up session storage for the main account via UI...');

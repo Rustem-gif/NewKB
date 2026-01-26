@@ -104,4 +104,4 @@ Wagering is a standard practice of the gaming industry, done for several reasons
 
 Wild Symbol
 
-Wilds are symbols which can be substituted for other symbols on the reel. So, when a wild symbol appears, it can be combined with other symbols around it and create a winning combination. In some cases, Wilds will pay out even if they aren't on a payline, as Scatters do. However, in video slots Wild symbols cannot usually be substituted for Scatter symbols.`
+Wilds are symbols which can be substituted for other symbols on the reel. So, when a wild symbol appears, it can be combined with other symbols around it and create a winning combination. In some cases, Wilds will pay out even if they aren't on a payline, as Scatters do. However, in video slots Wild symbols cannot usually be substituted for Scatter symbols.`;

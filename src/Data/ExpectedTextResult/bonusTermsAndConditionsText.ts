@@ -135,4 +135,4 @@ For example, you made a 20 EUR deposit and got your first Free Spins package. In
 
 4.13. General Terms and Conditions apply.
 
-General Terms and Conditions`
+General Terms and Conditions`;

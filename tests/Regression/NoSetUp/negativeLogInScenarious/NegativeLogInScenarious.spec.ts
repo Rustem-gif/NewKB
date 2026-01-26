@@ -1,97 +1,88 @@
-import test, {expect} from '@playwright/test'
-import KingBilly from "../../../../src/PageManager/KingBilly";
-import {LINKS} from "../../../../src/Data/Links/Links";
-import SignInModal from "../../../../src/PO/MainPage/Component/SignInModal";
-import {ERRORS} from "../../../../src/Data/Errors/errors";
-import {INVALID_USER} from "../../../../src/Data/Users/invalidUser";
-import {MAIN_USER} from "../../../../src/Data/Users/mainUser";
-
-
+import test, { expect } from '@playwright/test';
+import KingBilly from '../../../../src/PageManager/KingBilly';
+import { LINKS } from '../../../../src/Data/Links/Links';
+import SignInModal from '../../../../src/PO/MainPage/Component/SignInModal';
+import { ERRORS } from '../../../../src/Data/Errors/errors';
+import { INVALID_USER } from '../../../../src/Data/Users/invalidUser';
+import { MAIN_USER } from '../../../../src/Data/Users/mainUser';
 
 test.describe('Log In', () => {
-    let kingBilly: KingBilly;
-    let signInModal: SignInModal
+  let kingBilly: KingBilly;
+  let signInModal: SignInModal;
 
-    test.beforeEach(async ({page}) => {
-        kingBilly = new KingBilly(page);
+  test.beforeEach(async ({ page }) => {
+    kingBilly = new KingBilly(page);
 
-        await test.step('Navigate to main page', async () => {
-            await kingBilly.mainPage.navTo(LINKS.Main);
+    await test.step('Navigate to main page', async () => {
+      await kingBilly.mainPage.navTo(LINKS.Main);
 
-            await kingBilly.mainPage.clickAcceptCookies();
-        })
+      await kingBilly.mainPage.clickAcceptCookies();
+    });
 
-        await test.step('Open Sign in form', async () => {
-            signInModal = await kingBilly.mainPage.header.clickSignIn()
-            
-        })
-    })
+    await test.step('Open Sign in form', async () => {
+      signInModal = await kingBilly.mainPage.header.clickSignIn();
+    });
+  });
 
+  test('Negative. Check password field. Empty field password', async () => {
+    await test.step('Fill in password input with an empty string', async () => {
+      await signInModal.fillPassword('');
+      await signInModal.getPasswordInput.blur();
+    });
 
-    test('Negative. Check password field. Empty field password', async () => {
+    await test.step('Check password field error', async () => {
+      await expect(signInModal.getpasswordInputError).toBeVisible();
+      await expect(signInModal.getpasswordInputError).toContainText(ERRORS.passwordEmpty);
+    });
+  });
 
-        await test.step('Fill in password input with an empty string', async () => {
-            await signInModal.fillPassword('')
-            await signInModal.getPasswordInput.blur()
-        })
+  test('Negative. Check email field. Empty field email', async () => {
+    await test.step('Fill in email input with an empty string', async () => {
+      await signInModal.fillEmail('');
+      await signInModal.getEmailInput.blur();
+    });
 
-        await test.step('Check password field error', async () => {
-            await expect(signInModal.getpasswordInputError).toBeVisible()
-            await expect(signInModal.getpasswordInputError).toContainText(ERRORS.passwordEmpty)
-        })
-    })
+    await test.step('Check email field error', async () => {
+      await expect(signInModal.getEmailInputError).toBeVisible();
+      await expect(signInModal.getEmailInputError).toContainText(ERRORS.emailEmpty);
+    });
+  });
 
-    test('Negative. Check email field. Empty field email', async () => {
+  test('Negative. Check Login function. Invalid info', async () => {
+    await test.step('Enter invalid email', async () => {
+      await signInModal.fillEmail(INVALID_USER.email);
+    });
 
-        await test.step('Fill in email input with an empty string', async () => {
-            await signInModal.fillEmail('')
-            await signInModal.getEmailInput.blur()
-        })
+    await test.step('Enter invalid password', async () => {
+      await signInModal.fillPassword(INVALID_USER.password);
+    });
 
-        await test.step('Check email field error', async () => {
-            await expect(signInModal.getEmailInputError).toBeVisible()
-            await expect(signInModal.getEmailInputError).toContainText(ERRORS.emailEmpty)
-        })
-    })
+    await test.step('Click on Sign In', async () => {
+      await signInModal.clickSignInNegative();
+    });
 
-    test('Negative. Check Login function. Invalid info', async () => {
+    await test.step('Check invalid credentials error', async () => {
+      await expect(signInModal.getInvalidCredsError).toBeVisible();
+      await expect(signInModal.getInvalidCredsError).toContainText(ERRORS.invalidLoginCreds);
+    });
+  });
 
-        await test.step('Enter invalid email', async () => {
-            await signInModal.fillEmail(INVALID_USER.email)
-        })
+  test('Negative. Check log in functionality. Correct email wrong password', async () => {
+    await test.step('Enter correct email', async () => {
+      await signInModal.fillEmail(MAIN_USER.email);
+    });
 
-        await test.step('Enter invalid password', async () => {
-            await signInModal.fillPassword(INVALID_USER.password)
-        })
+    await test.step('Enter wrong password', async () => {
+      await signInModal.fillPassword(MAIN_USER.email);
+    });
 
-        await test.step('Click on Sign In', async () => {
-            await signInModal.clickSignInNegative()
-        })
+    await test.step('Click on Sign In', async () => {
+      await signInModal.clickSignInNegative();
+    });
 
-        await test.step('Check invalid credentials error', async () => {
-            await expect(signInModal.getInvalidCredsError).toBeVisible()
-            await expect(signInModal.getInvalidCredsError).toContainText(ERRORS.invalidLoginCreds)
-        })
-    })
-
-    test('Negative. Check log in functionality. Correct email wrong password', async () => {
-        await test.step('Enter correct email', async () => {
-            await signInModal.fillEmail(MAIN_USER.email)
-        })
-
-        await test.step('Enter wrong password', async () => {
-            await signInModal.fillPassword(MAIN_USER.email)
-        })
-
-        await test.step('Click on Sign In', async () => {
-            await signInModal.clickSignInNegative()
-        })
-
-        await test.step('Check invalid credentials error', async () => {
-            await expect(signInModal.getInvalidCredsError).toBeVisible()
-            await expect(signInModal.getInvalidCredsError).toContainText(ERRORS.invalidLoginCreds)
-        })
-    })
-
-
-})
+    await test.step('Check invalid credentials error', async () => {
+      await expect(signInModal.getInvalidCredsError).toBeVisible();
+      await expect(signInModal.getInvalidCredsError).toContainText(ERRORS.invalidLoginCreds);
+    });
+  });
+});

@@ -1,78 +1,84 @@
-import {Locator, Page} from "@playwright/test";
+import { Locator, Page } from '@playwright/test';
 
 export default class BaseComponent {
-    public langItem: (langValue: string) => Locator
-    public langDropdown: Locator
+  public langItem: (langValue: string) => Locator;
+  public langDropdown: Locator;
 
-    constructor(readonly page: Page) {
-        this.page = page;
-        this.langItem = (langValue: string) => this.page.locator('.header .select-language-icons-with-code__item', {'hasText': `${langValue}`}).first()
-        this.langDropdown = this.page.locator('.header .select-language-icons-with-code__button')
-    }
-
-    async sleep(miliseconds: number): Promise<void> {
-        await this.page.waitForTimeout(miliseconds)
-    }
-
-    async getPageUrl(): Promise<string>{
-        return this.page.url()
-    }
-
-    async waitForSelector(locator: Locator): Promise<void>{
-    await locator.waitFor({state: "visible"})
+  constructor(readonly page: Page) {
+    this.page = page;
+    this.langItem = (langValue: string) =>
+      this.page
+        .locator('.header .select-language-icons-with-code__item', { hasText: `${langValue}` })
+        .first();
+    this.langDropdown = this.page.locator('.header .select-language-icons-with-code__button');
   }
 
-    async changeLanguage(langValue: string = 'EN', domain?: string): Promise<void> {
-        await this.page.waitForLoadState('load')
-        await this.page.waitForTimeout(2000)
+  async sleep(miliseconds: number): Promise<void> {
+    await this.page.waitForTimeout(miliseconds);
+  }
 
-        const depositModal = this.page.locator('.fast-deposit-modal')
-        const closeDepositModalButton = this.page.locator('.modal__close-button').first()
+  async getPageUrl(): Promise<string> {
+    return this.page.url();
+  }
 
-        if (await depositModal.isVisible()) {
-            await closeDepositModalButton.click()
-        }
-        
-        
-        const currentUrl = await this.page.url();
-        const currentDomain = new URL(currentUrl).hostname;
+  async waitForSelector(locator: Locator): Promise<void> {
+    await locator.waitFor({ state: 'visible' });
+  }
 
-        console.log(`[changeLanguage] Current URL: ${currentUrl}`);
-        console.log(`[changeLanguage] Current domain: ${currentDomain}`);
+  async changeLanguage(langValue: string = 'EN', domain?: string): Promise<void> {
+    await this.page.waitForLoadState('load');
+    await this.page.waitForTimeout(2000);
 
-        const skipLanguageChangeDomains = ['www.kingbillywin29.com', 'kingbillywin29.com'];
+    const depositModal = this.page.locator('.fast-deposit-modal');
+    const closeDepositModalButton = this.page.locator('.modal__close-button').first();
 
-        if ((domain && skipLanguageChangeDomains.includes(domain)) ||
-            skipLanguageChangeDomains.includes(currentDomain)) {
-            console.log(`Domain ${domain || currentDomain} doesn't require language change`);
-            return;
-        }
-
-        // Check if language dropdown exists on this page
-        const langDropdownVisible = await this.langDropdown.isVisible({ timeout: 2000 }).catch(() => false);
-        if (!langDropdownVisible) {
-            console.log(`Language dropdown not found on ${currentDomain}, skipping language change`);
-            return;
-        }
-
-        // Proceed with language change if needed
-        try {
-            const currentLocale = await this.langDropdown.innerText();
-            
-            if (currentLocale.trim().toUpperCase() === langValue.trim().toUpperCase()) {
-                console.log(`Language is already set to ${langValue}`);
-                return;
-            } else {
-                await this.langDropdown.click();
-                await this.langItem(langValue).waitFor({ state: 'visible', timeout: 5000 });
-                await this.langItem(langValue).click();
-                console.log(`Language changed to ${langValue}`);
-                // Wait for page to load after language change
-                await this.page.waitForLoadState('load', { timeout: 10000 });
-            }
-        } catch (error) {
-            console.error(`Error changing language: ${error}`);
-            throw error;
-        }
+    if (await depositModal.isVisible()) {
+      await closeDepositModalButton.click();
     }
+
+    const currentUrl = await this.page.url();
+    const currentDomain = new URL(currentUrl).hostname;
+
+    console.log(`[changeLanguage] Current URL: ${currentUrl}`);
+    console.log(`[changeLanguage] Current domain: ${currentDomain}`);
+
+    const skipLanguageChangeDomains = ['www.kingbillywin29.com', 'kingbillywin29.com'];
+
+    if (
+      (domain && skipLanguageChangeDomains.includes(domain)) ||
+      skipLanguageChangeDomains.includes(currentDomain)
+    ) {
+      console.log(`Domain ${domain || currentDomain} doesn't require language change`);
+      return;
+    }
+
+    // Check if language dropdown exists on this page
+    const langDropdownVisible = await this.langDropdown
+      .isVisible({ timeout: 2000 })
+      .catch(() => false);
+    if (!langDropdownVisible) {
+      console.log(`Language dropdown not found on ${currentDomain}, skipping language change`);
+      return;
+    }
+
+    // Proceed with language change if needed
+    try {
+      const currentLocale = await this.langDropdown.innerText();
+
+      if (currentLocale.trim().toUpperCase() === langValue.trim().toUpperCase()) {
+        console.log(`Language is already set to ${langValue}`);
+        return;
+      } else {
+        await this.langDropdown.click();
+        await this.langItem(langValue).waitFor({ state: 'visible', timeout: 5000 });
+        await this.langItem(langValue).click();
+        console.log(`Language changed to ${langValue}`);
+        // Wait for page to load after language change
+        await this.page.waitForLoadState('load', { timeout: 10000 });
+      }
+    } catch (error) {
+      console.error(`Error changing language: ${error}`);
+      throw error;
+    }
+  }
 }
