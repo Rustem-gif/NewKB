@@ -39,6 +39,8 @@ export function getVpnController(): IVpnController {
     } else if (osType === 'windows' || osType === 'win32' || osType === 'win') {
       console.log('Initializing Windows VPN Controller');
       return new VpnController();
+    } else {
+      console.warn(`Invalid OS_TYPE value: "${osType}". Expected: windows, win32, win, mac, darwin, or macos. Falling back to auto-detection.`);
     }
   }
 
