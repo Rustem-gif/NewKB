@@ -17,8 +17,8 @@ export class VpnController implements IVpnController {
   async vpnConnect(location: string): Promise<void> {
     try {
       console.log(`Connecting to VPN location: ${location}`);
-      const command = `"${this.expressvpnPath}" connect "${location}"`;
-      const { stdout, stderr } = await execAsync(command);
+      const command = `& "${this.expressvpnPath}" connect "${location}"`;
+      const { stdout, stderr } = await execAsync(command, { shell: 'powershell.exe' });
 
       if (stderr && !stderr.includes('Connected to')) {
         throw new Error(`VPN connection failed: ${stderr}`);
@@ -37,8 +37,8 @@ export class VpnController implements IVpnController {
   async vpnDisconnect(): Promise<void> {
     try {
       console.log('Disconnecting VPN...');
-      const command = `"${this.expressvpnPath}" disconnect`;
-      const { stdout, stderr } = await execAsync(command);
+      const command = `& "${this.expressvpnPath}" disconnect`;
+      const { stdout, stderr } = await execAsync(command, { shell: 'powershell.exe' });
 
       if (stderr && !stderr.includes('Disconnected')) {
         console.warn(`VPN disconnect warning: ${stderr}`);
@@ -57,8 +57,8 @@ export class VpnController implements IVpnController {
    */
   async vpnCheckStatus(): Promise<string> {
     try {
-      const command = `"${this.expressvpnPath}" status`;
-      const { stdout, stderr } = await execAsync(command);
+      const command = `& "${this.expressvpnPath}" status`;
+      const { stdout, stderr } = await execAsync(command, { shell: 'powershell.exe' });
 
       if (stderr) {
         console.warn(`VPN status check warning: ${stderr}`);
@@ -84,8 +84,8 @@ export class VpnController implements IVpnController {
    */
   async vpnListLocations(): Promise<string[]> {
     try {
-      const command = `"${this.expressvpnPath}" list`;
-      const { stdout, stderr } = await execAsync(command);
+      const command = `& "${this.expressvpnPath}" list`;
+      const { stdout, stderr } = await execAsync(command, { shell: 'powershell.exe' });
 
       if (stderr) {
         console.warn(`VPN list locations warning: ${stderr}`);
@@ -120,7 +120,7 @@ export class VpnController implements IVpnController {
     try {
       // Using a simple curl command to get IP
       const command = 'curl -s https://api.ipify.org';
-      const { stdout, stderr } = await execAsync(command);
+      const { stdout, stderr } = await execAsync(command, { shell: 'powershell.exe' });
 
       if (stderr) {
         throw new Error(`Failed to get IP: ${stderr}`);

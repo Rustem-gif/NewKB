@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { VpnController } from '../../helpers/vpnController';
+import { getVpnController, IVpnController } from '../../helpers/vpnControllerFactory';
 import KingBilly from '../../src/PageManager/KingBilly';
 import { USERS_DEPOSIT_MODAL } from '../../src/Data/testDepositData/depositModalTestUsers';
 
@@ -11,10 +11,10 @@ for (const locale of Object.keys(USERS_DEPOSIT_MODAL)) {
 
     test.describe(`Check ${locale}, ${type}`, () => {
       let kingBilly: KingBilly;
-      let vpnController: VpnController;
+      let vpnController: IVpnController;
 
       test.beforeAll(async () => {
-        vpnController = new VpnController();
+        vpnController = getVpnController();
         const vpnStatus = await vpnController.vpnCheckStatus();
 
         if (vpnStatus.includes('connected')) {

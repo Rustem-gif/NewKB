@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { setTimeout } from 'timers/promises';
 import type { IVpnController } from './vpnControllerFactory';
 
 const execAsync = promisify(exec);
@@ -131,5 +132,13 @@ export class VpnControllerMac implements IVpnController {
       console.error(`Failed to verify VPN connection: ${error}`);
       return false;
     }
+  }
+
+  /**
+   * Sleep/wait function for VPN operations
+   * @param ms - Milliseconds to wait
+   */
+  async sleepVPN(ms: number): Promise<void> {
+    await setTimeout(ms);
   }
 }

@@ -11,6 +11,7 @@ export interface IVpnController {
   vpnListLocations(): Promise<string[]>;
   getCurrentIP(): Promise<string>;
   verifyVPNConnection(originalIP: string): Promise<boolean>;
+  sleepVPN(ms: number): Promise<void>;
 }
 
 /**
@@ -88,4 +89,6 @@ export function getOsType(): 'windows' | 'mac' | 'unknown' {
     default:
       return 'unknown';
   }
+
+  async function sleepVPN(ms: number) {}
 }
